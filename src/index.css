@@ -1,0 +1,24 @@
+@font-face {
+  font-family: "Thunder";
+  src: url("fonts/thunder/OpenType-TT/Thunder-SemiBoldLC.ttf")
+    format("truetype");
+}
+
+@font-face {
+  font-family: "Obviously";
+  src: url("fonts/obviously/Obviously-Regular.otf") format("opentype");
+}
+
+h1 {
+  font-family: "Thunder", sans-serif;
+  font-weight: 800;
+}
+
+h2 {
+  font-family: "Thunder", sans-serif;
+  font-weight: 700;
+}
+
+p {
+  font-family: "Obviously", sans-serif;
+}
