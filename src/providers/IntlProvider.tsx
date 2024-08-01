@@ -7,7 +7,9 @@ import messages from "../intl/messages";
 function getLocaleMessage(locale: string) {
   if (messages[locale]) {
     return messages[locale];
-  } else return messages.fr;
+  }
+
+  return messages.fr;
 }
 
 const IntlStoreProvider: React.FC<PropsWithChildren> = ({ children }) => {
