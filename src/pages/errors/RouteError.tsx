@@ -1,3 +1,4 @@
+import { FormattedMessage } from "react-intl";
 import { useRouteError } from "react-router-dom";
 
 interface RouteError {
@@ -19,8 +20,12 @@ const RouteError = () => {
 
   return (
     <div id="error-page">
-      <h1>Oops!</h1>
-      <p>Sorry, an unexpected error has occurred.</p>
+      <h1>
+        <FormattedMessage id="errorPageTitle" />
+      </h1>
+      <p>
+        <FormattedMessage id="errorPageMessage" />
+      </p>
       <p>
         <i>{error.statusText || error.error.message}</i>
       </p>

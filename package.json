@@ -10,8 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "easy-peasy": "^6.0.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-intl": "^6.6.8",
     "react-router": "^6.26.0",
     "react-router-dom": "^6.26.0"
   },
