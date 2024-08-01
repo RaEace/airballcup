@@ -1,6 +1,6 @@
 import "./App.css";
 
-function App() {
+const App = () => {
   return (
     <div>
       <h1>THIS IS A BIG TITLE</h1>
@@ -8,6 +8,6 @@ function App() {
       <p>This is a paragraph</p>
     </div>
   );
-}
+};
 
 export default App;
