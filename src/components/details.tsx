@@ -28,7 +28,7 @@ function Details() {
           consiste à faire rebondir la balle sur la table avant qu’elle n’entre
           dans un gobelet adverse. Il peut être intercepté et compte double.
           S’il est réussi, 2 cups sont enlevées, la deuxième au choix du
-          perdant.   Attention, si une balle rebondit sur un gobelet et rentre
+          perdant. Attention, si une balle rebondit sur un gobelet et rentre
           dans un autre, il compte comme un tir direct.
         </p>
       </CollapsibleContent>
