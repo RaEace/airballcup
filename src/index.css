@@ -4,13 +4,13 @@
 
 @font-face {
   font-family: "Thunder";
-  src: url("fonts/thunder/OpenType-TT/Thunder-SemiBoldLC.ttf")
+  src: url("assets/thunder/OpenType-TT/Thunder-SemiBoldLC.ttf")
     format("truetype");
 }
 
 @font-face {
   font-family: "Obviously";
-  src: url("fonts/obviously/Obviously-Regular.otf") format("opentype");
+  src: url("assets/obviously/Obviously-Regular.otf") format("opentype");
 }
 
 @layer base {
@@ -67,6 +67,11 @@
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
   }
+}
+
+body {
+  @apply bg-gray-900;
+  @apply text-white;
 }
 
 @layer base {

@@ -1,11 +1,8 @@
-import React, { Suspense } from "react";
+import React, {lazy, Suspense} from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { lazy } from "react";
+import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import "./index.css";
-import store from "./store/store.ts";
 import IntlStoreProvider from "./providers/IntlProvider.tsx";
-import { StoreProvider } from "easy-peasy";
 
 const App = lazy(() => import("./pages/App")); // <-- puisqu'on est dans SCAD
 const RouteError = lazy(() => import("./pages/errors/RouteError"));
@@ -22,13 +19,11 @@ const router = createBrowserRouter([
 
 const Root: React.FunctionComponent = () => {
   return (
-    <StoreProvider store={store}>
       <IntlStoreProvider>
         <Suspense fallback={<Fallback />}>
           <RouterProvider router={router} />
         </Suspense>
       </IntlStoreProvider>
-    </StoreProvider>
   );
 };
 
