@@ -74,6 +74,12 @@ body {
   @apply text-white;
 }
 
+.smooth {
+  @apply transition-all;
+  @apply ease-in-out;
+  @apply duration-500;
+}
+
 @layer base {
   * {
     @apply border-border;

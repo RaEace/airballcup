@@ -10,7 +10,7 @@ const StyledCard: FunctionComponent<StyledCardProps> = ({ icon, text }) => {
     return <Card className={"w-full border border-gray-700 p-4 pb-0"}>
         <CardContent className={"text-center uppercase font-display flex flex-col items-center gap-2"}>
             { icon }
-            <b>
+            <b className={"text-xl whitespace-nowrap"}>
                 { text }
             </b>
         </CardContent>
