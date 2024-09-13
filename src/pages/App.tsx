@@ -3,6 +3,7 @@ import Cost from "./sections/cost.tsx";
 import Rules from "@/pages/sections/rules.tsx";
 import CallToAction from "@/pages/sections/cta.tsx";
 import Gallery from "./sections/gallery.tsx";
+import TournamentInfo from "./sections/tournament-info.tsx";
 
 const App = () => {
   return (
@@ -11,6 +12,7 @@ const App = () => {
       <Cost />
       <Rules />
       <Gallery />
+      <TournamentInfo />
     </main>
   );
 };
