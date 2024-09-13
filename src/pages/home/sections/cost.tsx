@@ -5,7 +5,7 @@ import StyledCard from "@/components/styled-card.tsx";
 import StyledIcon from "@/components/styled-icon.tsx";
 
 const Cost: FunctionComponent = () => {
-    return <article className={"overflow-hidden relative bg-gray-700 w-full h-full flex flex-col items-center justify-start pt-[11rem] gap-6 px-4"}>
+    return <article id={"cost"} className={"overflow-hidden mb-10 relative bg-gray-700 w-full h-full flex flex-col items-center justify-start pt-[11rem] gap-6 px-4"}>
         <Shade />
 
         <div className={"z-10 flex flex-col items-center justify-evenly gap-4"}>
