@@ -1,5 +1,5 @@
-import {PropsWithChildren} from "react";
-import {IntlProvider} from "react-intl";
+import { PropsWithChildren } from "react";
+import { IntlProvider } from "react-intl";
 import messages from "../intl/messages";
 
 function getLocaleMessage(locale: string) {
