@@ -1,5 +1,5 @@
 import { FormattedMessage } from "react-intl";
-import InformativeTag from "../../components/informativeTag/InformativeTag";
+import InformativeTag from "../../components/informative-tag/Informative-tag";
 import "./Home.css";
 
 const Home = () => {
