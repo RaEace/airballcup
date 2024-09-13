@@ -6,7 +6,7 @@ const CallToAction: FunctionComponent = () => {
     <article
       id={"cta"}
       className={
-        "w-full h-screen font-display flex flex-col items-center justify-center p-10"
+        "w-full h-screen w-screen font-display flex flex-col items-center justify-center p-10"
       }
     >
       <div id="main" className={"flex flex-col items-center justify-start"}>

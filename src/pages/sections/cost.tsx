@@ -9,7 +9,7 @@ const Cost: FunctionComponent = () => {
     <article
       id={"cost"}
       className={
-        "overflow-hidden mb-10 relative bg-gray-700 w-full h-full flex flex-col items-center justify-start pt-[11rem] gap-6 px-4"
+        "overflow-hidden mb-10 relative bg-gray-700 h-screen w-screen flex flex-col items-center justify-start pt-[11rem] gap-6 px-4"
       }
     >
       <Shade />

@@ -16,7 +16,7 @@ const Rules: FunctionComponent = () => {
     <article
       id={"rules"}
       className={
-        "smooth md:grid md:grid-cols-2 md:grid-rows-1 relative font-display size-full bg-gray-900 uppercase flex flex-col items-center justify-start px-4 pt-[11rem] gap-6"
+        "smooth md:grid md:grid-cols-2 md:grid-rows-1 relative font-display h-screen w-screen bg-gray-900 uppercase flex flex-col items-center justify-start px-4 pt-[11rem] gap-6"
       }
     >
       <AnimatedText />

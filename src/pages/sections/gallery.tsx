@@ -4,7 +4,7 @@ import { FunctionComponent } from "react";
 
 const Gallery: FunctionComponent = () => {
   return (
-    <article className="smooth md:grid md:grid-cols-2 md:grid-rows-1 relative font-display size-full bg-gray-900 uppercase flex flex-col items-center justify-start px-4 pt-[11rem] gap-6">
+    <article className="smooth md:grid md:grid-cols-2 md:grid-rows-1 relative font-display h-screen w-screen bg-gray-900 uppercase flex flex-col items-center justify-start px-4 pt-[11rem] gap-6">
       <Badge className={"md:self-start md:ml-[25%]"}>
         <span className={"pr-2 text-sm self"}>📷</span>
         <p> Les coulisses </p>

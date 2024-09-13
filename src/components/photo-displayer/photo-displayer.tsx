@@ -1,12 +1,6 @@
 import { FunctionComponent, useEffect, useState } from "react";
 import { getImages } from "./import-all-images";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselPrevious,
-  CarouselNext,
-} from "../ui/carousel";
+import { Carousel, CarouselContent, CarouselItem } from "../ui/carousel";
 
 const PhotoDisplayer: FunctionComponent = () => {
   const [images, setImages] = useState<string[]>([]);
@@ -17,7 +11,7 @@ const PhotoDisplayer: FunctionComponent = () => {
   }, []);
 
   return (
-    <div className="pb-">
+    <div className="">
       <Carousel>
         <CarouselContent>
           {images.map((src, index) => (
@@ -26,8 +20,6 @@ const PhotoDisplayer: FunctionComponent = () => {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
       </Carousel>
     </div>
   );
