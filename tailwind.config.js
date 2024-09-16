@@ -27,9 +27,6 @@ export default {
           "100%": { transform: "translateX(0%)" },
         },
       },
-      fontSize: {
-        "subtitle-large": "24px",
-      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
