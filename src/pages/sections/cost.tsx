@@ -1,6 +1,6 @@
-import { FunctionComponent } from "react";
-import { Badge } from "@/components/ui/badge.tsx";
-import { Tag, TrophyIcon } from "lucide-react";
+import {FunctionComponent} from "react";
+import {Badge} from "@/components/ui/badge.tsx";
+import {Tag, TrophyIcon} from "lucide-react";
 import StyledCard from "@/components/styled-card.tsx";
 import StyledIcon from "@/components/styled-icon.tsx";
 
@@ -9,7 +9,7 @@ const Cost: FunctionComponent = () => {
     <article
       id={"cost"}
       className={
-        "overflow-hidden mb-10 relative bg-gray-700 h-screen w-screen flex flex-col items-center justify-start pt-[11rem] gap-6 px-4"
+        "overflow-hidden mb-10 relative bg-gray-700 w-full min-h-full flex flex-col items-center justify-start pt-[11rem] gap-6 px-4"
       }
     >
       <Shade />

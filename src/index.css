@@ -99,7 +99,11 @@ body {
 }
 
 #cta {
-  background: url("assets/photo/bg-img.png");
+  background: url("assets/photos/bg-img.png");
+}
+
+* {
+  scroll-behavior: smooth;
 }
 
 .marquee p {

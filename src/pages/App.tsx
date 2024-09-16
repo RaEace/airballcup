@@ -7,7 +7,7 @@ import TournamentInfo from "./sections/tournament-info.tsx";
 
 const App = () => {
   return (
-    <main className={"w-screen min-h-screen overflow-x-hidden"}>
+    <main className={"w-screen h-screen overflow-x-hidden"}>
       <CallToAction />
       <Cost />
       <Rules />

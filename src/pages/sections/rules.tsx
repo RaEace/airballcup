@@ -1,6 +1,7 @@
-import { FunctionComponent } from "react";
-import { Badge } from "@/components/ui/badge.tsx";
+import {FunctionComponent} from "react";
+import {Badge} from "@/components/ui/badge.tsx";
 import Details from "@/components/details.tsx";
+import Marquee from "react-fast-marquee";
 
 const Rules: FunctionComponent = () => {
   const headers = [
@@ -16,7 +17,7 @@ const Rules: FunctionComponent = () => {
     <article
       id={"rules"}
       className={
-        "smooth md:grid md:grid-cols-2 md:grid-rows-1 relative font-display h-screen w-screen bg-gray-900 uppercase flex flex-col items-center justify-start px-4 pt-[11rem] gap-6"
+        "smooth md:grid md:grid-cols-2 md:grid-rows-1 relative font-display w-full min-h-full bg-gray-900 uppercase flex flex-col items-center justify-start px-4 pt-[11rem] gap-6"
       }
     >
       <AnimatedText />
@@ -62,14 +63,16 @@ const AnimatedText: FunctionComponent = () => {
   return (
     <div
       className={
-        "whitespace-nowrap absolute top-2 w-[110%] h-20 bg-secondary-500 -rotate-2 flex items-center justify-center overflow-hidden"
+        "whitespace-nowrap absolute -top-4 w-[110%] h-20 bg-secondary-500 -rotate-2 flex items-center justify-center overflow-hidden"
       }
     >
-      <div>
-        {items.map((item) => (
-          <span className={"text-4xl"}>{item}</span>
-        ))}
-      </div>
+      <Marquee>
+        <div>
+          {items.map((item) => (
+              <span className={"text-4xl"}>{item}</span>
+          ))}
+        </div>
+      </Marquee>
     </div>
   );
 };
