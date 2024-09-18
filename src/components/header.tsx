@@ -62,7 +62,7 @@ const Header: FunctionComponent = () => {
     }
 
     return <header
-        className={"absolute top-0 font-display uppercase z-[100] px-6 flex items-center justify-between w-full h-[104px] bg-transparent"}>
+        className={"absolute backdrop-blur-sm font-display uppercase z-[100] px-6 flex items-center justify-between w-full h-[104px] bg-transparent"}>
         <a href="/">
             <img src={airballCupLogo} alt="logo airball cup"/>
         </a>

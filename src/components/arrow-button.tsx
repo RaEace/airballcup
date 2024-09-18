@@ -4,7 +4,7 @@ import {cn} from "@/lib/utils.ts";
 import {ArrowRight} from "lucide-react";
 
 const ArrowButton: FunctionComponent<ButtonProps & { iconSize?: number }> = (props) => {
-    return <Button {...props} className={cn(props.className, "smooth text-xl hover:scale-125")}>
+    return <Button {...props} className={cn(props.className, "smooth text-xl hover:scale-110")}>
         { props.children }
         <ArrowRight className={"ml-2"} size={props.iconSize ?? 15} />
     </Button>

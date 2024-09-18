@@ -34,32 +34,50 @@ const Cost: FunctionComponent = () => {
         className={"z-10 flex flex-col items-center justify-evenly gap-4"}
       >
         <StyledCard
-          icon={
-            <StyledIcon>
-              <Tag color={"white"} />
-            </StyledIcon>
-          }
-          text={"15€/ Personne"}
-        />
+            icon={
+              <StyledIcon>
+                <Tag color={"white"}/>
+              </StyledIcon>
+            }
+        >
+          <b className={"text-xl whitespace-nowrap uppercase"}>
+            15€/ Personne
+          </b>
+        </StyledCard>
 
-        <StyledCard text={"1 tarif tournoi pour tes consos"} />
+        <StyledCard>
+          <b className={"text-xl whitespace-nowrap uppercase"}>
+            1 tarif tournoi pour tes consos
+          </b>
+        </StyledCard>
 
         <div className={"w-full grid grid-rows-1 grid-cols-2 gap-4"}>
-          <StyledCard text={"* 2 pintes offertes"} />
-          <StyledCard text={"3 matchs minimum"} />
+          <StyledCard>
+            <b className={"text-xl whitespace-nowrap uppercase"}>
+              * 2 pintes offertes
+            </b>
+          </StyledCard>
+          <StyledCard>
+            <b className={"text-xl whitespace-nowrap uppercase"}>
+              3 matchs minimum
+            </b>
+          </StyledCard>
         </div>
 
         <StyledCard
-          icon={
-            <StyledIcon>
-              <TrophyIcon color={"white"} />
-            </StyledIcon>
-          }
-          text={"**Table de beer pong (100€)"}
-        />
+            icon={
+              <StyledIcon>
+                <TrophyIcon color={"white"}/>
+              </StyledIcon>
+            }
+        >
+          <b className={"text-xl whitespace-nowrap uppercase"}>
+            **Table de beer pong (100€)
+          </b>
+        </StyledCard>
 
         <div className={"w-full text-left text-gray-400 font-text text-sm"}>
-          <p>* Par équipe </p>
+        <p>* Par équipe </p>
           <p>** Gain des vainqueurs </p>
         </div>
       </section>
