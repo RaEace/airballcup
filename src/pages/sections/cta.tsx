@@ -7,7 +7,7 @@ const CallToAction: FunctionComponent = () => {
     <article
       id={"cta"}
       className={
-        "smooth w-full h-full font-display flex flex-col justify-center gap-6 p-10 md:p-40"
+        "smooth uppercase w-full h-full font-display flex flex-col justify-center gap-6 p-10 md:p-40"
       }
     >
       <div id="main" className={"smooth flex flex-col items-start justify-start gap-4"}>
@@ -24,5 +24,4 @@ const CallToAction: FunctionComponent = () => {
     </article>
   );
 };
-
 export default CallToAction;

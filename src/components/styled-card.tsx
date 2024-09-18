@@ -3,16 +3,14 @@ import {Card, CardContent} from "@/components/ui/card.tsx";
 
 interface StyledCardProps {
     icon?: ReactNode;
-    text: ReactNode;
+    children: ReactNode;
 }
 
-const StyledCard: FunctionComponent<StyledCardProps> = ({ icon, text }) => {
-    return <Card className={"w-full border border-gray-700 p-4 pb-0"}>
-        <CardContent className={"text-center uppercase font-display flex flex-col items-center gap-2"}>
+const StyledCard: FunctionComponent<StyledCardProps> = ({ icon, children }) => {
+    return <Card className={"w-full h-full border border-gray-700 p-4 pb-0"}>
+        <CardContent className={"h-full text-center font-display flex flex-col items-center gap-2"}>
             { icon }
-            <b className={"text-xl whitespace-nowrap"}>
-                { text }
-            </b>
+            { children }
         </CardContent>
     </Card>
 }

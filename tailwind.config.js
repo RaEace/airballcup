@@ -16,6 +16,8 @@ export default {
       animation: {
         marquee: "marquee 14s linear infinite",
         marquee2: "marquee2 14s linear infinite",
+        "float-left": 'float-left 5s ease-in-out infinite',
+        "float-right": 'float-right 5s ease-in-out infinite',
       },
       keyframes: {
         marquee: {
@@ -25,6 +27,14 @@ export default {
         marquee2: {
           "0%": { transform: "translateX(100%)" },
           "100%": { transform: "translateX(0%)" },
+        },
+        "float-left": {
+          '0%, 100%': { transform: 'translate(0, 0)' },
+          '50%': { transform: 'translate(10px, -10px)' }, // slight movement
+        },
+        "float-right": {
+          '0%, 100%': { transform: 'translate(0, 0)' },
+          '50%': { transform: 'translate(-10px, -10px)' }, // slight movement
         },
       },
       borderRadius: {
