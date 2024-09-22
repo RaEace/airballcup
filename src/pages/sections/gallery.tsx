@@ -1,22 +1,20 @@
-import PhotoDisplayer from "@/components/photo-displayer/photo-displayer";
-import { Badge } from "@/components/ui/badge";
-import { FunctionComponent } from "react";
+import {FunctionComponent} from "react";
+import {Badge} from "@/components/ui/badge.tsx";
+import PhotoDisplayer from "@/components/photo-displayer/photo-displayer.tsx";
 
 const Gallery: FunctionComponent = () => {
   return (
-    <article className="smooth md:grid md:grid-cols-2 md:grid-rows-1 relative font-display h-screen w-screen bg-gray-900 uppercase flex flex-col items-center justify-start px-4 pt-[11rem] gap-6">
-      <Badge className={"md:self-start md:ml-[25%]"}>
-        <span className={"pr-2 text-sm self"}>📷</span>
-        <p> Les coulisses </p>
-      </Badge>
-      <h2
-        className={
-          "smooth text-4xl md:text-[80px] lg:text-[100px] xl:text-[131px] md:w-1/2 md:mt-4 md:leading-none"
-        }
-      >
-        Gallerie des champions
-      </h2>
-      <PhotoDisplayer />
+    <article className="w-full min-h-full flex flex-col items-center px-6 pt-20 pb-4 gap-10">
+        <div className={"flex flex-col items-center gap-4"}>
+            <Badge className={"smooth font-display uppercase"}>📸 Les coulisses</Badge>
+            <h2 className={"smooth font-display uppercase sm:text-title-l-extrabold text-title-m-extrabold"}>
+                Gallerie des <span className={"ml-1 text-secondary-500"}>champions</span>
+            </h2>
+        </div>
+        <div className={"w-full"}>
+            <PhotoDisplayer speed={10} direction={"left"} />
+            <PhotoDisplayer speed={10} direction={"right"} />
+        </div>
     </article>
   );
 };
