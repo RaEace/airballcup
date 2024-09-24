@@ -10,7 +10,7 @@ import {Button} from "@/components/ui/button.tsx";
 const belushisAddress = "https://maps.app.goo.gl/Xq6KDifHZRUGahjH8";
 
 const Participate: FunctionComponent = () => {
-    return <article id={"participate"} className={"w-full min-h-full flex flex-col items-center justify-start py-20 px-6 sm:py-0"}>
+    return <article id={"participate"} className={"w-full min-h-full flex flex-col items-center justify-start py-20 px-6 sm:py-4"}>
         <div className={"w-full h-full my-auto sm:mx-0 mx-auto space-y-6"}>
             <div className={"md:grid md:grid-cols-2 md:grid-rows-1 mt-4"}>
                 <div className={"flex flex-col items-center justify-start md:items-start md:text-left text-center gap-4"}>

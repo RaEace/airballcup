@@ -11,10 +11,16 @@ import FloatingPicture from "@/components/floating-picture.tsx";
 const History: FunctionComponent = () => {
     return <article id={"about"} className={"w-full min-h-full bg-gray-900 flex flex-col items-center pt-20 gap-6"}>
         <div className={"relative sm:w-1/2 z-10 flex flex-col items-center justify-start gap-4"}>
-            <FloatingPicture floatingDirection={"right"} className={"absolute -z-10 -left-20 w-40"} src={history1} alt={"Joueur 1"} />
-            <FloatingPicture floatingDirection={"left"} className={"absolute -z-10 -right-40 w-60"} src={history2} alt={"Joueur 2"} />
-            <FloatingPicture floatingDirection={"right"} className={"sm:absolute sm:block hidden -z-10 -left-60 top-60 w-60"} src={history3} alt={"Joueur 2"} />
-            <FloatingPicture floatingDirection={"left"} className={"sm:absolute sm:block hidden -z-10 -right-60 top-80 w-80"} src={history4} alt={"Joueur 2"} />
+            <FloatingPicture floatingDirection={"right"} className={"absolute -z-10 -left-20 w-40"} src={history1}
+                             alt={"Joueur 1"}/>
+            <FloatingPicture floatingDirection={"left"} className={"absolute -z-10 -right-40 w-60"} src={history2}
+                             alt={"Joueur 2"}/>
+            <FloatingPicture floatingDirection={"right"}
+                             className={"sm:absolute sm:block hidden -z-10 -left-60 top-60 w-60"} src={history3}
+                             alt={"Joueur 2"}/>
+            <FloatingPicture floatingDirection={"left"}
+                             className={"sm:absolute sm:block hidden -z-10 -right-60 top-80 w-80"} src={history4}
+                             alt={"Joueur 2"}/>
 
             <div className={"bg-primary-500 rounded-full p-4 rotate-12"}>
                 <img className={"size-[90px]"} src={airballCup} alt="airball cup logo"/>
@@ -36,7 +42,8 @@ const History: FunctionComponent = () => {
             Pong et challenges battent leur plein. De là est née la Air Ball Cup, au plus grand plaisir d'une <b>jolie
             communauté de joueurs</b> qui deviennent petit à petit nos amis. Un vrai bonheur. <br/><br/>
 
-            La Airball Cup, c’est une rencontre mensuelle qui se déroule au <b>bar Belushi’s Canal</b>, le partenaire qui nous
+            La Airball Cup, c’est une rencontre mensuelle qui se déroule au <b>bar Belushi’s Canal</b>, le partenaire
+            qui nous
             accompagne depuis Septembre 2023. On a choisi ce lieu le long du canal Saint-Martin, avec ses néons colorés,
             son équipe internationale (adorable) et sa fréquentation de voyageurs. <br/><br/>
 
@@ -44,10 +51,16 @@ const History: FunctionComponent = () => {
 
             Au fait, nous c’est <b>Arthur et Romain</b> ;)
         </p>
-        <img className={"z-10"} src={creators} alt="Arthur et romain, les beaux créateurs d'Airball Cup" />
+        <div className="relative z-10">
+            <img
+                className="block w-full shadow-2xl"
+                src={creators}
+                alt="Arthur et romain, les beaux créateurs d'Airball Cup"
+            />
+            <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-gray-900 to-transparent"></div>
+        </div>
     </article>;
 };
-
 
 
 export default History;
