@@ -59,15 +59,27 @@ const Rules: FunctionComponent = () => {
 };
 
 const AnimatedText: FunctionComponent = () => {
-  const items = ["Paris", "Fun", "Beer Pong", "Tournoi"].join(" • ").split("");
+  const screenTypeRep = {
+    sm: 1,
+    md: 2,
+    lg: 3,
+    xl: 4,
+  };
+
+  const itemsParts = ["Paris", "Fun", "Beer Pong", "Tournoi"];
+  const items = Array.from({ length: screenTypeRep.xl * itemsParts.length }).map(
+    (_, i) => itemsParts[i % itemsParts.length]
+  ).join(" • ").split("").concat(` • \t`);
+  console.log(items)
+
   return (
     <div
       className={
         "whitespace-nowrap absolute -top-4 w-[110%] h-20 bg-secondary-500 -rotate-2 flex items-center justify-center overflow-hidden"
       }
     >
-      <Marquee>
-        <div>
+      <Marquee speed={40}>
+        <div className={"mr-2"}>
           {items.map((item) => (
               <span className={"text-4xl"}>{item}</span>
           ))}
