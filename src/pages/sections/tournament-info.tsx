@@ -55,7 +55,7 @@ const TournamentInfo: FunctionComponent = () => {
             </div>
           </div>
         </div>
-        <ArrowButton variant={"primary"} className={"py-4 self-center"}>Je m'inscris</ArrowButton>
+        <ArrowButton iconPlacement={"right"} variant={"primary"} className={"py-4 self-center"}>Je m'inscris</ArrowButton>
       </div>
       <div>
         <iframe
