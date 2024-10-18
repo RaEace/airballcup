@@ -1,0 +1,105 @@
+@font-face {
+    font-family: 'ThunderBlack';
+    src: url('assets/thunder/Web-TT/Thunder-BlackHC.ttf') format("truetype");
+    font-style: normal;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
+}
+
+@font-face {
+    font-family: 'ThunderBlack';
+    src: url('assets/thunder/Web-TT/Thunder-BlackHCItalic.ttf') format("truetype");
+    font-style: italic;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
+}
+
+@font-face {
+    font-family: 'ThunderExtBd';
+    src: url('assets/thunder/Web-TT/Thunder-BoldHC.ttf') format("truetype");
+    font-style: normal;
+    font-weight: bold;
+    text-rendering: optimizeLegibility;
+}
+
+@font-face {
+    font-family: "ThunderExtBd";
+    src: url('assets/thunder/Web-TT/Thunder-BoldHCItalic.ttf') format("truetype");
+    font-style: italic;
+    font-weight: bold;
+    text-rendering: optimizeLegibility;
+}
+
+@font-face {
+    font-family: "ThunderLight";
+    src: url('assets/thunder/Web-TT/Thunder-LightHC.ttf') format("truetype");
+    font-style: normal;
+    font-weight: 300;
+    text-rendering: optimizeLegibility;
+}
+
+@font-face {
+    font-family: "ThunderLightIta";
+    src: url('assets/thunder/Web-TT/Thunder-LightHCItalic.ttf') format("truetype");
+    font-style: italic;
+    font-weight: 300;
+    text-rendering: optimizeLegibility;
+}
+
+@font-face {
+    font-family: "ThunderExtBd";
+    src: url('assets/thunder/Web-TT/Thunder-ExtraBoldHC.ttf') format("truetype");
+    font-style: normal;
+    font-weight: 800;
+}
+
+@font-face {
+    font-family: "ThunderExtBdIta";
+    src: url('assets/thunder/Web-TT/Thunder-ExtraBoldHCItalic.ttf') format("truetype");
+    font-style: italic;
+    font-weight: 800;
+}
+
+@font-face {
+    font-family: "Thunder";
+    src: url('assets/thunder/Web-TT/Thunder-MediumHC.ttf') format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "ThunderIta";
+    src: url('assets/thunder/Web-TT/Thunder-MediumHCItalic.ttf') format("truetype");
+    font-style: italic;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "Obviously", "sans-serif";
+    src: url("assets/obviously/Obviously-Regular.otf") format("opentype");
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "Obviously", "sans-serif";
+    src: url("assets/obviously/Obviously-Bold.otf") format("opentype");
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: "Obviously", "sans-serif";
+    src: url("assets/obviously/Obviously-Black.otf") format("opentype");
+    font-weight: 800;
+}
+
+@font-face {
+    font-family: "Obviously", "sans-serif";
+    src: url("assets/obviously/Obviously-Medium.otf") format("opentype");
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: "Obviously", "sans-serif";
+    src: url("assets/obviously/Obviously-Light.otf") format("opentype");
+    font-weight: 300;
+}
