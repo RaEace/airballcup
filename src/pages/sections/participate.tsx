@@ -8,6 +8,7 @@ import {Input} from "@/components/ui/input.tsx";
 import {Button} from "@/components/ui/button.tsx";
 import {CardDescription, CardFooter, CardTitle} from "@/components/ui/card.tsx";
 import useMediaQuery from "@/hooks/use-media-query.ts";
+import {CURRENT_SIGNUP_URL} from "@/lib/utils.ts";
 
 const belushisAddress = "https://maps.app.goo.gl/Xq6KDifHZRUGahjH8";
 
@@ -43,7 +44,7 @@ const Participate: FunctionComponent = () => {
                             </p>
                         </CardDescription>
                         <CardFooter className={"w-full flex items-center justify-center"}>
-                            <ArrowButton size={btnSize} iconSize={
+                            <ArrowButton role={"link"} onClick={() => { window.open(CURRENT_SIGNUP_URL) }} size={btnSize} iconSize={
                                 isMobile ? 20 : 24
                             } iconPlacement={"right"} variant={"primary"}>
                                 Je m'inscris
