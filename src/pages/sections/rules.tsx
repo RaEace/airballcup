@@ -2,16 +2,32 @@ import {FunctionComponent} from "react";
 import {Badge} from "@/components/ui/badge.tsx";
 import Details from "@/components/details.tsx";
 import Marquee from "react-fast-marquee";
+import markdownIt from "markdown-it";
+
+import shotsMd from "@/pages/sections/rules/shots.md?raw";
+import ballsBackMd from "@/pages/sections/rules/balls-back.md?raw";
+import defenseMd from "@/pages/sections/rules/defense.md?raw";
+import reFormedMd from "@/pages/sections/rules/re-formed.md?raw";
+import redemptionMd from "@/pages/sections/rules/redemption.md?raw";
+import airballMd from "@/pages/sections/rules/airball.md?raw";
+import trickshotsMd from "@/pages/sections/rules/trick-shots.md?raw";
+
+const md = markdownIt();
 
 const Rules: FunctionComponent = () => {
   const headers = [
-    "Les tirs",
-    "Balls back",
-    "Défense",
-    "Re-formed",
-    "Redemption",
-    "Airball",
+    ["Les tirs", shotsMd],
+    ["Balls back", ballsBackMd],
+    ["Défense", defenseMd],
+    ["Re-formed", reFormedMd],
+    ["Redemption", redemptionMd],
+    ["Trick Shots", trickshotsMd],
+    ["Airball", airballMd],
   ];
+
+  function markdownToHtml(content: string) {
+    return md.render(content);
+  }
 
   return (
     <article
@@ -47,14 +63,11 @@ const Rules: FunctionComponent = () => {
         </p>
       </div>
       <div className={"w-full flex flex-col gap-4 md:w-2/3 self-start md:pt-14"}>
-        {headers.map((header) => (
+        {headers.map(([header, mdFile]) => (
           <Details title={header} key={header}>
-            Le tir direct dans une cup ne peut être intercepté par l’équipe adverse.{" "}
-            <span className={"font-bold"}>Lorsqu’il est réussi, une seule cup est enlevée</span>.{" "}
-
-            <span className={"font-bold"}>Le rebond</span> consiste à faire rebondir la balle sur la table avant qu’elle n’entre dans un gobelet adverse.
-            Il peut être intercepté et compte double. S’il est réussi, <span className={"font-bold"}>2 cups sont enlevées</span>, la deuxième au choix du perdant.
-            Attention, si une balle rebondit sur un gobelet et rentre dans un autre, il compte comme un tir direct.
+            <p dangerouslySetInnerHTML={{
+              __html: markdownToHtml(mdFile),
+            }}></p>
           </Details>
         ))}
       </div>
