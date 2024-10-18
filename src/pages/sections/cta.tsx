@@ -9,7 +9,7 @@ const CallToAction: FunctionComponent = () => {
   const buttonSize = isMobile ? "sm" : "lg";
 
   return (
-    <article className={
+    <article id={"cta"} className={
       cn(`w-full h-full flex flex-col items-center justify-center bg-cta`, "bg-cover bg-center", { "bg-no-repeat": !isMobile })
     }>
       <div className={"px-8 mr-2 space-y-4"}>

@@ -1,4 +1,4 @@
-import {FunctionComponent, HTMLAttributeAnchorTarget} from "react";
+import {FunctionComponent, HTMLAttributeAnchorTarget, useEffect, useState} from "react";
 import airballCupLogo from "@/assets/logo.svg";
 import {Button, buttonVariants} from "@/components/ui/button.tsx";
 import ArrowButton from "@/components/arrow-button.tsx";
@@ -13,8 +13,10 @@ import {
     SheetTrigger
 } from "@/components/ui/sheet.tsx";
 import {cn, CURRENT_SIGNUP_URL, handleScrollToSection} from "@/lib/utils.ts";
+import useInView from "@/hooks/use-in-view.ts";
 
 const Header: FunctionComponent = () => {
+    const [showStickyBtn, setShowStickyBtn] = useState<boolean>(false);
     const links: [string, string, HTMLAttributeAnchorTarget | undefined][] = [
         ["#about", "Notre histoire", undefined],
         ["#participate", "Comment participer", undefined],
@@ -22,6 +24,13 @@ const Header: FunctionComponent = () => {
         ["#champions", "Gallerie des champions", undefined],
         ["https://www.instagram.com/airballcup", "Instagram", "_blank"]
     ];
+    const hiddenSections = ["cta", "participate", "tournament-info", null];
+    const sectionsToObserve = ["cta", "about", "participate", "cost", "champions", "rules", "gallery", "tournament-info"];
+    const inView = useInView(sectionsToObserve);
+
+    useEffect(() => {
+        setShowStickyBtn(!hiddenSections.includes(inView));
+    }, [inView]);
 
     function InnerBurgerMenu() {
         return <Sheet>
@@ -95,7 +104,16 @@ const Header: FunctionComponent = () => {
                 Je m'inscris <ArrowRight className={"ml-2 mb-1 size-6"}/>
             </Button>
         </div>
-        <div className={"lg:hidden"}>
+        <div className={"lg:hidden flex items-center justify-center space-x-4"}>
+            <Button
+                onClick={() => { window.open(CURRENT_SIGNUP_URL) }}
+                size={"sm"}
+                variant={"primary"}
+                disabled={!showStickyBtn}
+                className={cn("smooth transition", {"invisible animate-easeOut": !showStickyBtn}, {"animate-easeIn": showStickyBtn})}
+            >
+                Je m'inscris
+            </Button>
             <InnerBurgerMenu/>
         </div>
     </header>

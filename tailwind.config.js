@@ -17,7 +17,9 @@ export default {
     			cta: "url('/src/assets/photos/bg-img.png')",
     		},
     		animation: {
-    			marquee: 'marquee 14s linear infinite',
+				easeIn: 'easeIn 0.3s',
+				easeOut: 'easeOut 0.3s',
+				marquee: 'marquee 14s linear infinite',
     			marquee2: 'marquee2 14s linear infinite',
     			'float-left': 'float-left 5s ease-in-out infinite',
     			'float-right': 'float-right 5s ease-in-out infinite',
@@ -30,6 +32,26 @@ export default {
     			'accordion-up': 'accordion-up 0.2s ease-out'
     		},
     		keyframes: {
+				easeIn: {
+					'0%': {
+						transform: 'scale(0.8)',
+						opacity: '0'
+					},
+					'100%': {
+						transform: 'scale(1)',
+						opacity: '1'
+					}
+				},
+				easeOut: {
+					'0%': {
+						transform: 'scale(1)',
+						opacity: '1'
+					},
+					'100%': {
+						transform: 'scale(0.8)',
+						opacity: '0'
+					}
+				},
     			marquee: {
     				'0%': {
     					transform: 'translateX(0%)'

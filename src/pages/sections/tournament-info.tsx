@@ -25,7 +25,7 @@ const TournamentInfo: FunctionComponent = () => {
   const hours = date.getHours() + "h" + date.getMinutes();
   return (
     <article
-      id="rules"
+      id="tournament-info"
       className="flex min-h-full w-full flex-col items-center gap-6 bg-gray-900 px-4 pt-20 sm:px-20 md:grid md:grid-cols-2 md:grid-rows-1 md:px-10"
     >
       <div className={"flex flex-col items-center md:items-start gap-4 sm:px-20"}>
