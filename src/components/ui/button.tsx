@@ -5,7 +5,7 @@ import {cva, type VariantProps} from "class-variance-authority";
 import {cn} from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex font-display rounded-full py-1 items-center justify-center whitespace-nowrap text-sm uppercase transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex font-text rounded-full py-1 items-center justify-center whitespace-nowrap text-sm uppercase transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
@@ -18,7 +18,7 @@ const buttonVariants = cva(
           "border border-gray-900 text-gray-900 bg-white shadow-sm hover:bg-white/80 hover:text-gray-900",
         secondary:
           "bg-secondary-500 rounded-full text-white shadow-sm hover:bg-secondary/80",
-        invertedPrimary: "text-primary-500 bg-white",
+        invertedPrimary: "font-text font-bold text-primary-500 bg-white",
         ghost: "hover:bg-transparent/10",
 
         warning:
@@ -26,10 +26,10 @@ const buttonVariants = cva(
         link: "text-white underline-offset-4 hover:text-primary-500 smooth",
       },
       size: {
-        default: "h-9 px-4 py-2",
-        sm: "h-8 rounded-md px-3 text-xs",
-        lg: "h-10 rounded-md px-8",
-        icon: "h-9 w-9",
+        default: "size-auto px-4 py-2 font-text font-bold",
+        sm: "h-[64px] w-[197px] rounded-full px-3 font-text font-bold text-button-s",
+        lg: "h-[72px] w-[221px] rounded-full px-8 py-6 font-tex font-bold text-button-l",
+        icon: "rounded-full h-9 w-9",
       },
     },
     defaultVariants: {
@@ -52,7 +52,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       <Comp
         className={cn(
           buttonVariants({ variant, size, className }),
-          "font-display"
+          "font-text"
         )}
         ref={ref}
         {...props}
