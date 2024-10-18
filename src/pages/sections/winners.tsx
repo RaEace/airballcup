@@ -1,55 +1,25 @@
 import {FunctionComponent} from "react";
 import {Badge} from "@/components/ui/badge.tsx";
-import {Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious} from "@/components/ui/carousel.tsx";
-import placeholder from "@/assets/photos/arthur-et-romain.png";
-import winner1 from "@/assets/photos/2024-09-26-winners.png";
-import history1 from "@/assets/photos/photo-1-history.png";
-import Polaroid from "@/components/polaroid.tsx";
+import WinnerCarousel from "@/components/winner-carousel.tsx";
 
 const Winners: FunctionComponent = () => {
-    const images = [{
-        image: placeholder,
-        name: "Arthur et Romain",
-        date: "17/11/2024",
-    }, {
-        image: winner1,
-        name: "Simon et Gaël",
-        date: "26/09/2024",
-    }, {
-        image: history1,
-        name: "Histoire",
-        date: "01/01/2024",
-    }];
-
-    return <article className={"sm:px-6 py-2 px-2 overflow-hidden relative w-full min-h-full flex flex-col items-center bg-secondary-500"}>
+    return <article id={"champions"} className={"overflow-hidden relative w-full h-full flex flex-col items-center bg-secondary-500 px-6 pt-32 pb-20"}>
         <CircleBackground />
-        <section className={"w-full my-auto h-full z-10 flex flex-col items-center md:grid md:grid-cols-2 md:grid-rows-1"}>
-            <div className={"flex flex-col md:items-start items-center text-center gap-4"}>
-                <Badge className={"smooth font-display uppercase"}>🏆 LES GOATS</Badge>
-                <h2 className={"smooth lg:text-display-l-extrabold md:text-display-s-extrabold md:text-left uppercase font-display text-title-l-extrabold"}>Nos derniers vainqueurs</h2>
+        <section className={"z-20 w-full h-full grid md:grid-cols-5 md:grid-rows-1 grid-rows-4 grid-cols-1 gap-6"}>
+            <div className={"mx-4 md:col-span-2 row-span-1 flex flex-col gap md:items-start justify-center items-center md:text-left text-center gap-4"}>
+                <Badge className={"font-text lg:text-tag-l text-tag-m text-black"}>
+                    <p>🏆 LES GOATS</p>
+                </Badge>
+                <h1 className={"smooth uppercase font-display lg:text-display-l text-title-m font-bold"}>
+                    Nos derniers
+                    Vainqueurs
+                </h1>
             </div>
-            <div id="carousel" className={"mx-auto overflow-visible flex items-center justify-center"}>
-                <Carousel opts={{
-                    align: "center",
-                    loop: true,
-                }} className={"relative smooth md:w-full w-3/4 max-w-sm flex flex-col items-center"}>
-                    <CarouselContent className={"-ml-1"}>
-                        {images.map((image, index) => (
-                            <CarouselItem key={index}>
-                                <Polaroid wrapperStyle={{
-                                    transform: `rotate(${getRandomRotation()}deg)`,
-                                }} wrapperClassName={`mx-auto my-auto size-[90%] mt-4`} src={image.image} alt={image.name}>
-                                    <p className={"font-display sm:text-[14px] text-[12px] uppercase text-black text-center"}>
-                                        {image.name}
-                                        <span className={"text-[12px] ml-2 text-secondary-500"}>{image.date}</span>
-                                    </p>
-                                </Polaroid>
-                            </CarouselItem>
-                        ))}
-                    </CarouselContent>
-                    <CarouselPrevious className={"!absolute !top-[110%] left-1/3"} />
-                    <CarouselNext className={"!absolute !top-[110%] right-1/3"} />
-                </Carousel>
+            <div className={"md:col-span-3 row-span-3 w-full flex flex-col items-center justify-center"}>
+                <div
+                    className={"w-1/2 min-w-[300px] max-w-[500px] h-full flex flex-col items-center justify-center z-20"}>
+                    <WinnerCarousel/>
+                </div>
             </div>
         </section>
     </article>
@@ -61,11 +31,5 @@ const CircleBackground: FunctionComponent = () => {
               fill="#224D9E"/>
     </svg>;
 };
-
-function getRandomRotation() {
-    const min = -20; // Min degree of rotation
-    const max = 20;  // Max degree of rotation
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
 
 export default Winners;

@@ -1,7 +1,5 @@
-import {ChevronDown, ChevronUp} from "lucide-react";
-import {Button} from "./ui/button";
-import {Collapsible, CollapsibleContent, CollapsibleTrigger,} from "./ui/collapsible";
-import {ReactNode, useState} from "react";
+import {ReactNode} from "react";
+import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from "@/components/ui/accordion.tsx";
 
 interface DetailsProps {
   title: string;
@@ -9,27 +7,21 @@ interface DetailsProps {
 }
 
 function Details({ title, children }: DetailsProps) {
-  const [open, setOpen] = useState(false);
-
   return (
-    <Collapsible className="bg-gray-800 p-4 text-white border border-[#414147] rounded">
-      <div className="flex items-center justify-between">
-        <h2 className="w-full text-2xl font-display">
-          { title }
-        </h2>
-
-        <CollapsibleTrigger asChild>
-          <Button onClick={() => setOpen(!open)} variant="ghost">
-            {open ? <ChevronUp /> : <ChevronDown />}
-          </Button>
-        </CollapsibleTrigger>
-      </div>
-      <CollapsibleContent className="mt-2 smooth">
-        <p className="font-text text-sm">
-          { children }
-        </p>
-      </CollapsibleContent>
-    </Collapsible>
+    <Accordion type={"single"} collapsible className="data-[state=open]:smooth data-[state=closed]:animate-out bg-gray-800 p-4 text-white border border-[#414147] rounded">
+        <AccordionItem value={"item-1"}>
+            <AccordionTrigger>
+                <h2 className="font-display lg:text-subtitle-l text-subtitle-m font-extrabold uppercase">
+                    {title}
+                </h2>
+            </AccordionTrigger>
+            <AccordionContent>
+                <p className="normal-case font-text sm:text-text-m text-text-s">
+                    {children}
+                </p>
+            </AccordionContent>
+        </AccordionItem>
+    </Accordion>
   );
 }
 

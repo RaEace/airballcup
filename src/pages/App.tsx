@@ -7,6 +7,7 @@ import TournamentInfo from "./sections/tournament-info.tsx";
 import History from "@/pages/sections/history.tsx";
 import Participate from "@/pages/sections/participate.tsx";
 import Winners from "@/pages/sections/winners.tsx";
+import Footer from "@/components/footer.tsx";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
       <Rules />
       <Gallery />
       <TournamentInfo />
+      <Footer />
     </main>
   );
 };

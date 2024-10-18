@@ -15,14 +15,14 @@ const Cost: FunctionComponent = () => {
       <Shade />
 
       <div className={"z-10 flex flex-col items-center justify-evenly gap-4"}>
-        <Badge className={"font-display tracking-wide"}>
+        <Badge className={"font-text sm:text-tag-l text-tag-m font-bold"}>
           <p>
-            <span className={"pr-2 text-sm"}>🎉</span> HAVE FUN
+            🎉 HAVE FUN
           </p>
         </Badge>
         <h1
           className={
-            "smooth text-4xl md:text-5xl tracking-normal leading-none font-display uppercase text-center w-2/3"
+            "smooth font-display lg:text-title-l md:text-title-m text-title-s font-bold uppercase text-center w-2/3"
           }
         >
           Tarif par équipe et{" "}
@@ -40,25 +40,25 @@ const Cost: FunctionComponent = () => {
               </StyledIcon>
             }
         >
-          <b className={"text-xl whitespace-nowrap uppercase"}>
+          <b className={"smooth font-display sm:text-subtitle-l text-subtitle-m font-bold whitespace-nowrap uppercase"}>
             15€/ Personne
           </b>
         </StyledCard>
 
         <StyledCard>
-          <b className={"text-xl whitespace-nowrap uppercase"}>
+          <b className={"smooth font-display sm:text-subtitle-l text-subtitle-m font-bold whitespace-nowrap uppercase"}>
             1 tarif tournoi pour tes consos
           </b>
         </StyledCard>
 
         <div className={"w-full grid grid-rows-1 grid-cols-2 gap-4"}>
           <StyledCard>
-            <b className={"text-xl whitespace-nowrap uppercase"}>
+            <b className={"smooth font-display sm:text-subtitle-l text-subtitle-m font-bold whitespace-nowrap uppercase"}>
               * 2 pintes offertes
             </b>
           </StyledCard>
           <StyledCard>
-            <b className={"text-xl whitespace-nowrap uppercase"}>
+            <b className={"smooth font-display sm:text-subtitle-l text-subtitle-m font-bold whitespace-nowrap uppercase"}>
               3 matchs minimum
             </b>
           </StyledCard>
@@ -71,7 +71,7 @@ const Cost: FunctionComponent = () => {
               </StyledIcon>
             }
         >
-          <b className={"text-xl whitespace-nowrap uppercase"}>
+          <b className={"smooth font-display sm:text-subtitle-l text-subtitle-m font-bold whitespace-nowrap uppercase"}>
             **Table de beer pong (100€)
           </b>
         </StyledCard>

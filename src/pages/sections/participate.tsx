@@ -6,39 +6,49 @@ import StyledIcon from "@/components/styled-icon.tsx";
 import ArrowButton from "@/components/arrow-button.tsx";
 import {Input} from "@/components/ui/input.tsx";
 import {Button} from "@/components/ui/button.tsx";
+import {CardDescription, CardFooter, CardTitle} from "@/components/ui/card.tsx";
+import useMediaQuery from "@/hooks/use-media-query.ts";
 
 const belushisAddress = "https://maps.app.goo.gl/Xq6KDifHZRUGahjH8";
 
 const Participate: FunctionComponent = () => {
-    return <article id={"participate"} className={"w-full min-h-full flex flex-col items-center justify-start py-20 px-6 sm:py-4"}>
+    const isMobile = useMediaQuery();
+    const btnSize = isMobile ? "sm" : "lg";
+
+    return <article id={"participate"} className={"bg-gray-950 w-full min-h-full flex flex-col items-center justify-start py-20 px-10 lg:px-40 sm:py-4"}>
         <div className={"w-full h-full my-auto sm:mx-0 mx-auto space-y-6"}>
             <div className={"md:grid md:grid-cols-2 md:grid-rows-1 mt-4"}>
                 <div className={"flex flex-col items-center justify-start md:items-start md:text-left text-center gap-4"}>
-                    <Badge className={"uppercase font-display"}>❓ Comment participer</Badge>
-                    <h2 className={"uppercase font-display text-title-l-extrabold"}>
-                        Rejoins l'aventure <span className={"text-secondary-500"}>Airball Cup</span>
+                    <Badge className={"uppercase font-text lg:text-tag-l text-tag-m"}>❓ Comment participer</Badge>
+                    <h2 className={"font-display font-extrabold lg:text-title-l md:text-title-m text-title-s"}>
+                        REJOINS L'AVENTURE <span className={"text-secondary-500"}>AIRBALL CUP</span>
                     </h2>
                 </div>
             </div>
             <div
-                className={"w-full mx-auto grid grid-cols-1 grid-rows-3 md:grid-cols-3 md:grid-rows-1 gap-4"}>
+                className={"w-full mx-auto grid grid-cols-1 grid-rows-3 lg:grid-cols-3 lg:grid-rows-1 gap-4"}>
                 <StyledCard icon={
                     <StyledIcon>
                         <TicketIcon/>
                     </StyledIcon>
                 }>
                     <div className={"h-full flex flex-col gap-6"}>
-                    <div className={"h-3/4"}>
-                            <h3 className={"text-title-s-bold uppercase"}>Chope ta place</h3>
-                            <p className={"font-text text-text-s-light"}>
+                        <CardTitle>
+                            <h3 className={"uppercase font-display font-bold text-title-s"}>Chope
+                                ta place</h3>
+                        </CardTitle>
+                        <CardDescription className={"h-3/4 md:px-6"}>
+                            <p className={"font-text text-subtitle-m text-gray-300"}>
                                 Inscris-toi à la prochaine Airball Cup pour participer au tournoi de Beer Pong.
                             </p>
-                        </div>
-                        <div className={"h-1/4 mb-4"}>
-                            <ArrowButton variant={"primary"} className={"px-4 py-6 w-full my-auto"}>
+                        </CardDescription>
+                        <CardFooter className={"w-full flex items-center justify-center"}>
+                            <ArrowButton size={btnSize} iconSize={
+                                isMobile ? 20 : 24
+                            } iconPlacement={"right"} variant={"primary"}>
                                 Je m'inscris
                             </ArrowButton>
-                        </div>
+                        </CardFooter>
                     </div>
                 </StyledCard>
                 <StyledCard icon={
@@ -47,37 +57,42 @@ const Participate: FunctionComponent = () => {
                     </StyledIcon>
                 }>
                     <div className={"h-full flex flex-col gap-6"}>
-                        <div className={"h-3/4"}>
-                            <h3 className={"text-title-s-bold uppercase"}>Tu cherches un partenaire ?</h3>
-                            <p className={"font-text text-text-s-light"}>
+                        <CardTitle>
+                            <h3 className={"uppercase font-display font-bold text-title-s"}>Tu cherches
+                                un partenaire ?</h3>
+                        </CardTitle>
+                        <CardDescription className={"h-3/4"}>
+                            <p className={"font-text text-subtitle-m text-gray-300"}>
                                 On se charge de te mettre en relation avec un autre joueur single. Indique ton mail
                                 ci-dessous et on te tient au courant !
                             </p>
-                        </div>
-                        <div className={"h-1/4 mb-4"}>
-                            <Input placeholder={"Ton addresse email"}/>
-                        </div>
+                        </CardDescription>
+                        <CardFooter className={"w-full flex items-center justify-center"}>
+                            <Input type={"email"} inputSize={btnSize} placeholder={"Ton addresse email"}/>
+                        </CardFooter>
                     </div>
                 </StyledCard>
                 <StyledCard icon={
                     <StyledIcon>
-                        <Calendar/>
+                    <Calendar/>
                     </StyledIcon>
                 }>
                     <div className={"h-full flex flex-col gap-6"}>
-                        <div className={"h-3/4"}>
-                            <h3 className={"text-title-s-bold uppercase"}>RDV AU BELUSHI'S CANAL</h3>
-                            <p className={"font-text text-text-s-light"}>
+                        <CardTitle>
+                            <h3 className={"uppercase font-display font-bold text-title-s"}>RDV AU BELUSHI'S CANAL</h3>
+                        </CardTitle>
+                        <CardDescription className={"h-3/4"}>
+                            <p className={"font-text  text-subtitle-m text-gray-300"}>
                                 Notre partenaire, le Belushi's Canal, t'ouvre ses portes au bord de l'eau. Atmosphère
                                 familiale, néons colorés, et 6 tables de BP privatisées rien que pour nous.
                             </p>
-                        </div>
-                        <div className={"h-1/4 mb-4"}>
-                            <Button className={"my-auto uppercase flex items-center justify-center"} variant={"link"} asChild>
-                                <a className={"font-display text-text-m-light tracking-wider"} href={belushisAddress}>Ouvrir
+                        </CardDescription>
+                        <CardFooter className={"w-full flex items-center justify-center"}>
+                            <Button size={btnSize} variant={"link"} asChild>
+                                <a href={belushisAddress}>Ouvrir
                                     maps <ExternalLink className={"ml-2 mb-1 hover:underline"} size={15}/></a>
                             </Button>
-                        </div>
+                        </CardFooter>
                     </div>
                 </StyledCard>
             </div>

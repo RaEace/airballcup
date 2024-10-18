@@ -5,6 +5,8 @@ import "./index.css";
 import IntlStoreProvider from "./providers/IntlProvider.tsx";
 import Header from "@/components/header.tsx";
 
+import.meta.glob('/src/assets/thunder/Web-TT/Thunder-*.css', { eager: true });
+
 const App = lazy(() => import("./pages/App")); // <-- puisqu'on est dans SCAD
 const RouteError = lazy(() => import("./pages/errors/RouteError"));
 const Fallback = lazy(() => import("./pages/fallback/Fallback"));

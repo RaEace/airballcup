@@ -26,20 +26,19 @@ const Rules: FunctionComponent = () => {
           "w-full h-full mb-12 md:pt-10 flex flex-col items-center md:items-center justify-center md:justify-start gap-2"
         }
       >
-        <Badge className={"md:self-start md:ml-[25%]"}>
-          <span className={"pr-2 text-sm self"}>🍺</span>
-          <p> Comment Jouer ? </p>
+        <Badge className={"font-text lg:text-tag-l text-tag-m font-bold md:self-start md:ml-[25%] mb-1"}>
+          <p>🍺 Comment Jouer ?</p>
         </Badge>
         <h2
           className={
-            "smooth text-4xl md:text-[80px] lg:text-[100px] xl:text-[131px] md:w-1/2 md:mt-4 md:leading-none"
+            "smooth md:text-left text-center whitespace-nowrap font-display font-bold lg:text-display-l md:text-display-s text-title-s md:w-1/2 md:mt-4"
           }
         >
-          Règles du <span className={"text-secondary-500"}>tournoi</span>
+          Règles du <br/><span className={"text-secondary-500"}>tournoi</span>
         </h2>
         <p
           className={
-            "font-text text-gray-400 normal-case hidden md:block text-left w-1/2"
+            "font-text sm:text-text-m text-text-s text-gray-400 normal-case md:text-left text-center w-1/2"
           }
         >
           “C’était la traverse du desert” Quand t’es asoiffé de beer pong et que
@@ -47,10 +46,15 @@ const Rules: FunctionComponent = () => {
           la glotte, tu paniques complétement.
         </p>
       </div>
-      <div className={"w-full flex flex-col gap-4 md:w-2/3 self-start"}>
+      <div className={"w-full flex flex-col gap-4 md:w-2/3 self-start md:pt-14"}>
         {headers.map((header) => (
           <Details title={header} key={header}>
-            Lorem ipsum tu connais
+            Le tir direct dans une cup ne peut être intercepté par l’équipe adverse.{" "}
+            <span className={"font-bold"}>Lorsqu’il est réussi, une seule cup est enlevée</span>.{" "}
+
+            <span className={"font-bold"}>Le rebond</span> consiste à faire rebondir la balle sur la table avant qu’elle n’entre dans un gobelet adverse.
+            Il peut être intercepté et compte double. S’il est réussi, <span className={"font-bold"}>2 cups sont enlevées</span>, la deuxième au choix du perdant.
+            Attention, si une balle rebondit sur un gobelet et rentre dans un autre, il compte comme un tir direct.
           </Details>
         ))}
       </div>
@@ -70,7 +74,6 @@ const AnimatedText: FunctionComponent = () => {
   const items = Array.from({ length: screenTypeRep.xl * itemsParts.length }).map(
     (_, i) => itemsParts[i % itemsParts.length]
   ).join(" • ").split("").concat(` • \t`);
-  console.log(items)
 
   return (
     <div
@@ -81,7 +84,7 @@ const AnimatedText: FunctionComponent = () => {
       <Marquee speed={40}>
         <div className={"mr-2"}>
           {items.map((item) => (
-              <span className={"text-4xl"}>{item}</span>
+              <span className={"smooth font-display lg:text-title-l md:text-title-m text-title-s font-bold"}>{item}</span>
           ))}
         </div>
       </Marquee>
