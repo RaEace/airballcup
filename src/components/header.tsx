@@ -12,7 +12,7 @@ import {
     SheetTitle,
     SheetTrigger
 } from "@/components/ui/sheet.tsx";
-import {cn, handleScrollToSection} from "@/lib/utils.ts";
+import {cn, CURRENT_SIGNUP_URL, handleScrollToSection} from "@/lib/utils.ts";
 
 const Header: FunctionComponent = () => {
     const links: [string, string, HTMLAttributeAnchorTarget | undefined][] = [
@@ -58,6 +58,8 @@ const Header: FunctionComponent = () => {
                 </SheetDescription>
                 <SheetFooter className={"mt-10"}>
                     <ArrowButton
+                        role={"link"}
+                        onClick={() => { window.open(CURRENT_SIGNUP_URL) }}
                         size={"sm"}
                         iconPlacement={"right"}
                         className={"w-48 mr-4 py-6 px-8 ml-16"}
@@ -89,7 +91,7 @@ const Header: FunctionComponent = () => {
                     {title}
                 </a>
             ))}
-            <Button size={"sm"} variant={"invertedPrimary"}>
+            <Button role={"link"} onClick={() => { window.open(CURRENT_SIGNUP_URL) }} size={"sm"} variant={"invertedPrimary"}>
                 Je m'inscris <ArrowRight className={"ml-2 mb-1 size-6"}/>
             </Button>
         </div>

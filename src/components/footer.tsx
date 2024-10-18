@@ -1,5 +1,5 @@
 import {FunctionComponent} from "react";
-import {cn} from "@/lib/utils.ts";
+import {cn, CURRENT_SIGNUP_URL} from "@/lib/utils.ts";
 import {buttonVariants} from "@/components/ui/button.tsx";
 import {ArrowRight} from "lucide-react";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar.tsx";
@@ -7,9 +7,9 @@ import airballCupLogo from "@/assets/logo.svg";
 
 const Footer: FunctionComponent = () => {
     const links = [
-        ["s'inscrire", "/signup", undefined],
+        ["s'inscrire", CURRENT_SIGNUP_URL, undefined],
         ["instagram", "https://www.instagram.com/airballcup", "_blank"],
-        ["nous contacter", "/contact", undefined]
+        ["nous contacter", "mailto:feedesevents@gmail.com", undefined]
     ];
     return <footer className={"w-full bg-gray-950 md:h-[533px] h-[573px] grid sm:grid-rows-1 sm:grid-cols-2 grid-rows-2 grid-cols-1 gap-4"}>
         <div className={"size-full flex flex-col items-center justify-center"}>

@@ -2,7 +2,7 @@ import {FunctionComponent} from "react";
 import {Badge} from "@/components/ui/badge.tsx";
 import ArrowButton from "@/components/arrow-button.tsx";
 import useMediaQuery from "@/hooks/use-media-query.ts";
-import {cn} from "@/lib/utils.ts";
+import {cn, CURRENT_SIGNUP_URL} from "@/lib/utils.ts";
 
 const CallToAction: FunctionComponent = () => {
   const isMobile = useMediaQuery();
@@ -21,7 +21,7 @@ const CallToAction: FunctionComponent = () => {
             TOURNOI MENSUEL DE BEER PONG À PARIS
           </h1>
         </div>
-        <ArrowButton size={buttonSize} variant={"primary"} iconPlacement={"right"}>
+        <ArrowButton role={"link"} onClick={() => { window.open(CURRENT_SIGNUP_URL) }} size={buttonSize} variant={"primary"} iconPlacement={"right"}>
           Je m'inscris
         </ArrowButton>
       </div>
