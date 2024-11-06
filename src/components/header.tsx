@@ -20,16 +20,21 @@ const Header: FunctionComponent = () => {
     const links: [string, string, HTMLAttributeAnchorTarget | undefined][] = [
         ["#about", "Notre histoire", undefined],
         ["#participate", "Comment participer", undefined],
-        ["#cost", "Tarifs et récomponses", undefined],
+        ["#cost", "Tarifs et récompenses", undefined],
         ["#champions", "Gallerie des champions", undefined],
         ["https://www.instagram.com/airballcup", "Instagram", "_blank"]
     ];
-    const hiddenSections = ["cta", "participate", "tournament-info", null];
+    const hiddenSections = ["cta", "tournament-info", "participate", null];
     const sectionsToObserve = ["cta", "about", "participate", "cost", "champions", "rules", "gallery", "tournament-info"];
     const inView = useInView(sectionsToObserve);
 
     useEffect(() => {
-        setShowStickyBtn(!hiddenSections.includes(inView));
+        console.log(inView)
+        if (hiddenSections.includes(inView)) {
+            setShowStickyBtn(false);
+        } else {
+            setShowStickyBtn(true);
+        }
     }, [inView]);
 
     function InnerBurgerMenu() {
@@ -42,7 +47,7 @@ const Header: FunctionComponent = () => {
             <SheetContent side={"full"} className={"z-[101] bg-gray-950"}>
                 <SheetTitle>
                     <SheetClose>
-                        <Button variant={"link"} asChild>
+                        <Button name={"back-home"} variant={"link"} asChild>
                             <a href="/"><img src={airballCupLogo} alt="AirballCup Logo"/></a>
                         </Button>
                     </SheetClose>
@@ -51,7 +56,7 @@ const Header: FunctionComponent = () => {
                     <nav className={"flex flex-col items-start"}>
                         {links.map(([href, title, target]) => (
                             <SheetClose key={href}>
-                                <a target={target} className={
+                                <a title={title} target={target} className={
                                     cn(buttonVariants({variant: "link"}), "group font-display font-bold text-title-m")
                                 }
                                    href={href}>
@@ -67,6 +72,7 @@ const Header: FunctionComponent = () => {
                 </SheetDescription>
                 <SheetFooter className={"mt-10"}>
                     <ArrowButton
+                        name={"register-header"}
                         role={"link"}
                         onClick={() => { window.open(CURRENT_SIGNUP_URL) }}
                         size={"sm"}
@@ -83,13 +89,14 @@ const Header: FunctionComponent = () => {
 
     return <header
         className={"absolute backdrop-blur-[2px] font-display uppercase z-[100] px-6 flex items-center justify-between w-full h-[104px] bg-transparent"}>
-        <a href="/">
+        <a title={"back-home-link"} href="/">
             <img src={airballCupLogo} alt="logo airball cup"/>
         </a>
 
         <div className={"hidden lg:flex lg:items-center"}>
             {links.map(([href, title, target], index) => (
                 <a
+                   title={title}
                    key={index}
                    onClick={target === undefined ? handleScrollToSection : undefined}
                    className={
@@ -100,12 +107,13 @@ const Header: FunctionComponent = () => {
                     {title}
                 </a>
             ))}
-            <Button role={"link"} onClick={() => { window.open(CURRENT_SIGNUP_URL) }} size={"sm"} variant={"invertedPrimary"}>
+            <Button name={"register-header-main"} role={"link"} onClick={() => { window.open(CURRENT_SIGNUP_URL) }} size={"sm"} variant={"invertedPrimary"}>
                 Je m'inscris <ArrowRight className={"ml-2 mb-1 size-6"}/>
             </Button>
         </div>
         <div className={"lg:hidden flex items-center justify-center space-x-4"}>
             <Button
+                name={"register-header-mobile-"+(showStickyBtn ? "visible" : "invisible")}
                 onClick={() => { window.open(CURRENT_SIGNUP_URL) }}
                 size={"sm"}
                 variant={"primary"}

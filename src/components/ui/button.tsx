@@ -9,7 +9,7 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        primary: "bg-primary-500 text-white",
+        primary: "bg-primary-500 hover:bg-primary-600 text-white",
         default:
           "bg-primary text-primary-foreground shadow hover:bg-primary/90",
         destructive:
@@ -18,7 +18,7 @@ const buttonVariants = cva(
           "border border-gray-900 text-gray-900 bg-white shadow-sm hover:bg-white/80 hover:text-gray-900",
         secondary:
           "bg-secondary-500 rounded-full text-white shadow-sm hover:bg-secondary/80",
-        invertedPrimary: "font-text font-bold text-primary-500 bg-white",
+        invertedPrimary: "font-text font-bold text-primary-500 bg-white hover:bg-white/90",
         ghost: "hover:bg-transparent/10",
 
         warning:
@@ -51,6 +51,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const Comp = asChild ? Slot : "button";
     return (
       <Comp
+        title={props.title ?? props.name}
         className={cn(
           buttonVariants({ variant, size, className }),
           "font-text"

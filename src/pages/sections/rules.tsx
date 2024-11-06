@@ -52,15 +52,6 @@ const Rules: FunctionComponent = () => {
         >
           Règles du <br/><span className={"text-secondary-500"}>tournoi</span>
         </h2>
-        <p
-          className={
-            "font-text sm:text-text-m text-text-s text-gray-400 normal-case md:text-left text-center w-1/2"
-          }
-        >
-          “C’était la traverse du desert” Quand t’es asoiffé de beer pong et que
-          tu sillonnes une ville comme Paris sans rien trouver à te mettre sous
-          la glotte, tu paniques complétement.
-        </p>
       </div>
       <div className={"w-full flex flex-col gap-4 md:w-2/3 self-start md:pt-14"}>
         {headers.map(([header, mdFile]) => (

@@ -5,7 +5,7 @@ import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar.tsx";
 import {CURRENT_SIGNUP_URL} from "@/lib/utils.ts";
 
 const tournamentInfo = {
-  date: Date.now(),
+  date: new Date("2024-10-30T20:00:00").valueOf(),
   bar: "Belushi's Canal",
   address: "159 Rue de Crimée, 75019 Paris",
   metros: [{
