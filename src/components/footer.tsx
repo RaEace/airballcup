@@ -14,7 +14,7 @@ const Footer: FunctionComponent = () => {
     return <footer className={"w-full bg-gray-950 md:h-[533px] h-[573px] grid sm:grid-rows-1 sm:grid-cols-2 grid-rows-2 grid-cols-1 gap-4"}>
         <div className={"size-full flex flex-col items-center justify-center"}>
             <Avatar className={"size-[208px] bg-primary-500 p-4"}>
-                <AvatarImage src={airballCupLogo} alt={"Airball Cup Logo"} />
+                <AvatarImage src={airballCupLogo.src} alt={"Airball Cup Logo"} />
                 <AvatarFallback>
                     Logo AirballCup
                 </AvatarFallback>

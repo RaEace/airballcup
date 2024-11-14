@@ -3,9 +3,15 @@ import {Badge} from "@/components/ui/badge.tsx";
 import ArrowButton from "@/components/arrow-button.tsx";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar.tsx";
 import {CURRENT_SIGNUP_URL} from "@/lib/utils.ts";
+import {ClientOnlyProps} from "@/app/client.tsx";
+import {useAppContext} from "@/contents/App.tsx";
+import dayjs from "dayjs";
 
-const tournamentInfo = {
-  date: new Date("2024-10-30T20:00:00").valueOf(),
+const getTournamentInfo = ({ date, startingHour }: ClientOnlyProps["contents"]["tournamentInfo"]) => ({
+  date: dayjs(date)
+      .add(Number(startingHour.split("h")[0]), "hours")
+      .add(Number(startingHour.split("h")[1]), "minutes")
+      .valueOf(),
   bar: "Belushi's Canal",
   address: "159 Rue de Crimée, 75019 Paris",
   metros: [{
@@ -18,11 +24,12 @@ const tournamentInfo = {
     line: "E",
     type: "rer"
   }]
-};
+});
 
 const TournamentInfo: FunctionComponent = () => {
-  const date = new Date(tournamentInfo.date);
-  const hours = date.getHours() + "h" + date.getMinutes();
+  const { contents: { tournamentInfo }} = useAppContext();
+  const info = getTournamentInfo(tournamentInfo);
+
   return (
     <article
       id="tournament-info"
@@ -30,24 +37,24 @@ const TournamentInfo: FunctionComponent = () => {
     >
       <div className={"flex flex-col items-center md:items-start gap-4 sm:px-20"}>
         <div className={"flex flex-col items-center md:items-start gap-4"}>
-          <Badge className={"smooth font-text font-bold md:text-tag-l text-tag-m uppercase"}>🚨 Prochain tournoi</Badge>
+          <Badge className={"smooth font-text font-bold md:text-tag-l text-tag-m uppercase"}>{tournamentInfo.badgeText}</Badge>
           <h2 className={"smooth font-display font-bold uppercase lg:text-display-s md:text-title-l text-title-m"}>
-            { formatDateIntl(tournamentInfo.date, "fr-FR") }<br/>
+            { formatDateIntl(info.date.valueOf(), "fr-FR") }<br/>
           </h2>
         </div>
         <div className={"w-full grid grid-cols-3 grid-rows-1 gap-6 px-4"}>
           <div className={"flex flex-col items-center text-center gap-4"}>
             <h3 className={"text-subtitle-l uppercase font-display font-bold"}>Horaire</h3>
-            <p className={"font-text text-text-m text-white/80"}>{hours}</p>
+            <p className={"font-text text-text-m text-white/80"}>{tournamentInfo.startingHour}</p>
           </div>
           <div className={"flex flex-col items-center text-center gap-4"}>
             <h3 className={"text-subtitle-l uppercase font-display font-bold"}>Bar</h3>
-            <p className={"font-text text-text-m text-white/80"}>{tournamentInfo.bar}</p>
+            <p className={"font-text text-text-m text-white/80"}>{info.bar}</p>
           </div>
           <div className={"flex flex-col items-center text-center gap-4"}>
             <h3 className={"text-subtitle-l uppercase font-display font-bold"}>Métros</h3>
             <div className={"flex items-center gap-2 font-text text-text-m text-white/80"}>
-              {tournamentInfo.metros.map(({line, type}) => (
+              {info.metros.map(({line, type}) => (
                   <Avatar className={"size-[24px]"}>
                     <AvatarImage src={getLineImage(line, type)} alt={`Ligne ${line}`} />
                     <AvatarFallback>{line}</AvatarFallback>
@@ -76,7 +83,7 @@ function formatDateIntl(date: string | number, locale: string): string {
     day: "2-digit",
     hour: "numeric",
     minute: "numeric"
-  }).format(new Date(date));
+  }).format(dayjs(date).toDate());
 }
 
 function getLineImage(line: string, type: string) {

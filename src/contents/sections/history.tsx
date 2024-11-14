@@ -21,13 +21,13 @@ const History: FunctionComponent = () => {
             <FloatingPicture
                 floatingDirection={"right"}
                 className={cn("absolute -z-10 -left-20 w-40", `translate-y-[${offset1}px]`)}
-                src={history1}
+                src={history1.src}
                 alt={"Joueur 1"}
             />
             <FloatingPicture
                 floatingDirection={"left"}
                 className={"absolute -z-10 -right-40 w-60"}
-                src={history2}
+                src={history2.src}
                 style={{ transform: `translateY(${offset2}px)`}}
                 alt={"Joueur 2"}
             />
@@ -35,19 +35,19 @@ const History: FunctionComponent = () => {
                 floatingDirection={"right"}
                 className={cn("sm:absolute sm:block hidden -z-10 -left-60 top-60 w-60")}
                 style={{ transform: `translateY(${offset3}px)` }} // Apply parallax effect
-                src={history3}
+                src={history3.src}
                 alt={"Joueur 2"}
             />
             <FloatingPicture
                 floatingDirection={"left"}
                 className={"sm:absolute sm:block hidden -z-10 -right-60 top-80 w-80"}
                 style={{ transform: `translateY(${offset4}px)` }} // Apply parallax effect
-                src={history4}
+                src={history4.src}
                 alt={"Joueur 2"}
             />
 
             <div className={"bg-primary-500 rounded-full p-4 rotate-12"}>
-                <img className={"size-[88px]"} src={airballCup} alt="airball cup logo"/>
+                <img className={"size-[88px]"} src={airballCup.src} alt="airball cup logo"/>
             </div>
             <Badge className={"uppercase font-text lg:text-tag-l text-tag-m"}>
                 🍻 L’aventure air ball CUP
@@ -78,7 +78,7 @@ const History: FunctionComponent = () => {
         <div className="relative z-10">
             <img
                 className="block w-full shadow-2xl"
-                src={creators}
+                src={creators.src}
                 alt="Arthur et romain, les beaux créateurs d'Airball Cup"
             />
             <div className="absolute right-0 bottom-0 left-0 h-24 bg-gradient-to-t from-gray-900 to-transparent"></div>

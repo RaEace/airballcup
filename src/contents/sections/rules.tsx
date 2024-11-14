@@ -1,28 +1,21 @@
-import {FunctionComponent} from "react";
+import {FunctionComponent, ReactNode} from "react";
 import {Badge} from "@/components/ui/badge.tsx";
 import Details from "@/components/details.tsx";
 import Marquee from "react-fast-marquee";
 import markdownIt from "markdown-it";
-
-import shotsMd from "@/pages/sections/rules/shots.md?raw";
-import ballsBackMd from "@/pages/sections/rules/balls-back.md?raw";
-import defenseMd from "@/pages/sections/rules/defense.md?raw";
-import reFormedMd from "@/pages/sections/rules/re-formed.md?raw";
-import redemptionMd from "@/pages/sections/rules/redemption.md?raw";
-import airballMd from "@/pages/sections/rules/airball.md?raw";
-import trickshotsMd from "@/pages/sections/rules/trick-shots.md?raw";
+import pongBall from "@/assets/icons/ping-pong-ball.png";
 
 const md = markdownIt();
 
 const Rules: FunctionComponent = () => {
   const headers = [
-    ["Les tirs", shotsMd],
-    ["Balls back", ballsBackMd],
-    ["Défense", defenseMd],
-    ["Re-formed", reFormedMd],
-    ["Redemption", redemptionMd],
-    ["Trick Shots", trickshotsMd],
-    ["Airball", airballMd],
+    ["Les tirs", "shotsMd"],
+    ["Balls back", "ballsBackMd"],
+    ["Défense", "defenseMd"],
+    ["Re-formed", "reFormedMd"],
+    ["Redemption", "redemptionMd"],
+    ["Trick Shots", "trickshotsMd"],
+    ["Airball", "airballMd"],
   ];
 
   function markdownToHtml(content: string) {
@@ -74,25 +67,29 @@ const AnimatedText: FunctionComponent = () => {
     xl: 4,
   };
 
+  const ballIcon = <img className={"mb-2 mr-1"} src={pongBall.src} alt={"pong ball"} />;
+
   const itemsParts = ["Paris", "Fun", "Beer Pong", "Tournoi"];
-  const items = Array.from({ length: screenTypeRep.xl * itemsParts.length }).map(
-    (_, i) => itemsParts[i % itemsParts.length]
-  ).join(" • ").split("").concat(` • \t`);
+  const items: ReactNode[] = Array.from({ length: screenTypeRep.xl }, () => itemsParts).flat().map((item) => (
+      <span className={"flex items-center gap-1"}>{item} {ballIcon}</span>
+  ));
+
 
   return (
-    <div
-      className={
-        "whitespace-nowrap absolute -top-4 w-[110%] h-20 bg-secondary-500 -rotate-2 flex items-center justify-center overflow-hidden"
-      }
-    >
-      <Marquee speed={40}>
-        <div className={"mr-2"}>
-          {items.map((item) => (
-              <span className={"smooth font-display lg:text-title-l md:text-title-m text-title-s font-bold"}>{item}</span>
-          ))}
-        </div>
-      </Marquee>
-    </div>
+      <div
+          className={
+            "whitespace-nowrap absolute -top-4 w-[110%] h-20 bg-secondary-500 -rotate-2 flex items-center justify-center overflow-hidden"
+          }
+      >
+        <Marquee speed={40}>
+          <div className={"mr-2 flex items-center"}>
+            {items.map((item) => (
+                <span
+                    className={"smooth font-display lg:text-title-l md:text-title-m text-title-s font-bold"}>{item}</span>
+            ))}
+          </div>
+        </Marquee>
+      </div>
   );
 };
 

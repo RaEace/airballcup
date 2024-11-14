@@ -1,0 +1,1 @@
+**Lorsque le dernier verre** d’une équipe est éliminé, l’équipe en mauvaise posture peut tenter une **rédemption**. Elle dispose alors de **deux lancers** pour mettre **toutes** les cups adverses restantes. Si elle réussit, elle conserve un gobelet et la partie reprend.

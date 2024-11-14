@@ -30,4 +30,10 @@ export const handleScrollToSection: MouseEventHandler<HTMLAnchorElement> = (even
     targetElement.scrollIntoView({behavior: "smooth"});
 }
 
+export const GALLERIE = "1JP9lmyb7QykVQRfMROHhYZPxO8s4TIN3";
+export const WINNERS = "19AlYz7i6U-McNJ9UJainAIJhh37BnG0J";
+export const RULES = "1n6ra_uUNGC8MyRn8duQ1UVPcQmT_lmV6";
+export const SECTIONS_TEXT = "1ytVX7bgO0Na3dpYj7MeE5Uvxmj5CotkkVIJ4Iq1MWtU";
+export const TOURNAMENT_INFO = "1frScDovZZvGDfG_bWqXl8INqaBu6hcCUaqmBtdIqZ5s";
+
 export const CURRENT_SIGNUP_URL = "https://www.billetweb.fr/air-ball-cup-10&multi=u234108&margin=no_margin&color=635BFF&parent=1&margin=no_margin&color=635BFF";
