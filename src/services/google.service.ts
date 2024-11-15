@@ -1,12 +1,16 @@
 "use server";
 
 import {google} from "googleapis";
-import credentials from "../../credentials.json";
 
 const SCOPES = [
     'https://www.googleapis.com/auth/drive.file',
     'https://www.googleapis.com/auth/drive.readonly',
 ];
+
+const credentials = {
+    client_email: process.env.GOOGLE_CLIENT_EMAIL ?? "",
+    private_key: process.env.GOOGLE_PRIVATE_KEY ?? "",
+};
 
 class GoogleService {
     authClient: any;
