@@ -2,7 +2,7 @@ import "./index.css";
 import {ClientOnly, ClientOnlyProps} from "./client.tsx";
 import loadImages from "@/components/photo-displayer/actions.ts";
 
-const placeholderData: ClientOnlyProps["contents"] = {
+const placeholderData: Partial<ClientOnlyProps["contents"]> = {
     cta: {
         badgeText: "Inscriptions ouvertes",
         headerText: "PARTICIPEZ À L'AIRBALL CUP",
@@ -18,9 +18,13 @@ const placeholderData: ClientOnlyProps["contents"] = {
 
 
 export default async function Page() {
+    // const rules = await getRules();
+    // console.log(rules);
     // const files = await googleService.readGoogleDoc("1ytVX7bgO0Na3dpYj7MeE5Uvxmj5CotkkVIJ4Iq1MWtU");
     // const parsedTomlObject = parse(files as string) as unknown as ClientOnlyProps["contents"];
     //
     // console.log(parsedTomlObject);
-    return <ClientOnly contents={{...placeholderData}}/>;
+    return <ClientOnly contents={{...placeholderData, ...{
+            rules: []
+        } } as any}/>;
 }

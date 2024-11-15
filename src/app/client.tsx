@@ -16,10 +16,16 @@ type TournamentInfoContent = {
     startingHour: string;
 }
 
+export type RulesContent = {
+    name: string;
+    content: string;
+}
+
 export interface ClientOnlyProps {
     contents: {
         cta: CtaTextContent;
         tournamentInfo: TournamentInfoContent;
+        rules: RulesContent[];
         loadImageAction: (folderName: "winners" | "gallery") => Promise<{
             id: string | null | undefined;
             name: string | null | undefined;

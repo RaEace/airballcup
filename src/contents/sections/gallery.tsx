@@ -31,8 +31,7 @@ const Gallery: FunctionComponent = () => {
                 </h2>
             </div>
             <div className={"w-full"}>
-                <PhotoDisplayer key={images.length + "1"} images={images} speed={10} direction={"left"}/>
-                <PhotoDisplayer key={images.length + "2"} images={images} speed={10} direction={"right"}/>
+                <PhotoDisplayer key={images.length + "1"} images={images} speed={10} />
             </div>
         </article>
     );

@@ -118,7 +118,7 @@ const EloRankingTable: FunctionComponent<EloRankingProps> = ({ranking: data, col
                     {table.getRowModel().rows?.length ? (
                         table.getRowModel().rows.map((row) => (
                             <>
-                                <TableRow onClick={row.getToggleExpandedHandler()} className={cn({"hover:bg-gray-900 hover:cursor-pointer": isMedium})}>
+                                <TableRow key={row.id} onClick={row.getToggleExpandedHandler()} className={cn({"hover:bg-gray-900 hover:cursor-pointer": isMedium})}>
                                     {row.getVisibleCells().map((cell) => (
                                         <TableCell key={cell.id}>
                                             {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -126,18 +126,18 @@ const EloRankingTable: FunctionComponent<EloRankingProps> = ({ranking: data, col
                                     ))}
                                 </TableRow>
                                 {row.getIsExpanded() && isMedium && (
-                                    <TableRow className={cn("w-full", "smooth transition-all ease-in duration-300")}>
-                                        <TableCell colSpan={row.getVisibleCells().length}>
-                                            <Table className={"max-w-full rounded-t-none"}>
-                                                <TableHeader>
+                                    <TableRow key={row.id} className={cn("w-full", "smooth transition-all ease-in duration-300")}>
+                                        <TableCell key={row.id} colSpan={row.getVisibleCells().length}>
+                                            <Table key={row.id} className={"max-w-full rounded-t-none"}>
+                                                <TableHeader key={row.id}>
                                                     {Object.entries(hiddenHeaders).map(([_, [header, color]], _i, arr) => (
                                                         <TableHead colSpan={arr.length} className={cn("font-text text-text-m font-bold text-white", color)} key={header}>
                                                             {header}
                                                         </TableHead>
                                                     ))}
                                                 </TableHeader>
-                                                <TableBody>
-                                                    <TableRow>
+                                                <TableBody key={row.id}>
+                                                    <TableRow key={row.id}>
                                                         { row.getAllCells()
                                                             .filter((cell) => Object.keys(hiddenHeaders).includes(cell.column.id))
                                                             .map((cell, _, arr) => (

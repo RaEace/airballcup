@@ -57,9 +57,9 @@ const Header: FunctionComponent = () => {
     function InnerBurgerMenu() {
         return <Sheet>
             <SheetTrigger>
-                <Button variant={"outline"} size={"icon"}>
+                <div role={"button"} className={cn(buttonVariants({ variant: "outline", size: "icon" }))}>
                     <AlignJustifyIcon/>
-                </Button>
+                </div>
             </SheetTrigger>
             <SheetContent side={"full"} className={"z-[101] bg-gray-950"}>
                 <SheetTitle>
@@ -70,7 +70,7 @@ const Header: FunctionComponent = () => {
                     </SheetClose>
                 </SheetTitle>
                 <SheetDescription className={"mt-10"}>
-                    <nav className={"flex flex-col items-start"}>
+                    <div role={"navigation"} className={"flex flex-col items-start"}>
                         {links.map(([href, title, target]) => (
                             <SheetClose key={href}>
                                 <a title={title} target={target} className={
@@ -85,7 +85,7 @@ const Header: FunctionComponent = () => {
                                 </a>
                             </SheetClose>
                         ))}
-                    </nav>
+                    </div>
                 </SheetDescription>
                 <SheetFooter className={"mt-10"}>
                     <ArrowButton

@@ -36,4 +36,38 @@ export const RULES = "1n6ra_uUNGC8MyRn8duQ1UVPcQmT_lmV6";
 export const SECTIONS_TEXT = "1ytVX7bgO0Na3dpYj7MeE5Uvxmj5CotkkVIJ4Iq1MWtU";
 export const TOURNAMENT_INFO = "1frScDovZZvGDfG_bWqXl8INqaBu6hcCUaqmBtdIqZ5s";
 
+export const sectionsLinkedList = [{
+    prev: null,
+    current: "cta",
+    next: "history",
+}, {
+    prev: "cta",
+    current: "history",
+    next: "participate",
+}, {
+    prev: "history",
+    current: "participate",
+    next: "winners",
+}, {
+    prev: "participate",
+    current: "winners",
+    next: "cost",
+}, {
+    prev: "winners",
+    current: "cost",
+    next: "rules",
+}, {
+    prev: "cost",
+    current: "rules",
+    next: "gallery",
+}, {
+    prev: "rules",
+    current: "gallery",
+    next: "tournament-info",
+}, {
+    prev: "gallery",
+    current: "tournament-info",
+    next: null,
+}];
+
 export const CURRENT_SIGNUP_URL = "https://www.billetweb.fr/air-ball-cup-10&multi=u234108&margin=no_margin&color=635BFF&parent=1&margin=no_margin&color=635BFF";

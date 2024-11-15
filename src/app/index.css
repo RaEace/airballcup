@@ -60,6 +60,14 @@
   }
 }
 
+html {
+  scroll-snap-type: y mandatory;
+}
+
+article {
+  scroll-snap-align: start;
+}
+
 body {
   @apply bg-gray-900;
   @apply text-white;

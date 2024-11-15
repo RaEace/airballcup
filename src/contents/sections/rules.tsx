@@ -8,15 +8,12 @@ import pongBall from "@/assets/icons/ping-pong-ball.png";
 const md = markdownIt();
 
 const Rules: FunctionComponent = () => {
-  const headers = [
-    ["Les tirs", "shotsMd"],
-    ["Balls back", "ballsBackMd"],
-    ["Défense", "defenseMd"],
-    ["Re-formed", "reFormedMd"],
-    ["Redemption", "redemptionMd"],
-    ["Trick Shots", "trickshotsMd"],
-    ["Airball", "airballMd"],
-  ];
+  const rules = {
+    rules: {
+      name: "Règles du tournoi",
+      content: "qsldqùmlfùqlzfùl",
+    },
+  }
 
   function markdownToHtml(content: string) {
     return md.render(content);
@@ -47,10 +44,10 @@ const Rules: FunctionComponent = () => {
         </h2>
       </div>
       <div className={"w-full flex flex-col gap-4 md:w-2/3 self-start md:pt-14"}>
-        {headers.map(([header, mdFile]) => (
-          <Details title={header} key={header}>
+        {Object.entries(rules).map(([_, mdFile]) => (
+          <Details title={mdFile.name} key={mdFile.name}>
             <p dangerouslySetInnerHTML={{
-              __html: markdownToHtml(mdFile),
+              __html: markdownToHtml(mdFile.content),
             }}></p>
           </Details>
         ))}
@@ -84,8 +81,7 @@ const AnimatedText: FunctionComponent = () => {
         <Marquee speed={40}>
           <div className={"mr-2 flex items-center"}>
             {items.map((item) => (
-                <span
-                    className={"smooth font-display lg:text-title-l md:text-title-m text-title-s font-bold"}>{item}</span>
+                <span className={"smooth font-display lg:text-title-l md:text-title-m text-title-s font-bold"}>{item}</span>
             ))}
           </div>
         </Marquee>
