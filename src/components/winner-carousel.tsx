@@ -1,3 +1,5 @@
+"use client";
+
 import {FunctionComponent, useEffect, useState} from "react";
 import {
     Carousel,
@@ -16,7 +18,7 @@ const WinnerCarousel: FunctionComponent = () => {
     const [images, setImages] = useState<string[]>(Array.from({length: 10}, () => placeholder.src));
 
     useEffect(() => {
-        app.contents.loadImageAction("winners").then((images) => {
+        app.loadImageAction("winners").then((images) => {
             const urls = images.map((image) => image.url);
             setImages(urls);
         });

@@ -1,19 +1,18 @@
+"use client";
+
 import {FunctionComponent, ReactNode} from "react";
 import {Badge} from "@/components/ui/badge.tsx";
 import Details from "@/components/details.tsx";
 import Marquee from "react-fast-marquee";
 import markdownIt from "markdown-it";
 import pongBall from "@/assets/icons/ping-pong-ball.png";
+import {useAppContext} from "@/contents/App.tsx";
 
 const md = markdownIt();
 
 const Rules: FunctionComponent = () => {
-  const rules = {
-    rules: {
-      name: "Règles du tournoi",
-      content: "qsldqùmlfùqlzfùl",
-    },
-  }
+  const app = useAppContext();
+  const rules = app.rules;
 
   function markdownToHtml(content: string) {
     return md.render(content);
@@ -44,8 +43,8 @@ const Rules: FunctionComponent = () => {
         </h2>
       </div>
       <div className={"w-full flex flex-col gap-4 md:w-2/3 self-start md:pt-14"}>
-        {Object.entries(rules).map(([_, mdFile]) => (
-          <Details title={mdFile.name} key={mdFile.name}>
+        {Object.entries(rules ?? {}).map(([_, mdFile]) => (
+          <Details title={mdFile.title} key={mdFile.title}>
             <p dangerouslySetInnerHTML={{
               __html: markdownToHtml(mdFile.content),
             }}></p>
@@ -80,8 +79,8 @@ const AnimatedText: FunctionComponent = () => {
       >
         <Marquee speed={40}>
           <div className={"mr-2 flex items-center"}>
-            {items.map((item) => (
-                <span className={"smooth font-display lg:text-title-l md:text-title-m text-title-s font-bold"}>{item}</span>
+            {items.map((item, index) => (
+                <span key={index} className={"smooth font-display lg:text-title-l md:text-title-m text-title-s font-bold"}>{item}</span>
             ))}
           </div>
         </Marquee>

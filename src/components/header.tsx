@@ -25,6 +25,7 @@ import {
     NavigationMenuList,
     NavigationMenuTrigger
 } from "@/components/ui/navigation-menu.tsx";
+import Link from "next/link";
 
 const Header: FunctionComponent = () => {
     const [showStickyBtn, setShowStickyBtn] = useState<boolean>(false);
@@ -73,16 +74,16 @@ const Header: FunctionComponent = () => {
                     <div role={"navigation"} className={"flex flex-col items-start"}>
                         {links.map(([href, title, target]) => (
                             <SheetClose key={href}>
-                                <a title={title} target={target} className={
+                                <Link prefetch title={title} target={target} className={
                                     cn(buttonVariants({variant: "link"}), "group font-display font-bold text-title-m")
                                 }
-                                   href={href}>
+                                   href={String(href)}>
                                     <ArrowRight
                                         color={"#E51C21"}
                                         className={"smooth mr-2 mb-1 sm:size-10 size-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 ease-in-out transform translate-x-2"}
                                     />
                                     {title}
-                                </a>
+                                </Link>
                             </SheetClose>
                         ))}
                     </div>
@@ -106,9 +107,9 @@ const Header: FunctionComponent = () => {
 
     return <header
         className={"absolute backdrop-blur-[2px] font-display uppercase z-[100] px-6 flex items-center justify-between w-full h-[104px] bg-transparent"}>
-        <a title={"back-home-link"} href="/">
+        <Link prefetch title={"back-home-link"} href="/">
             <img src={airballCupLogo.src} alt="logo airball cup"/>
-        </a>
+        </Link>
 
         <div className={"hidden lg:flex lg:items-center"}>
             <Navbar nestedLinks={navigationMenuLinks} links={links.slice(END_OF_NESTED_LINKS_INDEX+1)}/>
@@ -120,6 +121,7 @@ const Header: FunctionComponent = () => {
         </div>
         <div className={"lg:hidden flex items-center justify-center space-x-4"}>
             <Button
+                role={"link"}
                 name={"register-header-mobile-"+(showStickyBtn ? "visible" : "invisible")}
                 onClick={() => { window.open(CURRENT_SIGNUP_URL) }}
                 size={"sm"}
@@ -149,9 +151,9 @@ function Navbar({nestedLinks,links}: {
                         {nestedLinks.map(([href, title, target]) => (
                             <li key={href}>
                                 <NavigationMenuLink asChild>
-                                    <a className={cn(buttonVariants({ variant: "link" }))} title={title} target={target} href={href}>
+                                    <Link prefetch className={cn(buttonVariants({ variant: "link" }))} title={title} target={target} href={href}>
                                         {title}
-                                    </a>
+                                    </Link>
                                 </NavigationMenuLink>
                             </li>
                         ))}
@@ -161,7 +163,7 @@ function Navbar({nestedLinks,links}: {
             {links.map(([href, title, target], index) => (
                 <NavigationMenuItem key={href}>
                     <NavigationMenuLink asChild>
-                        <a
+                        <Link prefetch
                             title={title}
                             key={index}
                             onClick={target === undefined ? handleScrollToSection : undefined}
@@ -169,9 +171,9 @@ function Navbar({nestedLinks,links}: {
                                 cn(buttonVariants({variant: "link"}), "xl:text-button-m lg:text-[10px]")
                             }
                             target={target}
-                            href={href}>
+                            href={String(href)}>
                             {title}
-                        </a>
+                        </Link>
                     </NavigationMenuLink>
                 </NavigationMenuItem>
             ))}

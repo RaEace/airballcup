@@ -1,6 +1,6 @@
 "use server";
 
-import {google} from "googleapis";
+import {drive_v3, google, sheets_v4} from "googleapis";
 
 const SCOPES = [
     'https://www.googleapis.com/auth/drive.file',
@@ -8,22 +8,53 @@ const SCOPES = [
 ];
 
 const credentials = {
-    client_email: process.env.GOOGLE_CLIENT_EMAIL ?? "",
-    private_key: process.env.GOOGLE_PRIVATE_KEY ?? "",
+    client_email: process.env.CLIENT_EMAIL!,
+    private_key: process.env.PRIVATE_KEY!,
 };
 
 class GoogleService {
+    static #instance: GoogleService;
     authClient: any;
+    #drive: drive_v3.Drive | undefined;
+    #sheets: sheets_v4.Sheets | undefined;
 
     constructor() {
         this.authClient = null;
-
         this.authorize({
             client_email: credentials.client_email,
             private_key: credentials.private_key.split(String.raw`\n`).join('\n'),
         });
 
         console.log("GoogleService initialized");
+    }
+
+    public static get instance() {
+        if (!GoogleService.#instance) {
+            GoogleService.#instance = new GoogleService();
+        }
+        return GoogleService.#instance;
+    }
+
+    get drive() {
+        if (!this.#drive) {
+            this.#drive = google.drive({
+                version: 'v3',
+                auth: this.authClient,
+            });
+        }
+
+        return this.#drive;
+    }
+
+    get sheets() {
+        if (!this.#sheets) {
+            this.#sheets = google.sheets({
+                version: 'v4',
+                auth: this.authClient,
+            });
+        }
+
+        return this.#sheets;
     }
 
     authorize(credentials: { client_email: string, private_key: string }) {
@@ -39,10 +70,7 @@ class GoogleService {
             return;
         }
 
-        const drive = google.drive({
-            version: 'v3',
-            auth: this.authClient,
-        });
+        const drive = this.drive;
 
         const res = await drive.files.list({
             pageSize: 10,
@@ -58,10 +86,7 @@ class GoogleService {
             return;
         }
 
-        const drive = google.drive({
-            version: 'v3',
-            auth: this.authClient,
-        });
+        const drive = this.drive;
 
         const folder = await drive.files.list({
             q: `'${folderId}' in parents and trashed=false`,
@@ -82,10 +107,7 @@ class GoogleService {
             return;
         }
 
-        const drive = google.drive({
-            version: 'v3',
-            auth: this.authClient,
-        });
+        const drive = this.drive;
 
         const res = await drive.files.get({
             fileId,
@@ -101,10 +123,7 @@ class GoogleService {
             return;
         }
 
-        const drive = google.drive({
-            version: 'v3',
-            auth: this.authClient,
-        });
+        const drive = this.drive;
 
         const res = await drive.files.export({
             fileId,
@@ -121,10 +140,7 @@ class GoogleService {
             return;
         }
 
-        const sheets = google.sheets({
-            version: 'v4',
-            auth: this.authClient,
-        });
+        const sheets = this.sheets;
 
         const values = await sheets.spreadsheets.values.get({
             spreadsheetId: fileId,

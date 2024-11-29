@@ -5,30 +5,30 @@ import dynamic from 'next/dynamic';
 
 const App = dynamic(() => import('@/contents/App'), { ssr: false });
 
-type CtaTextContent = {
+export type CtaTextContent = {
     badgeText: string;
     headerText: string;
 }
 
-type TournamentInfoContent = {
+export type TournamentInfoContent = {
     badgeText: string;
     date: string;
     startingHour: string;
 }
 
 export type RulesContent = {
-    name: string;
+    title: string;
     content: string;
 }
 
 export interface ClientOnlyProps {
     contents: {
-        cta: CtaTextContent;
+        sectionsText: { cta: CtaTextContent };
         tournamentInfo: TournamentInfoContent;
         rules: RulesContent[];
         loadImageAction: (folderName: "winners" | "gallery") => Promise<{
-            id: string | null | undefined;
-            name: string | null | undefined;
+            id: string;
+            name: string;
             url: string;
         }[]>;
     }

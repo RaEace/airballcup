@@ -1,11 +1,11 @@
 "use server";
 
-import {GALLERIE, WINNERS} from "@/lib/utils.ts";
+import {GALLERY, WINNERS} from "@/lib/utils.ts";
 import GoogleService from "@/services/google.service.ts";
 
 export default async function loadImages(folderName: "gallery" | "winners") {
-    const googleService = new GoogleService();
-    const folder = await googleService.getFilesInFolder(folderName === "gallery" ? GALLERIE : WINNERS);
+    const googleService = GoogleService.instance;
+    const folder = await googleService.getFilesInFolder(folderName === "gallery" ? GALLERY : WINNERS);
 
     if (!folder) return [];
 

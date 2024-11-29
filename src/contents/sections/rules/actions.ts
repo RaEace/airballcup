@@ -1,32 +1,24 @@
 "use server";
 
 import GoogleService from "@/services/google.service.ts";
-import {RULES} from "@/lib/utils.ts";
+import {RULES, translateTomlToJson} from "@/lib/utils.ts";
+import {RulesContent} from "@/app/client.tsx";
 
-async function getRules() {
-    const googleService = new GoogleService();
-    const rules = await googleService.getFilesInFolder(RULES);
+async function getRules(): Promise<{ rules: RulesContent[] }> {
+    const googleService = GoogleService.instance;
+    const rules = await googleService.readGoogleDoc(RULES);
 
-    if (!rules) return [];
-
-    const formattedFileArray: {name: string; content: string;}[] = [];
-
-    for await (const rule of rules) {
-        const name = formatFileName(String(rule.name));
-        const content = await googleService.readGoogleDoc(String(rule.id));
-
-        if (!content) continue;
-        
-        formattedFileArray.push({name, content});
+    if (!rules) {
+        throw new Error("No rules found");
     }
 
-    return formattedFileArray;
-}
+    const config =  translateTomlToJson<{
+        rules_configuration: {
+            rules: { title: string; content: string; }[];
+        };
+    }>(rules);
 
-function formatFileName(fileName: string) {
-    const withoutHyphens = fileName.replace(/-/g, " ");
-    const withoutExtension = withoutHyphens.replace(".md", "");
-    return withoutExtension.charAt(0).toUpperCase() + withoutExtension.slice(1);
+    return config.rules_configuration;
 }
 
 export default getRules;

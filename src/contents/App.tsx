@@ -1,3 +1,5 @@
+"use client";
+
 import "./App.css";
 import Cost from "./sections/cost.tsx";
 import Rules from "@/contents/sections/rules.tsx";
@@ -8,11 +10,23 @@ import History from "@/contents/sections/history.tsx";
 import Participate from "@/contents/sections/participate.tsx";
 import Winners from "@/contents/sections/winners.tsx";
 import Footer from "@/components/footer.tsx";
-import {createContext, FunctionComponent, useContext, useEffect, useState} from "react";
-import {ClientOnlyProps} from "@/app/client.tsx";
-import {sectionsLinkedList} from "@/lib/utils.ts";
+import {createContext, FunctionComponent, useContext} from "react";
+import {ClientOnlyProps, CtaTextContent, RulesContent, TournamentInfoContent} from "@/app/client.tsx";
+import {motion} from "framer-motion";
+import loadImages from "@/components/photo-displayer/actions.ts";
 
-const AppContext = createContext<ClientOnlyProps | null>(null);
+type AppContextProps = {
+    sectionsText: {
+        cta: CtaTextContent;
+    };
+    tournamentInfo: TournamentInfoContent;
+    rules: RulesContent[];
+    loadImageAction: typeof loadImages;
+};
+
+// Resulting type
+
+const AppContext = createContext<AppContextProps | null>(null);
 const AppProvider = AppContext.Provider;
 
 export function useAppContext() {
@@ -23,56 +37,30 @@ export function useAppContext() {
     return context;
 }
 
+
 const App: FunctionComponent<ClientOnlyProps> = ({contents}) => {
-    const [scrolling, setScrolling] = useState(false);
-    const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
-
-    useEffect(() => {
-        window.addEventListener("wheel", smoothScrollToSection);
-        return () => window.removeEventListener("wheel", smoothScrollToSection);
-    }, []);
-
-    function smoothScrollToSection(event: WheelEvent) {
-        if (scrolling) return;
-        setScrolling(true);
-
-        const target = event.deltaY > 0 ? "next" : "prev";
-        const currentSection = sectionsLinkedList[currentSectionIndex];
-        const targetSectionName = currentSection[target];
-
-        if (!targetSectionName) {
-            setScrolling(false);
-            return;
-        } else {
-            setCurrentSectionIndex(target === "prev" ? currentSectionIndex - 1 : currentSectionIndex + 1);
-        }
-
-        const targetSectionAnchor = document.getElementById(targetSectionName);
-        if (!targetSectionAnchor) {
-            setScrolling(false);
-            return;
-        }
-
-        targetSectionAnchor.scrollIntoView({behavior: "smooth"});
-
-        setTimeout(() => {
-            setScrolling(false);
-        }, 1000);
-    }
-
     return (
-        <AppProvider value={{contents}}>
-            <main className={"w-screen h-screen overflow-x-hidden"}>
-                <CallToAction/>
-                <History/>
-                <Participate/>
-                <Winners/>
-                <Cost/>
-                <Rules/>
-                <Gallery/>
-                <TournamentInfo/>
-                <Footer/>
-            </main>
+        <AppProvider value={{
+            sectionsText: contents.sectionsText,
+            tournamentInfo: contents.tournamentInfo,
+            rules: contents.rules,
+            loadImageAction: contents.loadImageAction,
+        }}>
+            <motion.main
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
+                id={"smooth-wrapper"} className={"w-screen h-screen overflow-x-hidden scroll-body"}>
+                    <CallToAction/>
+                    <History/>
+                    <Participate/>
+                    <Winners/>
+                    <Cost/>
+                    <Rules/>
+                    <Gallery/>
+                    <TournamentInfo/>
+                    <Footer/>
+            </motion.main>
         </AppProvider>
     );
 };

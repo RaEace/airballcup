@@ -1,13 +1,15 @@
+"use client";
+
 import {FunctionComponent} from "react";
 import {Badge} from "@/components/ui/badge.tsx";
 import ArrowButton from "@/components/arrow-button.tsx";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar.tsx";
 import {CURRENT_SIGNUP_URL} from "@/lib/utils.ts";
-import {ClientOnlyProps} from "@/app/client.tsx";
+import {TournamentInfoContent} from "@/app/client.tsx";
 import {useAppContext} from "@/contents/App.tsx";
 import dayjs from "dayjs";
 
-const getTournamentInfo = ({ date, startingHour }: ClientOnlyProps["contents"]["tournamentInfo"]) => ({
+const getTournamentInfo = ({ date, startingHour }: TournamentInfoContent) => ({
   date: dayjs(date)
       .add(Number(startingHour.split("h")[0]), "hours")
       .add(Number(startingHour.split("h")[1]), "minutes")
@@ -27,7 +29,7 @@ const getTournamentInfo = ({ date, startingHour }: ClientOnlyProps["contents"]["
 });
 
 const TournamentInfo: FunctionComponent = () => {
-  const { contents: { tournamentInfo }} = useAppContext();
+  const { tournamentInfo } = useAppContext();
   const info = getTournamentInfo(tournamentInfo);
 
   return (

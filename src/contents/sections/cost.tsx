@@ -1,3 +1,5 @@
+"use client";
+
 import {FunctionComponent} from "react";
 import {Badge} from "@/components/ui/badge.tsx";
 import {Tag, TrophyIcon} from "lucide-react";

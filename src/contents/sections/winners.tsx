@@ -1,3 +1,5 @@
+"use client";
+
 import {FunctionComponent} from "react";
 import {Badge} from "@/components/ui/badge.tsx";
 import WinnerCarousel from "@/components/winner-carousel.tsx";
@@ -11,7 +13,7 @@ const Winners: FunctionComponent = () => {
                     <p>🏆 LES GOATS</p>
                 </Badge>
                 <h1 className={"smooth uppercase font-display lg:text-display-l text-title-m font-bold"}>
-                    Nos derniers
+                    Nos <br/> derniers <br/>
                     Vainqueurs
                 </h1>
             </div>

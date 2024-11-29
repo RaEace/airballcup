@@ -1,3 +1,5 @@
+"use client";
+
 import {FunctionComponent, useEffect, useState} from "react";
 import {Badge} from "@/components/ui/badge.tsx";
 import PhotoDisplayer from "@/components/photo-displayer/photo-displayer.tsx";
@@ -8,6 +10,7 @@ import {useAppContext} from "@/contents/App.tsx";
 
 const Gallery: FunctionComponent = () => {
     const app = useAppContext();
+    console.log(app)
     const [images, setImages] = useState<string[]>([
         placeholder1.src,
         placeholder2.src,
@@ -15,7 +18,7 @@ const Gallery: FunctionComponent = () => {
     ]);
 
     useEffect(() => {
-        app.contents.loadImageAction("gallery").then((images) => {
+        app.loadImageAction("gallery").then((images) => {
             const urls = images.map((image) => image.url);
             setImages(urls);
         });

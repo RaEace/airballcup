@@ -21,7 +21,7 @@ import {cn} from "@/lib/utils.ts";
 
 interface EloRankingProps {
     columns: ColumnDef<EloEntry>[];
-    ranking: EloEntry[];
+    rankings: EloEntry[];
 }
 
 function sortNumberRows(a: Row<number>, b: Row<number>) {
@@ -32,7 +32,7 @@ function sortStringRows(a: Row<string>, b: Row<string>) {
     return a.original.localeCompare(b.original);
 }
 
-const EloRankingTable: FunctionComponent<EloRankingProps> = ({ranking: data, columns}) => {
+const EloRankingTable: FunctionComponent<EloRankingProps> = ({rankings: data, columns}) => {
     const [sort, setSort] = useState<SortingState>([]);
     const [visibility, setVisibility] = useState<VisibilityState>({});
     const [expanded, setExpanded] = useState<ExpandedState>({});
@@ -96,7 +96,6 @@ const EloRankingTable: FunctionComponent<EloRankingProps> = ({ranking: data, col
         }
     }, [isMedium]);
 
-
     return (
         <div className={"w-full"}>
             <Table className={"w-full h-full"}>
@@ -126,7 +125,7 @@ const EloRankingTable: FunctionComponent<EloRankingProps> = ({ranking: data, col
                                     ))}
                                 </TableRow>
                                 {row.getIsExpanded() && isMedium && (
-                                    <TableRow key={row.id} className={cn("w-full", "smooth transition-all ease-in duration-300")}>
+                                    <TableRow key={row.id} className={"w-full"}>
                                         <TableCell key={row.id} colSpan={row.getVisibleCells().length}>
                                             <Table key={row.id} className={"max-w-full rounded-t-none"}>
                                                 <TableHeader key={row.id}>

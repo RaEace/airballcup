@@ -8,9 +8,9 @@ const PhotoDisplayer: FunctionComponent<{
 }> = ({speed, images}) => {
 
     function InternalMarquee({direction}:{direction: "left" | "right"}) {
-        return <Marquee speed={speed} direction={direction} className={"w-full flex items-center justify-start"}>
+        return <Marquee key={`marquee-${direction}`} speed={speed} direction={direction} className={"w-full flex items-center justify-start"}>
             {images.length > 0 && images.map((img, index) => (
-                <img className={"max-h-[288px] sm:max-h-[500px]"} src={img} alt={`gallery picture ${index}`}/>
+                <img key={`image-${direction}-${index}`} className={"max-h-[288px] sm:max-h-[500px]"} src={img} alt={`gallery picture ${index}`}/>
             ))}
         </Marquee>;
     }

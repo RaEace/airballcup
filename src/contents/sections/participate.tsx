@@ -1,3 +1,5 @@
+"use client";
+
 import {FunctionComponent} from "react";
 import {Badge} from "@/components/ui/badge.tsx";
 import StyledCard from "@/components/styled-card.tsx";
@@ -35,13 +37,13 @@ const Participate: FunctionComponent = () => {
                 }>
                     <div className={"h-full flex flex-col gap-6"}>
                         <CardTitle>
-                            <h3 className={"uppercase font-display font-bold text-title-s"}>Chope
-                                ta place</h3>
+                            <span className={"uppercase font-display font-bold text-title-s"}>Chope
+                                ta place</span>
                         </CardTitle>
                         <CardDescription className={"h-3/4 md:px-6"}>
-                            <p className={"font-text text-subtitle-m text-gray-300"}>
+                            <span className={"font-text text-subtitle-m text-gray-300"}>
                                 Inscris-toi à la prochaine Airball Cup pour participer au tournoi de Beer Pong.
-                            </p>
+                            </span>
                         </CardDescription>
                         <CardFooter className={"w-full flex items-center justify-center"}>
                             <ArrowButton role={"link"} onClick={() => { window.open(CURRENT_SIGNUP_URL) }} size={btnSize} iconSize={
@@ -59,14 +61,14 @@ const Participate: FunctionComponent = () => {
                 }>
                     <div className={"h-full flex flex-col gap-6"}>
                         <CardTitle>
-                            <h3 className={"uppercase font-display font-bold text-title-s"}>Tu cherches
-                                un partenaire ?</h3>
+                            <span className={"uppercase font-display font-bold text-title-s"}>Tu cherches
+                                un partenaire ?</span>
                         </CardTitle>
                         <CardDescription className={"h-3/4"}>
-                            <p className={"font-text text-subtitle-m text-gray-300"}>
+                            <span className={"font-text text-subtitle-m text-gray-300"}>
                                 On se charge de te mettre en relation avec un autre joueur single. Indique ton mail
                                 ci-dessous et on te tient au courant !
-                            </p>
+                            </span>
                         </CardDescription>
                         <CardFooter className={"w-full flex items-center justify-center"}>
                             <Input type={"email"} inputSize={btnSize} placeholder={"Ton addresse email"}/>
@@ -80,13 +82,13 @@ const Participate: FunctionComponent = () => {
                 }>
                     <div className={"h-full flex flex-col gap-6"}>
                         <CardTitle>
-                            <h3 className={"uppercase font-display font-bold text-title-s"}>RDV AU BELUSHI'S CANAL</h3>
+                            <span className={"uppercase font-display font-bold text-title-s"}>RDV AU BELUSHI'S CANAL</span>
                         </CardTitle>
                         <CardDescription className={"h-3/4"}>
-                            <p className={"font-text  text-subtitle-m text-gray-300"}>
+                            <span className={"font-text  text-subtitle-m text-gray-300"}>
                                 Notre partenaire, le Belushi's Canal, t'ouvre ses portes au bord de l'eau. Atmosphère
                                 familiale, néons colorés, et 6 tables de BP privatisées rien que pour nous.
-                            </p>
+                            </span>
                         </CardDescription>
                         <CardFooter className={"w-full flex items-center justify-center"}>
                             <Button size={btnSize} variant={"link"} asChild>
