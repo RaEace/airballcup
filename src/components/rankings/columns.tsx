@@ -60,6 +60,10 @@ export const columns: ColumnDef<EloEntry>[] = [
             <SortingBtnHeader color={"green-500"} column={column}>
                 Victoires
             </SortingBtnHeader>,
+        cell: ({ row }) => {
+            const wins = row.getValue<number>("wins");
+            return <span className={"text-green-500"}>{wins >= 0 ? wins : "-"}</span>;
+        },
         enableHiding: true,
     },
     {
@@ -68,12 +72,20 @@ export const columns: ColumnDef<EloEntry>[] = [
             <SortingBtnHeader color={"primary-500"} column={column}>
                 Défaites
             </SortingBtnHeader>,
+        cell: ({ row }) => {
+            const losses = row.getValue<number>("losses");
+            return <span className={"text-red-500"}>{losses >= 0 ? losses : "-"}</span>;
+        },
         enableHiding: true,
     },
     {
         accessorKey: "gamesPlayed",
         header: ({ column }) => {
             return <SortingBtnHeader column={column}>Parties jouées</SortingBtnHeader>
+        },
+        cell: ({ row }) => {
+            const gamesPlayed = row.getValue<number>("gamesPlayed");
+            return <span>{gamesPlayed >= 0 ? gamesPlayed : "-"}</span>;
         },
         enableHiding: true,
     },

@@ -8,6 +8,7 @@ export const dynamic = "force-dynamic";
 async function getEloData() {
     const googleService = GoogleService.instance;
     const eloSheet = await googleService.readGoogleSheet(process.env.ELO_DOC, "2024");
+    console.log(eloSheet)
     return transformEloData(eloSheet?.values ?? []);
 }
 
@@ -32,14 +33,17 @@ async function Page() {
 
 function transformEloData(data: string[][]): EloEntry[] {
     const rows = data.slice(1);
-    return rows.map((row) => ({
-        rank: parseInt(row[0]),
-        teamName: row[1],
-        elo: parseInt(row[2]),
-        wins: parseInt(row[3]),
-        losses: parseInt(row[4]),
-        gamesPlayed: parseInt(row[5]),
-        winRate: parseFloat(row[6].replace(",", ".")),
+    const placeholder = (val: number) => isNaN(val) ? -1 : val;
+    const eloSort = (a: string, b: string) => parseInt(b) - parseInt(a);
+
+    return rows.sort((a,b) => eloSort(a[1], b[1])).map((row, index) => ({
+        rank: index + 1,
+        teamName: row[0],
+        elo: placeholder(parseInt(row[1])),
+        wins: placeholder(parseInt(row[2])),
+        losses: placeholder(parseInt(row[3])),
+        gamesPlayed: placeholder(parseInt(row[4])),
+        winRate: placeholder(parseInt(row[5])),
     }));
 }
 

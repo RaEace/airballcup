@@ -97,7 +97,7 @@ const EloRankingTable: FunctionComponent<EloRankingProps> = ({rankings: data, co
     }, [isMedium]);
 
     return (
-        <div className={"w-full"}>
+        <div className={"w-full overflow-y-scroll"}>
             <Table className={"w-full h-full"}>
                 <TableHeader>
                     {table.getHeaderGroups().map((headerGroup) => (
