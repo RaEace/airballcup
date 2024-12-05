@@ -1,25 +1,26 @@
-import {FunctionComponent, useEffect, useState} from "react";
-import {getImages} from "./import-all-images";
+import {FunctionComponent} from "react";
 import Marquee from "react-fast-marquee";
 
+
 const PhotoDisplayer: FunctionComponent<{
-  speed: number;
-  direction: "left" | "right" | "up" | "down";
-}> = ({ speed, direction }) => {
-  const [images, setImages] = useState<string[]>([]);
-  const loadImages = async () => setImages(await getImages());
+    speed: number;
+    images: string[];
+}> = ({speed, images}) => {
 
-  useEffect(() => {
-    void loadImages();
-  }, []);
+    function InternalMarquee({direction}:{direction: "left" | "right"}) {
+        return <Marquee key={`marquee-${direction}`} speed={speed} direction={direction} className={"w-full flex items-center justify-start"}>
+            {images.length > 0 && images.map((img, index) => (
+                <img key={`image-${direction}-${index}`} className={"max-h-[288px] sm:max-h-[500px]"} src={img} alt={`gallery picture ${index}`}/>
+            ))}
+        </Marquee>;
+    }
 
-  return (
-    <Marquee speed={speed} direction={direction} className={"w-full flex items-center justify-start"}>
-      {images.length > 0 && images.map((img, index) => (
-          <img className={"max-h-[288px] sm:max-h-[500px]"} src={img} alt={`gallery picture ${index}`}/>
-      ))}
-    </Marquee>
-  );
+    return (
+        <div className={"w-full"}>
+            <InternalMarquee direction={"left"} />
+            <InternalMarquee direction={"right"} />
+        </div>
+    );
 };
 
 export default PhotoDisplayer;

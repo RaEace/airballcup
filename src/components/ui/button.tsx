@@ -19,7 +19,7 @@ const buttonVariants = cva(
         secondary:
           "bg-secondary-500 rounded-full text-white shadow-sm hover:bg-secondary/80",
         invertedPrimary: "font-text font-bold text-primary-500 bg-white hover:bg-white/90",
-        ghost: "hover:bg-transparent/10",
+        ghost: "transition-colors text-white",
 
         warning:
           "bg-warning-500 text-warning-foreground shadow-sm hover:bg-warning/90",

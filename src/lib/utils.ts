@@ -1,6 +1,7 @@
 import {type ClassValue, clsx} from "clsx"
 import {extendTailwindMerge} from "tailwind-merge"
 import {MouseEventHandler} from "react";
+import {parse} from "@std/toml";
 
 const twMerge = extendTailwindMerge({
   extend: {
@@ -28,6 +29,32 @@ export const handleScrollToSection: MouseEventHandler<HTMLAnchorElement> = (even
     if (!targetElement) return;
 
     targetElement.scrollIntoView({behavior: "smooth"});
+}
+
+export const GALLERY = process.env.GALLERY_DIR;
+export const WINNERS = process.env.WINNERS_DIR;
+export const RULES = process.env.RULES_DOC;
+export const SECTIONS_TEXT = process.env.SECTIONS_DOC;
+export const TOURNAMENT_INFO = process.env.TOURNAMENT_INFO_DOC;
+
+export const sectionsLinkedList = [
+    { prev: null, current: "cta", next: "history" },
+    { prev: "cta", current: "history", next: "participate" },
+    { prev: "history", current: "participate", next: "winners" },
+    { prev: "participate", current: "winners", next: "cost" },
+    { prev: "winners", current: "cost", next: "rules" },
+    { prev: "cost", current: "rules", next: "gallery" },
+    { prev: "rules", current: "gallery", next: "tournament-info" },
+    { prev: "gallery", current: "tournament-info", next: null },
+];
+
+function sanitizeString(str: string): string {
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
+export function translateTomlToJson<T extends Object>(tomlContent: string): T {
+    const json = parse(sanitizeString(tomlContent)) as unknown as T;
+    return json as T;
 }
 
 export const CURRENT_SIGNUP_URL = "https://www.billetweb.fr/air-ball-cup-10&multi=u234108&margin=no_margin&color=635BFF&parent=1&margin=no_margin&color=635BFF";
