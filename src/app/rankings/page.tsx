@@ -3,12 +3,9 @@ import mascotte from "@/assets/icons/rankings_icon.svg";
 import EloRankingTable from "@/components/rankings/elo-ranking-table.tsx";
 import GoogleService from "@/services/google.service.ts";
 
-export const dynamic = "force-dynamic";
-
 async function getEloData() {
     const googleService = GoogleService.instance;
     const eloSheet = await googleService.readGoogleSheet(process.env.ELO_DOC, "2024");
-    console.log(eloSheet)
     return transformEloData(eloSheet?.values ?? []);
 }
 

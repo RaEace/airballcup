@@ -10,7 +10,6 @@ import {useAppContext} from "@/contents/App.tsx";
 
 const Gallery: FunctionComponent = () => {
     const app = useAppContext();
-    console.log(app)
     const [images, setImages] = useState<string[]>([
         placeholder1.src,
         placeholder2.src,
@@ -30,7 +29,7 @@ const Gallery: FunctionComponent = () => {
                 <Badge className={"smooth font-text font-bold sm:text-tag-l text-tag-m uppercase"}>📸 Les
                     coulisses</Badge>
                 <h2 className={"smooth font-display font-bold uppercase lg:text-display-s md:text-title-l sm:text-title-m"}>
-                    Gallerie des <span className={"ml-1 text-secondary-500"}>champions</span>
+                    Galerie des <span className={"ml-1 text-secondary-500"}>champions</span>
                 </h2>
             </div>
             <div className={"w-full"}>

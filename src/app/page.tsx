@@ -5,8 +5,6 @@ import getRules from "@/contents/sections/rules/actions.ts";
 import getTournamentInfo from "@/contents/sections/tournamentInfo/actions.ts";
 import getContentForSections from "@/contents/sections/cms/actions.ts";
 
-export const dynamic = "force-dynamic";
-
 export default async function Page() {
     const sectionsText = await getContentForSections();
     const tournamentContent = await getTournamentInfo();

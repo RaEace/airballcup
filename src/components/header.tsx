@@ -35,7 +35,7 @@ const Header: FunctionComponent = () => {
         [slug + "#about", "Notre histoire", "_self"],
         [slug + "#participate", "Comment participer", "_self"],
         [slug + "#cost", "Tarifs et récompenses", "_self"],
-        [slug + "#champions", "Gallerie des champions", "_self"],
+        [slug + "#champions", "Galerie des champions", "_self"],
         //--end of nested links--//
         ["/rankings", "Classement", "_self"],
         ["https://www.instagram.com/airballcup", "Instagram", "_blank"]
