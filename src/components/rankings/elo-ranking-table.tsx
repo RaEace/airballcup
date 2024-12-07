@@ -18,6 +18,9 @@ import {
 } from "@tanstack/react-table";
 import useMediaQuery from "@/hooks/use-media-query.ts";
 import {cn} from "@/lib/utils.ts";
+import {Button} from "@/components/ui/button.tsx";
+import {ArrowLeft, ArrowRight} from "lucide-react";
+import {DoubleArrowLeftIcon, DoubleArrowRightIcon} from "@radix-ui/react-icons";
 
 interface EloRankingProps {
     columns: ColumnDef<EloEntry>[];
@@ -36,6 +39,7 @@ const EloRankingTable: FunctionComponent<EloRankingProps> = ({rankings: data, co
     const [sort, setSort] = useState<SortingState>([]);
     const [visibility, setVisibility] = useState<VisibilityState>({});
     const [expanded, setExpanded] = useState<ExpandedState>({});
+    const [pagination, setPagination] = useState({pageIndex: 0, pageSize: 10});
     const isMedium = useMediaQuery("(max-width: 768px)");
 
     // [[header, color]]
@@ -58,6 +62,7 @@ const EloRankingTable: FunctionComponent<EloRankingProps> = ({rankings: data, co
         getExpandedRowModel: getExpandedRowModel<EloEntry>(),
         onSortingChange: setSort,
         onColumnVisibilityChange: setVisibility,
+        onPaginationChange: setPagination,
         sortingFns: {
             rank: sortNumberRows,
             teamName: sortStringRows,
@@ -71,6 +76,7 @@ const EloRankingTable: FunctionComponent<EloRankingProps> = ({rankings: data, co
             sorting: sort,
             columnVisibility: visibility,
             expanded,
+            pagination,
         }
     });
 
@@ -97,8 +103,8 @@ const EloRankingTable: FunctionComponent<EloRankingProps> = ({rankings: data, co
     }, [isMedium]);
 
     return (
-        <div className={"w-full overflow-y-scroll"}>
-            <Table className={"w-full h-full"}>
+        <div className={"w-full"}>
+            <Table className={"w-full h-[50vh]"}>
                 <TableHeader>
                     {table.getHeaderGroups().map((headerGroup) => (
                         <TableRow key={headerGroup.id}>
@@ -117,7 +123,8 @@ const EloRankingTable: FunctionComponent<EloRankingProps> = ({rankings: data, co
                     {table.getRowModel().rows?.length ? (
                         table.getRowModel().rows.map((row) => (
                             <>
-                                <TableRow key={row.id} onClick={row.getToggleExpandedHandler()} className={cn({"hover:bg-gray-900 hover:cursor-pointer": isMedium})}>
+                                <TableRow key={row.id} onClick={row.getToggleExpandedHandler()}
+                                          className={cn({"hover:bg-gray-900 hover:cursor-pointer": isMedium})}>
                                     {row.getVisibleCells().map((cell) => (
                                         <TableCell key={cell.id}>
                                             {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -130,14 +137,16 @@ const EloRankingTable: FunctionComponent<EloRankingProps> = ({rankings: data, co
                                             <Table key={row.id} className={"max-w-full rounded-t-none"}>
                                                 <TableHeader key={row.id}>
                                                     {Object.entries(hiddenHeaders).map(([_, [header, color]], _i, arr) => (
-                                                        <TableHead colSpan={arr.length} className={cn("font-text text-text-m font-bold text-white", color)} key={header}>
+                                                        <TableHead colSpan={arr.length}
+                                                                   className={cn("font-text text-text-m font-bold text-white", color)}
+                                                                   key={header}>
                                                             {header}
                                                         </TableHead>
                                                     ))}
                                                 </TableHeader>
                                                 <TableBody key={row.id}>
                                                     <TableRow key={row.id}>
-                                                        { row.getAllCells()
+                                                        {row.getAllCells()
                                                             .filter((cell) => Object.keys(hiddenHeaders).includes(cell.column.id))
                                                             .map((cell, _, arr) => (
                                                                 <TableCell colSpan={arr.length} key={cell.id}>
@@ -158,6 +167,25 @@ const EloRankingTable: FunctionComponent<EloRankingProps> = ({rankings: data, co
                     </TableRow>}
                 </TableBody>
             </Table>
+            <div className={"bg-gray-950 border-t border-gray-800 py-2 w-full flex items-center justify-center gap-4"}>
+                <Button disabled={!table.getCanPreviousPage()} onClick={() => table.firstPage()}>
+                    <DoubleArrowLeftIcon className={"size-4"} />
+                </Button>
+                <Button onClick={() => table.previousPage()}
+                        disabled={!table.getCanPreviousPage()}>
+                    <ArrowLeft className={"size-4"}/>
+                </Button>
+                <div className={"text-center text-gray-500"}>
+                    Page {pagination.pageIndex + 1} sur {table.getPageCount()}
+                </div>
+                <Button onClick={() => table.nextPage()}
+                        disabled={!table.getCanNextPage()}>
+                    <ArrowRight className={"size-4"}/>
+                </Button>
+                <Button onClick={() => table.lastPage()} disabled={!table.getCanNextPage()}>
+                    <DoubleArrowRightIcon className={"size-4"} />
+                </Button>
+            </div>
         </div>
     );
 };
