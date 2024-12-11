@@ -1,6 +1,6 @@
 "use server";
 
-import {drive_v3, google, sheets_v4} from "googleapis";
+import {drive_v3, google, sheets_v4, storage_v1} from "googleapis";
 
 const SCOPES = [
     'https://www.googleapis.com/auth/drive.file',
@@ -15,8 +15,10 @@ const credentials = {
 class GoogleService {
     static #instance: GoogleService;
     authClient: any;
+    BUCKET_NAME = "gs://airballcup";
     #drive: drive_v3.Drive | undefined;
     #sheets: sheets_v4.Sheets | undefined;
+    #storage: storage_v1.Storage | undefined;
 
     constructor() {
         this.authClient = null;
@@ -55,6 +57,17 @@ class GoogleService {
         }
 
         return this.#sheets;
+    }
+
+    get storage() {
+        if (!this.#storage) {
+            this.#storage = google.storage({
+                version: 'v1',
+                auth: this.authClient,
+            });
+        }
+
+        return this.#storage;
     }
 
     authorize(credentials: { client_email: string, private_key: string }) {

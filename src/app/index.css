@@ -110,7 +110,7 @@ body {
 }
 
 #cta {
-  background: url("../assets/photos/bg-img.png");
+  background-image: url("../assets/photos/bg-img.png");
 }
 
 * {

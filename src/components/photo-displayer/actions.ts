@@ -12,6 +12,6 @@ export default async function loadImages(folderName: "gallery" | "winners") {
     return folder.map((file) => ({
         id: String(file.id),
         name: String(file.name),
-        url: `https://storage.cloud.google.com/airballcup_cms/${folderName}/${String(file.id)}?authuser=2`,
+        url: `https://storage.googleapis.com/airballcup/${folderName}/${String(file.id)}`,
     }));
 }

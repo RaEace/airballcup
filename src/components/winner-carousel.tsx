@@ -41,12 +41,12 @@ function CarouselImages({ images }: { images: string[] }) {
     return <>
         <CarouselContent>
             {images.map((src, index) => (
-                <CarouselItem key={src+index} className={cn("max-h-[455px] -pl-4 rounded-xl backdrop-blur-2xl shadow-2xl", {
+                <CarouselItem key={src+index} className={cn("max-h-[455px] -pl-4 rounded-xl flex flex-col items-center justify-center", {
                     "invisible opacity-0 transition-opacity duration-500": currentSlide !== index,
                 })}>
-                    <img className={"size-full rounded-xl object-fill"} src={src} alt={"Winner-" + index} />
+                    <img className={"max-h-full rounded-xl"} src={src} alt={"Winner-" + index} />
                     <p className={"text-white text-center"}>
-                        <span className={"font-bold"}>Arthur et Romain</span> - {index}
+                        {index+1}/{images.length}
                     </p>
                 </CarouselItem>
             ))}
