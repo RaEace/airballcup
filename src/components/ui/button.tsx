@@ -3,6 +3,7 @@ import {Slot} from "@radix-ui/react-slot";
 import {cva, type VariantProps} from "class-variance-authority";
 
 import {cn} from "@/lib/utils";
+import {sendGTMEvent} from "@next/third-parties/google";
 
 const buttonVariants = cva(
   "inline-flex font-text rounded-full py-1 items-center justify-center whitespace-nowrap text-sm uppercase transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
@@ -47,8 +48,18 @@ export interface ButtonProps
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
+  ({ className, variant, size, asChild = false, onClick, ...props }, ref) => {
     const Comp = asChild ? Slot : "button";
+
+    function sendGoogleAnalyticsEvent() {
+        sendGTMEvent({
+            event: "button_click",
+            category: "button",
+            action: "click",
+            label: props.name ?? props.title,
+        });
+    }
+
     return (
       <Comp
         title={props.title ?? props.name}
@@ -57,6 +68,10 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           "font-text"
         )}
         ref={ref}
+        onClick={(e) => {
+            sendGoogleAnalyticsEvent();
+            onClick?.(e);
+        }}
         {...props}
       />
     );
