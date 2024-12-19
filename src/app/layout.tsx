@@ -1,7 +1,6 @@
 import {ReactNode} from "react";
 import {Metadata} from "next";
 import "./index.css";
-import Header from "@/components/header.tsx";
 import {GoogleTagManager} from "@next/third-parties/google";
 
 export const metadata: Metadata = {
@@ -16,9 +15,8 @@ export default function RootLayout({children}: { children: ReactNode }) {
             <link href="/logo.svg" rel="icon" type="image/svg+xml"/>
             <link href="https://fonts.cdnfonts.com/css/humane" rel="stylesheet"/>
         </head>
-        <GoogleTagManager gtmId={process.env.GTM_ID} />
+        <GoogleTagManager gtmId={String(process.env.GTM_ID)} />
         <body>
-            <Header/>
             <div id="root">{children}</div>
         </body>
         </html>

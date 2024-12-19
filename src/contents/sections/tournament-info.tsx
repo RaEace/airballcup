@@ -4,7 +4,6 @@ import {FunctionComponent} from "react";
 import {Badge} from "@/components/ui/badge.tsx";
 import ArrowButton from "@/components/arrow-button.tsx";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar.tsx";
-import {CURRENT_SIGNUP_URL} from "@/lib/utils.ts";
 import {TournamentInfoContent} from "@/app/client.tsx";
 import {useAppContext} from "@/contents/App.tsx";
 import dayjs from "dayjs";
@@ -65,7 +64,7 @@ const TournamentInfo: FunctionComponent = () => {
             </div>
           </div>
         </div>
-        <ArrowButton role={"link"} onClick={() => { window.open(CURRENT_SIGNUP_URL) }} iconPlacement={"right"} variant={"primary"} className={"py-4 self-center"}>Je m'inscris</ArrowButton>
+        <ArrowButton role={"link"} onClick={() => { window.open(tournamentInfo.registrationLink) }} iconPlacement={"right"} variant={"primary"} className={"py-4 self-center"}>Je m'inscris</ArrowButton>
       </div>
       <div>
         <iframe

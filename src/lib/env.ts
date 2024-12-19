@@ -10,6 +10,7 @@ const envSchema = z.object({
     SECTIONS_DOC: z.string(),
     TOURNAMENT_INFO_DOC: z.string(),
     ELO_DOC: z.string(),
+    GTM_ID: z.string(),
 });
 
 export const validateEnv = () => envSchema.safeParse({
@@ -22,6 +23,7 @@ export const validateEnv = () => envSchema.safeParse({
     SECTIONS_DOC: process.env.SECTIONS_DOC,
     TOURNAMENT_INFO_DOC: process.env.TOURNAMENT_INFO_DOC,
     ELO_DOC: process.env.ELO_DOC,
+    GTM_ID: process.env.GTM_ID,
 });
 
 declare global {

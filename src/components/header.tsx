@@ -14,7 +14,7 @@ import {
     SheetTitle,
     SheetTrigger
 } from "@/components/ui/sheet.tsx";
-import {cn, CURRENT_SIGNUP_URL, handleScrollToSection} from "@/lib/utils.ts";
+import {cn, handleScrollToSection} from "@/lib/utils.ts";
 import useInView from "@/hooks/use-in-view.ts";
 import {usePathname} from "next/navigation";
 import {
@@ -27,7 +27,9 @@ import {
 } from "@/components/ui/navigation-menu.tsx";
 import Link from "next/link";
 
-const Header: FunctionComponent = () => {
+const Header: FunctionComponent<{
+    signupUrl: string;
+}> = ({ signupUrl: CURRENT_SIGNUP_URL }) => {
     const [showStickyBtn, setShowStickyBtn] = useState<boolean>(false);
     const pathname = usePathname();
     const slug = pathname === "/" ? "" : "/";

@@ -4,7 +4,7 @@ import {FunctionComponent} from "react";
 import {Badge} from "@/components/ui/badge.tsx";
 import ArrowButton from "@/components/arrow-button.tsx";
 import useMediaQuery from "@/hooks/use-media-query.ts";
-import {cn, CURRENT_SIGNUP_URL} from "@/lib/utils.ts";
+import {cn} from "@/lib/utils.ts";
 import {useAppContext} from "@/contents/App.tsx";
 import {motion} from "framer-motion";
 import Link from "next/link";
@@ -31,7 +31,7 @@ const CallToAction: FunctionComponent = () => {
             {app.sectionsText.cta.headerText}
           </h1>
         </motion.div>
-        <Link href={CURRENT_SIGNUP_URL}>
+        <Link href={app.tournamentInfo.registrationLink}>
           <ArrowButton size={buttonSize} variant={"primary"} iconPlacement={"right"}>
             Je m'inscris
           </ArrowButton>

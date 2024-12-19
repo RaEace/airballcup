@@ -56,5 +56,3 @@ export function translateTomlToJson<T extends Object>(tomlContent: string): T {
     const json = parse(sanitizeString(tomlContent)) as unknown as T;
     return json as T;
 }
-
-export const CURRENT_SIGNUP_URL = "https://www.billetweb.fr/air-ball-cup-10&multi=u234108&margin=no_margin&color=635BFF&parent=1&margin=no_margin&color=635BFF";

@@ -14,6 +14,7 @@ export type TournamentInfoContent = {
     badgeText: string;
     date: string;
     startingHour: string;
+    registrationLink: string;
 }
 
 export type RulesContent = {

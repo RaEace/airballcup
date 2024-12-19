@@ -1,13 +1,16 @@
 import {FunctionComponent} from "react";
-import {cn, CURRENT_SIGNUP_URL} from "@/lib/utils.ts";
+import {cn} from "@/lib/utils.ts";
 import {buttonVariants} from "@/components/ui/button.tsx";
 import {ArrowRight} from "lucide-react";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar.tsx";
 import airballCupLogo from "@/assets/logo.svg";
+import {useAppContext} from "@/contents/App.tsx";
 
 const Footer: FunctionComponent = () => {
+    const app = useAppContext();
+
     const links = [
-        ["s'inscrire", CURRENT_SIGNUP_URL, undefined],
+        ["s'inscrire", app.tournamentInfo.registrationLink, undefined],
         ["instagram", "https://www.instagram.com/airballcup", "_blank"],
         ["nous contacter", "mailto:feedesevents@gmail.com", undefined]
     ];
