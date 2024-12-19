@@ -36,17 +36,17 @@ async function Page() {
 
 function transformEloData(data: string[][]): EloEntry[] {
     const rows = data.slice(1);
-    const placeholder = (val: number) => isNaN(val) ? -1 : val;
+    const placeholder = (val: number, repl?: number) => isNaN(val) ? repl ?? -1 : val;
     const eloSort = (a: string, b: string) => parseInt(b) - parseInt(a);
 
     return rows.sort((a, b) => eloSort(a[1], b[1])).map((row, index) => ({
-        rank: index + 1,
-        teamName: row[0],
-        elo: placeholder(parseInt(row[1])),
-        wins: placeholder(parseInt(row[2])),
-        losses: placeholder(parseInt(row[3])),
-        gamesPlayed: placeholder(parseInt(row[4])),
-        winRate: placeholder(parseInt(row[5])),
+        rank: placeholder(parseInt(row[0]), index),
+        teamName: row[1],
+        elo: placeholder(parseInt(row[2])),
+        wins: placeholder(parseInt(row[3])),
+        losses: placeholder(parseInt(row[4])),
+        gamesPlayed: placeholder(parseInt(row[5])),
+        winRate: placeholder(parseInt(row[6])),
     }));
 }
 

@@ -49,7 +49,6 @@ const Header: FunctionComponent<{
     const inView = useInView(sectionsToObserve);
 
     useEffect(() => {
-        console.log(inView)
         if (hiddenSections.includes(inView)) {
             setShowStickyBtn(false);
         } else {
@@ -91,17 +90,18 @@ const Header: FunctionComponent<{
                     </div>
                 </SheetDescription>
                 <SheetFooter className={"mt-10"}>
-                    <ArrowButton
-                        name={"register-header"}
-                        role={"link"}
-                        onClick={() => { window.open(CURRENT_SIGNUP_URL) }}
-                        size={"sm"}
-                        iconPlacement={"right"}
-                        className={"w-48 mr-4 py-6 px-8 ml-16"}
-                        variant={"primary"}
-                    >
-                        Je m'inscris
-                    </ArrowButton>
+                    <Link href={CURRENT_SIGNUP_URL}>
+                        <ArrowButton
+                            name={"register-header"}
+                            role={"link"}
+                            size={"sm"}
+                            iconPlacement={"right"}
+                            className={"w-48 mr-4 py-6 px-8 ml-16"}
+                            variant={"primary"}
+                        >
+                            Je m'inscris
+                        </ArrowButton>
+                    </Link>
                 </SheetFooter>
             </SheetContent>
         </Sheet>
@@ -115,24 +115,25 @@ const Header: FunctionComponent<{
 
         <div className={"hidden lg:flex lg:items-center"}>
             <Navbar nestedLinks={navigationMenuLinks} links={links.slice(END_OF_NESTED_LINKS_INDEX+1)}/>
-            <Button name={"register-header-main"} role={"link"} onClick={() => {
-                window.open(CURRENT_SIGNUP_URL)
-            }} size={"sm"} variant={"invertedPrimary"}>
-                Je m'inscris <ArrowRight className={"ml-2 mb-1 size-6"}/>
-            </Button>
+            <Link href={CURRENT_SIGNUP_URL} target={"_blank"}>
+                <Button name={"register-header-main"} role={"link"} size={"sm"} variant={"invertedPrimary"}>
+                    Je m'inscris <ArrowRight className={"ml-2 mb-1 size-6"}/>
+                </Button>
+            </Link>
         </div>
         <div className={"lg:hidden flex items-center justify-center space-x-4"}>
-            <Button
-                role={"link"}
-                name={"register-header-mobile-"+(showStickyBtn ? "visible" : "invisible")}
-                onClick={() => { window.open(CURRENT_SIGNUP_URL) }}
-                size={"sm"}
-                variant={"primary"}
-                disabled={!showStickyBtn}
-                className={cn("smooth transition", {"invisible animate-easeOut": !showStickyBtn}, {"animate-easeIn": showStickyBtn})}
-            >
-                Je m'inscris
-            </Button>
+            <Link href={CURRENT_SIGNUP_URL} target={"_blank"}>
+                <Button
+                    role={"link"}
+                    name={"register-header-mobile-"+(showStickyBtn ? "visible" : "invisible")}
+                    size={"sm"}
+                    variant={"primary"}
+                    disabled={!showStickyBtn}
+                    className={cn("smooth transition", {"invisible animate-easeOut": !showStickyBtn}, {"animate-easeIn": showStickyBtn})}
+                >
+                    Je m'inscris
+                </Button>
+            </Link>
             <InnerBurgerMenu/>
         </div>
     </header>

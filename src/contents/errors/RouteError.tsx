@@ -1,8 +1,9 @@
 import notFound from "@/assets/404.gif";
-import {Button} from "@/components/ui/button.tsx";
 import {Home} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import {cn} from "@/lib/utils.ts";
+import {buttonVariants} from "@/components/ui/button.tsx";
 
 const RouteError = () => {
   return (
@@ -14,11 +15,9 @@ const RouteError = () => {
         Ouups, la page que vous cherchez n'existe pas
       </p>
       <Image src={notFound.src} alt={"404 NOT FOUND"} width={200} height={200} />
-      <Button name={"back-home"} role={"link"} size={"lg"} variant={"primary"} asChild>
-          <Link href={"/"}>
-              <Home className={"size-4"} />
-          </Link>
-      </Button>
+      <Link href={"/"} className={cn(buttonVariants({ variant: "primary" }))}>
+          <Home className={"size-4"} />
+      </Link>
     </div>
   );
 };
