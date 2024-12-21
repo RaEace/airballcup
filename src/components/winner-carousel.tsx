@@ -41,7 +41,7 @@ function CarouselImages({ images }: { images: string[] }) {
     return <>
         <CarouselContent>
             {images.map((src, index) => (
-                <CarouselItem key={src+index} className={cn("max-h-[455px] -pl-4 rounded-xl flex flex-col items-center justify-center", {
+                <CarouselItem key={src+index} className={cn("smooth max-h-[300px] md:max-h-[455px] rounded-xl flex flex-col items-center justify-center", {
                     "invisible opacity-0 transition-opacity duration-500": currentSlide !== index,
                 })}>
                     <img className={"max-h-full rounded-xl"} src={src} alt={"Winner-" + index} />
