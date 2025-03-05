@@ -1,24 +1,16 @@
 "use server";
 
-import GoogleService from "@/services/google.service.ts";
-import {RULES, translateTomlToJson} from "@/lib/utils.ts";
-import {RulesContent} from "@/app/client.tsx";
+import {getPayload} from "payload";
+import _config from '@payload-config';
+import {Rule} from "@/payload-types.ts";
 
-async function getRules(): Promise<{ rules: RulesContent[] }> {
-    const googleService = GoogleService.instance;
-    const rules = await googleService.readGoogleDoc(RULES);
+async function getRules(): Promise<Rule[]> {
+    const payload = await getPayload({
+        config: _config
+    });
+    const rules = await payload.find({collection: 'rules', sort: ['createdAt']});
 
-    if (!rules) {
-        throw new Error("No rules found");
-    }
-
-    const config =  translateTomlToJson<{
-        rules_configuration: {
-            rules: { title: string; content: string; }[];
-        };
-    }>(rules);
-
-    return config.rules_configuration;
+    return rules.docs;
 }
 
 export default getRules;

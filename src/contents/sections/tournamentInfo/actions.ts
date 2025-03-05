@@ -1,19 +1,17 @@
 "use server";
 
-import {TournamentInfoContent} from "@/app/client.tsx";
-import GoogleService from "@/services/google.service.ts";
-import {TOURNAMENT_INFO, translateTomlToJson} from "@/lib/utils.ts";
+import {getPayload} from "payload";
+import _config from '@payload-config';
+import {Tournament} from "@/payload-types.ts";
 
-async function getTournamentInfo(): Promise<{
-    tournamentInfo: TournamentInfoContent;
-}> {
-    const file = await GoogleService.instance.readGoogleDoc(TOURNAMENT_INFO);
-
-    if (!file) {
-        throw new Error("No tournament info found");
-    }
-
-    return translateTomlToJson<{ tournamentInfo: TournamentInfoContent }>(file);
+async function getTournamentInfo(): Promise<Tournament> {
+    const payload = await getPayload({ config: _config });
+    const lastTournament = await payload.find({
+        collection: 'tournament',
+        limit: 1,
+        sort: 'date',
+    });
+    return lastTournament.docs[0]
 }
 
 export default getTournamentInfo;

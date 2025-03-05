@@ -7,6 +7,7 @@ import placeholder1 from "@/assets/photos/photo-1-airballcup.jpeg";
 import placeholder2 from "@/assets/photos/photo-2-airballcup.jpeg";
 import placeholder3 from "@/assets/photos/photo-3-airballcup.jpeg";
 import {useAppContext} from "@/contents/App.tsx";
+import placeholder from "@/assets/photos/arthur-et-romain.png";
 
 const Gallery: FunctionComponent = () => {
     const app = useAppContext();
@@ -17,10 +18,19 @@ const Gallery: FunctionComponent = () => {
     ]);
 
     useEffect(() => {
-        app.loadImageAction("gallery").then((images) => {
-            const urls = images.map((image) => image.url);
-            setImages(urls);
-        });
+        const imgs = app.gallery.images.reduce<string[]>((acc, curr) => {
+            if (typeof curr.image === "string") {
+                acc.push(curr.image);
+            } else {
+                if (curr.image.url != null) {
+                    acc.push(curr.image.url);
+                } else {
+                    acc.push(placeholder.src);
+                }
+            }
+            return acc;
+        }, []);
+        setImages(imgs);
     }, []);
 
     return (
@@ -33,7 +43,7 @@ const Gallery: FunctionComponent = () => {
                 </h2>
             </div>
             <div className={"w-full"}>
-                <PhotoDisplayer key={images.length + "1"} images={images} speed={10} />
+                <PhotoDisplayer key={images.length + "1"} images={images} speed={10}/>
             </div>
         </article>
     );

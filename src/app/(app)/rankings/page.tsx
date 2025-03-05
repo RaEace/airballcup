@@ -11,11 +11,13 @@ async function getEloData() {
     return transformEloData(eloSheet?.values ?? []);
 }
 
+export const dynamic = 'force-dynamic'
+
 async function Page() {
-    const {tournamentInfo} = await getTournamentInfo();
+    const {registrationLink} = await getTournamentInfo();
     const rankings = await getEloData();
     return <>
-        <Header signupUrl={tournamentInfo.registrationLink} />
+        <Header signupUrl={registrationLink} />
         <section className={"relative flex flex-col justify-center items-center w-screen h-screen bg-secondary-500"}>
             <img
                 className={"smooth absolute top-[36%] lg:top-[19%] right-0 max-w-[170px] lg:max-w-[762px] -z-4"}

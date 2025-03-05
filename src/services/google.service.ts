@@ -8,8 +8,8 @@ const SCOPES = [
 ];
 
 const credentials = {
-    client_email: process.env.CLIENT_EMAIL!,
-    private_key: process.env.PRIVATE_KEY!,
+    client_email: process.env.CLIENT_EMAIL,
+    private_key: process.env.PRIVATE_KEY.split(String.raw`\n`).join('\n'),
 };
 
 class GoogleService {
@@ -24,7 +24,7 @@ class GoogleService {
         this.authClient = null;
         this.authorize({
             client_email: credentials.client_email,
-            private_key: credentials.private_key.split(String.raw`\n`).join('\n'),
+            private_key: credentials.private_key,
         });
 
         console.log("GoogleService initialized");

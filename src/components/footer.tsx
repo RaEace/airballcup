@@ -25,7 +25,7 @@ const Footer: FunctionComponent = () => {
         </div>
         <nav className={"flex flex-col items-center justify-center"}>
             {links.map(([title, href, target]) => (
-                <a target={target} className={
+                <a key={title} target={target} className={
                     cn(buttonVariants({variant: "link"}), "group font-display font-bold text-title-m md:mr-10 mr-6")
                 }
                    href={href}>
