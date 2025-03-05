@@ -55,7 +55,7 @@ const Participate: FunctionComponent = () => {
                         </CardFooter>
                     </div>
                 </StyledCard>
-                <StyledCard icon={
+                <StyledCard disabled icon={
                     <StyledIcon>
                         <User/>
                     </StyledIcon>

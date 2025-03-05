@@ -20,4 +20,5 @@ export async function register() {
     }
 
     console.info('✅ Environment variables loaded successfully');
+    process.env.PRIVATE_KEY = process.env.PRIVATE_KEY.split(String.raw`\n`).join('\n');
 }

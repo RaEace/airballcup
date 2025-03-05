@@ -1,8 +1,8 @@
 "use server";
 
-import {CtaTextContent} from "@/app/client.tsx";
 import GoogleService from "@/services/google.service.ts";
 import {SECTIONS_TEXT, translateTomlToJson} from "@/lib/utils.ts";
+import {CtaTextContent} from "@/app/(app)/client";
 
 async function getContentForSections(): Promise<{
     cta: CtaTextContent;

@@ -1,17 +1,13 @@
 "use server";
 
-import {GALLERY, WINNERS} from "@/lib/utils.ts";
-import GoogleService from "@/services/google.service.ts";
+import {getPayload} from "payload";
+import config from "@payload-config";
+import {Carousel, Gallery} from "@/payload-types.ts";
 
-export default async function loadImages(folderName: "gallery" | "winners") {
-    const googleService = GoogleService.instance;
-    const folder = await googleService.getFilesInFolder(folderName === "gallery" ? GALLERY : WINNERS);
-
-    if (!folder) return [];
-
-    return folder.map((file) => ({
-        id: String(file.id),
-        name: String(file.name),
-        url: `https://storage.googleapis.com/airballcup/${folderName}/${String(file.id)}`,
-    }));
+export default async function loadImages(folderName: "gallery" | "carousels"): Promise<Gallery | Carousel> {
+    const payload = await getPayload({config});
+    const images = await payload.find({
+        collection: folderName, sort: ['-created_at'], limit: 1
+    });
+    return images.docs[0];
 }

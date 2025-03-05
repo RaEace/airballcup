@@ -1,7 +1,10 @@
+import {withPayload} from "@payloadcms/next/withPayload";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    basePath: process.env.NEXT_PUBLIC_BASE_PATH, // Changes the base path to `/app`.
-    images: { unoptimized: true },
+    distDir: "./dist",
+    basePath: '', // Changes the base path to `/app`.
+    images: { unoptimized: false },
     webpack: (config) => {
         config.module.rules.push(
             {
@@ -13,4 +16,4 @@ const nextConfig = {
     },
 }
 
-export default nextConfig;
+export default withPayload(nextConfig);

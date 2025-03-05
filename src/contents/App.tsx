@@ -11,17 +11,20 @@ import Participate from "@/contents/sections/participate.tsx";
 import Winners from "@/contents/sections/winners.tsx";
 import Footer from "@/components/footer.tsx";
 import {createContext, FunctionComponent, useContext} from "react";
-import {ClientOnlyProps, CtaTextContent, RulesContent, TournamentInfoContent} from "@/app/client.tsx";
 import {motion} from "framer-motion";
-import loadImages from "@/components/photo-displayer/actions.ts";
+import {ClientOnlyProps, CtaTextContent} from "@/app/(app)/client.tsx";
+import type {Carousel, Gallery as GalleryType, Tournament} from "@/payload-types.ts";
+import {Rule} from "@/payload-types.ts";
+import {TooltipProvider} from "@/components/ui/tooltip.tsx";
 
 type AppContextProps = {
     sectionsText: {
         cta: CtaTextContent;
     };
-    tournamentInfo: TournamentInfoContent;
-    rules: RulesContent[];
-    loadImageAction: typeof loadImages;
+    tournamentInfo: Tournament;
+    rules: Rule[];
+    gallery: GalleryType;
+    carousel: Carousel;
 };
 
 // Resulting type
@@ -39,18 +42,21 @@ export function useAppContext() {
 
 
 const App: FunctionComponent<ClientOnlyProps> = ({contents}) => {
+    console.log(contents)
     return (
         <AppProvider value={{
             sectionsText: contents.sectionsText,
             tournamentInfo: contents.tournamentInfo,
             rules: contents.rules,
-            loadImageAction: contents.loadImageAction,
+            gallery: contents.gallery,
+            carousel: contents.carousel,
         }}>
-            <motion.main
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5 }}
-                id={"smooth-wrapper"} className={"w-screen h-screen overflow-x-hidden scroll-body"}>
+            <TooltipProvider>
+                <motion.main
+                    initial={{opacity: 0}}
+                    animate={{opacity: 1}}
+                    transition={{duration: 0.5}}
+                    id={"smooth-wrapper"} className={"w-screen h-screen overflow-x-hidden scroll-body"}>
                     <CallToAction/>
                     <History/>
                     <Participate/>
@@ -60,7 +66,8 @@ const App: FunctionComponent<ClientOnlyProps> = ({contents}) => {
                     <Gallery/>
                     <TournamentInfo/>
                     <Footer/>
-            </motion.main>
+                </motion.main>
+            </TooltipProvider>
         </AppProvider>
     );
 };
