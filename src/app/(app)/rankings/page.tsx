@@ -11,7 +11,7 @@ async function getEloData() {
     return transformEloData(eloSheet?.values ?? []);
 }
 
-export const dynamic = 'force-dynamic'
+export const dynamic = 'force-dynamic';
 
 async function Page() {
     const {registrationLink} = await getTournamentInfo();

@@ -7,6 +7,8 @@ import getContentForSections from "@/contents/sections/cms/actions.ts";
 import Header from "@/components/header.tsx";
 import {Carousel, Gallery} from "@/payload-types.ts";
 
+export const dynamic = 'force-dynamic';
+
 export default async function Page() {
     const sectionsText = await getContentForSections();
     const tournamentContent = await getTournamentInfo();
