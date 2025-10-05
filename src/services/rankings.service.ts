@@ -34,7 +34,7 @@ class RankingsService {
             return this.seasonsCache;
         } catch (error) {
             console.error('Failed to fetch seasons:', error);
-            return this.seasonsCache; // Return cached data if available
+            return this.seasonsCache ?? undefined; // Return cached data if available
         }
     }
 
