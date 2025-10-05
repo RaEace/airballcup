@@ -5,17 +5,9 @@ import {Button} from "@/components/ui/button.tsx";
 import {ArrowDown, ArrowUp, ChevronDown, ChevronUp} from "lucide-react";
 import {cn} from "@/lib/utils.ts";
 import {FunctionComponent, ReactNode} from "react";
+import {CompleteRanking} from "@/app/(app)/rankings/[id]/page.tsx";
 
-export type EloEntry = {
-    rank: number;
-    teamName: string;
-    elo: number;
-    wins: number;
-    losses: number;
-    winRate: number;
-};
-
-export const columns: ColumnDef<EloEntry>[] = [
+export const columns: ColumnDef<CompleteRanking>[] = [
     {
         accessorKey: "rank",
         header: ({ column }) => {
@@ -36,7 +28,7 @@ export const columns: ColumnDef<EloEntry>[] = [
         },
     },
     {
-        accessorKey: "teamName",
+        accessorKey: "playerName",
         header: ({ column }) => {
             return <SortingBtnHeader column={column}>
                 Équipe
@@ -44,13 +36,13 @@ export const columns: ColumnDef<EloEntry>[] = [
         },
         cell: ({ row }) => {
             const rank = row.getValue<number>("rank");
-            const teamName = row.getValue<string>("teamName");
+            const playerName = row.getValue<string>("playerName");
             return <div className={"flex items-center font-text"}>
                 <span className={cn(
                     {"text-yellow-300": rank === 1},
                     {"text-gray-300": rank === 2},
                     {"text-orange-300": rank === 3},
-                )}>{teamName}</span>
+                )}>{playerName}</span>
             </div>
         }
     },
@@ -79,13 +71,13 @@ export const columns: ColumnDef<EloEntry>[] = [
         enableHiding: true,
     },
     {
-        accessorKey: "gamesPlayed",
+        accessorKey: "matchesPlayed",
         header: ({ column }) => {
             return <SortingBtnHeader column={column}>Parties jouées</SortingBtnHeader>
         },
         cell: ({ row }) => {
-            const gamesPlayed = row.getValue<number>("gamesPlayed");
-            return <span>{gamesPlayed >= 0 ? gamesPlayed : "-"}</span>;
+            const matchesPlayed = row.getValue<number>("matchesPlayed");
+            return <span>{matchesPlayed >= 0 ? matchesPlayed : "-"}</span>;
         },
         enableHiding: true,
     },
@@ -131,7 +123,7 @@ export const columns: ColumnDef<EloEntry>[] = [
 
 const SortingBtnHeader: FunctionComponent<{
     children: ReactNode;
-    column: Column<EloEntry, unknown>;
+    column: Column<CompleteRanking, unknown>;
     color?: string;
 }> = ({children, column, color}) => {
     const Arrow = column.getIsSorted() === "asc" ? ArrowUp : ArrowDown;
