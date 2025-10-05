@@ -2,7 +2,6 @@
 
 import {FunctionComponent, useEffect, useState} from "react";
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table.tsx";
-import {EloEntry} from "@/components/rankings/columns.ts";
 import {
     ColumnDef,
     ExpandedState,
@@ -21,10 +20,11 @@ import {cn} from "@/lib/utils.ts";
 import {Button} from "@/components/ui/button.tsx";
 import {ArrowLeft, ArrowRight} from "lucide-react";
 import {DoubleArrowLeftIcon, DoubleArrowRightIcon} from "@radix-ui/react-icons";
+import {CompleteRanking} from "@/app/(app)/rankings/[id]/page.tsx";
 
 interface EloRankingProps {
-    columns: ColumnDef<EloEntry>[];
-    rankings: EloEntry[];
+    columns: ColumnDef<CompleteRanking>[];
+    rankings: CompleteRanking[];
 }
 
 function sortNumberRows(a: Row<number>, b: Row<number>) {
@@ -51,15 +51,15 @@ const EloRankingTable: FunctionComponent<EloRankingProps> = ({rankings: data, co
         winRate: ["WR"],
     };
 
-    const table = useReactTable<EloEntry>({
+    const table = useReactTable<CompleteRanking>({
         data,
         columns,
         enableExpanding: true,
         getRowCanExpand: (row) => isMedium && row.depth === 0,
-        getCoreRowModel: getCoreRowModel<EloEntry>(),
-        getPaginationRowModel: getPaginationRowModel<EloEntry>(),
-        getSortedRowModel: getSortedRowModel<EloEntry>(),
-        getExpandedRowModel: getExpandedRowModel<EloEntry>(),
+        getCoreRowModel: getCoreRowModel<CompleteRanking>(),
+        getPaginationRowModel: getPaginationRowModel<CompleteRanking>(),
+        getSortedRowModel: getSortedRowModel<CompleteRanking>(),
+        getExpandedRowModel: getExpandedRowModel<CompleteRanking>(),
         onSortingChange: setSort,
         onColumnVisibilityChange: setVisibility,
         onPaginationChange: setPagination,
