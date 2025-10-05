@@ -13,13 +13,31 @@ async function Page(props: { params: Promise<{ id: string }> }) {
   const id = (await props.params).id;
   const { registrationLink } = await getTournamentInfo();
   const rankingsService = RankingsService.instance;
-  const currentSeason = await rankingsService.getSeason(id);
-  const availableRankings = await rankingsService.getSeasons();
-  const rankings = await rankingsService.getRankings(currentSeason?.id ?? '');
+  
+  // Ensure all data is loaded with proper error handling
+  let currentSeason, availableRankings, rankings;
+  
+  try {
+    [currentSeason, availableRankings] = await Promise.all([
+      rankingsService.getSeason(id),
+      rankingsService.getSeasons()
+    ]);
+    
+    if (currentSeason) {
+      rankings = await rankingsService.getRankings(currentSeason.id);
+    }
+  } catch (error) {
+    console.error('Failed to load rankings data:', error);
+    availableRankings = [];
+    rankings = [];
+  }
 
     return (
     <>
-      <Header signupUrl={registrationLink} availableRankings={availableRankings} />
+      <Header 
+        signupUrl={registrationLink} 
+        availableRankings={availableRankings || []} 
+      />
       <section
         className={
           "relative flex flex-col justify-center items-center w-screen h-screen bg-secondary-500"

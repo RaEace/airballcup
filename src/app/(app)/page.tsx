@@ -17,10 +17,21 @@ export default async function Page() {
     const rulesContent = await getRules();
     const gallery: Gallery = await loadImages("gallery");
     const carousel: Carousel = await loadImages("carousels");
-    const availableRankings = await RankingsService.instance.getSeasons();
+    
+    // Ensure rankings are always available with fallback
+    let availableRankings;
+    try {
+        availableRankings = await RankingsService.instance.getSeasons();
+    } catch (error) {
+        console.error('Failed to load rankings for header:', error);
+        availableRankings = []; // Fallback to empty array
+    }
 
     return <>
-        <Header signupUrl={tournamentContent.registrationLink} availableRankings={availableRankings} />
+        <Header 
+            signupUrl={tournamentContent.registrationLink} 
+            availableRankings={availableRankings || []} 
+        />
         <ClientOnly contents={{
             sectionsText,
             tournamentInfo: tournamentContent,

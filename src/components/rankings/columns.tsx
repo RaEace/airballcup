@@ -94,7 +94,7 @@ export const columns: ColumnDef<CompleteRanking>[] = [
         enableHiding: true,
     },
     {
-        accessorKey: "elo",
+        accessorKey: "eloRating",
         header: ({ column }) => {
             return (
                 <SortingBtnHeader column={column}>
@@ -104,7 +104,7 @@ export const columns: ColumnDef<CompleteRanking>[] = [
         },
         cell: ({ row }) => {
             const rank = row.getValue<number>("rank");
-            const elo = row.getValue<number>("elo");
+            const eloRating = row.getValue<number>("eloRating");
 
             const Chevron = row.getIsExpanded() ? ChevronUp : ChevronDown;
 
@@ -114,7 +114,7 @@ export const columns: ColumnDef<CompleteRanking>[] = [
                     {"text-yellow-300": rank === 1},
                     {"text-gray-300": rank === 2},
                     {"text-orange-300": rank === 3},
-                )}>{elo}</span>
+                )}>{eloRating}</span>
                 {row.getCanExpand() && <Chevron className={"size-4"} />}
             </div>;
         }
