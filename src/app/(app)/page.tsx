@@ -6,19 +6,18 @@ import getTournamentInfo from "@/contents/sections/tournamentInfo/actions.ts";
 import getContentForSections from "@/contents/sections/cms/actions.ts";
 import Header from "@/components/header.tsx";
 import {Carousel, Gallery} from "@/payload-types.ts";
-import config from "@payload-config";
-import {getPayload} from "payload";
+import RankingsService from "@/services/rankings.service.ts";
 
 export const dynamic = 'force-dynamic';
 
 export default async function Page() {
-    const payload = await getPayload({config});
     const sectionsText = await getContentForSections();
+    console.log(sectionsText);
     const tournamentContent = await getTournamentInfo();
     const rulesContent = await getRules();
     const gallery: Gallery = await loadImages("gallery");
     const carousel: Carousel = await loadImages("carousels");
-    const availableRankings = await payload.find({ collection: 'seasons', sort: ['-year'] , limit: 100}).then((res) => res.docs);
+    const availableRankings = await RankingsService.instance.getSeasons();
 
     return <>
         <Header signupUrl={tournamentContent.registrationLink} availableRankings={availableRankings} />
