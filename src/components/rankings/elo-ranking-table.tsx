@@ -47,7 +47,7 @@ const EloRankingTable: FunctionComponent<EloRankingProps> = ({rankings: data, co
         rank: ["#"],
         wins: ["V", "text-green-500"],
         losses: ["D", "text-red-500"],
-        gamesPlayed: ["J"],
+        matchesPlayed: ["J"],
         winRate: ["WR"],
     };
 
@@ -87,7 +87,7 @@ const EloRankingTable: FunctionComponent<EloRankingProps> = ({rankings: data, co
                 rank: false,
                 wins: false,
                 losses: false,
-                gamesPlayed: false,
+                matchesPlayed: false,
                 winRate: false,
             }));
         } else {
@@ -96,7 +96,7 @@ const EloRankingTable: FunctionComponent<EloRankingProps> = ({rankings: data, co
                 rank: true,
                 wins: true,
                 losses: true,
-                gamesPlayed: true,
+                matchesPlayed: true,
                 winRate: true,
             }));
         }

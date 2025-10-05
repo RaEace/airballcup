@@ -11,18 +11,6 @@ export type CtaTextContent = {
     headerText: string;
 }
 
-export type TournamentInfoContent = {
-    badgeText: string;
-    date: string;
-    startingHour: string;
-    registrationLink: string;
-}
-
-export type RulesContent = {
-    title: string;
-    content: string;
-}
-
 export interface ClientOnlyProps {
     contents: {
         sectionsText: { cta: CtaTextContent };

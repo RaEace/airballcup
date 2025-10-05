@@ -12,7 +12,6 @@ export const dynamic = 'force-dynamic';
 
 export default async function Page() {
     const sectionsText = await getContentForSections();
-    console.log(sectionsText);
     const tournamentContent = await getTournamentInfo();
     const rulesContent = await getRules();
     const gallery: Gallery = await loadImages("gallery");
