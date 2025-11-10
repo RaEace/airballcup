@@ -7,8 +7,10 @@ import getContentForSections from "@/contents/sections/cms/actions.ts";
 import Header from "@/components/header.tsx";
 import {Carousel, Gallery} from "@/payload-types.ts";
 import RankingsService from "@/services/rankings.service.ts";
+import config from "@payload-config";
+import {getPayload} from "payload";
 
-export const dynamic = 'force-dynamic';
+export const dynamic = 'auto';
 
 export default async function Page() {
     const sectionsText = await getContentForSections();
@@ -17,14 +19,9 @@ export default async function Page() {
     const gallery: Gallery = await loadImages("gallery");
     const carousel: Carousel = await loadImages("carousels");
     
-    // Ensure rankings are always available with fallback
-    let availableRankings;
-    try {
-        availableRankings = await RankingsService.instance.getSeasons();
-    } catch (error) {
-        console.error('Failed to load rankings for header:', error);
-        availableRankings = []; // Fallback to empty array
-    }
+    const payload = await getPayload({ config });
+    const rankingService = new RankingsService(payload);
+    const availableRankings = await rankingService.getSeasons();
 
     return <>
         <Header 

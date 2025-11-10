@@ -29,6 +29,11 @@ export default buildConfig({
       title: "Airball Cup - Admin",
       description: "Airball Cup Admin",
     },
+    components: {
+      graphics: {
+        Logo: './components/Logo.tsx',
+      },
+    }
   },
   collections: [Users, Media, Rules, Carousels, Gallery, Tournament, Rankings, Seasons],
   editor: lexicalEditor(),

@@ -4,7 +4,7 @@ import {cn} from "@/lib/utils"
 import {cva} from "class-variance-authority";
 
 
-export const inputVariants = cva("flex h-9 font-text w-full placeholder:text-center placeholder:text-button-s font-text placeholder:font-text placeholder:font-light placeholder:px-3 rounded-full border border-[#414147] bg-transparent px-4 py-6 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+export const inputVariants = cva("flex h-9 w-full placeholder:text-center placeholder:text-button-s font-text text-black placeholder:font-text placeholder:px-3 rounded-full border border-[#414147] bg-transparent px-4 py-6 text-sm shadow-sm transition-colors file:border-0 file:py-1 file:px-2 file:rounded-full file:bg-grey-100 file:text-sm file:font-medium file:text-black focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
     , {
         variants: {
             inputSize: {

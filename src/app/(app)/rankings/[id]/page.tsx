@@ -6,7 +6,7 @@ import Header from "@/components/header.tsx";
 import RankingsService from "@/services/rankings.service.ts";
 import {Ranking} from "@/payload-types.ts";
 
-export const dynamic = "force-dynamic";
+export const dynamic = "auto";
 export type CompleteRanking = Ranking & { matchesPlayed: number; winRate: number };
 
 async function Page(props: { params: Promise<{ id: string }> }) {

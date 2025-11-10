@@ -16,6 +16,7 @@ import {ClientOnlyProps, CtaTextContent} from "@/app/(app)/client.tsx";
 import type {Carousel, Gallery as GalleryType, Tournament} from "@/payload-types.ts";
 import {Rule} from "@/payload-types.ts";
 import {TooltipProvider} from "@/components/ui/tooltip.tsx";
+import {Toaster} from "@/components/ui/sonner.tsx";
 
 type AppContextProps = {
     sectionsText: {
@@ -66,6 +67,7 @@ const App: FunctionComponent<ClientOnlyProps> = ({contents}) => {
                     <Gallery/>
                     <TournamentInfo/>
                     <Footer/>
+                    <Toaster />
                 </motion.main>
             </TooltipProvider>
         </AppProvider>
