@@ -9,7 +9,7 @@ import {Button} from "@/components/ui/button.tsx";
 import uploadAction from "@/contents/upload/actions.ts";
 import {Spinner} from "@/components/ui/spinner.tsx";
 import {Alert, AlertDescription, AlertTitle} from "@/components/ui/alert.tsx";
-import {AlertCircleIcon, CheckCircle} from "lucide-react";
+import {AlertCircleIcon, CheckCircle, Download} from "lucide-react";
 
 interface RankingUploadFormProps {
     seasons: Season[] | undefined;
@@ -39,8 +39,24 @@ function RankingUploadForm({seasons}: RankingUploadFormProps): ReactElement {
     }
 
     return <section className={"w-full min-h-full pt-[104px] bg-secondary-500"}>
-        <section className="h-full w-full p-8 bg-white rounded-lg border border-black shadow-md max-w-2xl mx-auto mt-10">
+        <section className="h-full w-full flex flex-col gap-4 p-8 bg-white text-black rounded-lg border border-black shadow-md max-w-2xl mx-auto mt-10">
             <h1 className="text-2xl font-bold mb-6">Upload Rankings</h1>
+
+            <p>
+                The csv file should have the following format:
+                <pre className={"mb-2"}>
+                    Rank,Team,ELO
+                </pre>
+            </p>
+
+            { selectedSeason && (
+                <Button variant={"secondary"} asChild>
+                    <a download href={`/rankings/upload/template/${selectedSeason.id}`} className={"flex items-center justify-center gap-2"}>
+                        <Download /> Download Sample CSV
+                    </a>
+                </Button>
+            )}
+
             <form
                 action={formAction}
                 method="POST"

@@ -47,53 +47,6 @@ export const columns: ColumnDef<CompleteRanking>[] = [
         }
     },
     {
-        accessorKey: "wins",
-        header: ({ column }) =>
-            <SortingBtnHeader color={"green-500"} column={column}>
-                Victoires
-            </SortingBtnHeader>,
-        cell: ({ row }) => {
-            const wins = row.getValue<number>("wins");
-            return <span className={"text-green-500"}>{wins >= 0 ? wins : "-"}</span>;
-        },
-        enableHiding: true,
-    },
-    {
-        accessorKey: "losses",
-        header: ({ column }) =>
-            <SortingBtnHeader color={"primary-500"} column={column}>
-                Défaites
-            </SortingBtnHeader>,
-        cell: ({ row }) => {
-            const losses = row.getValue<number>("losses");
-            return <span className={"text-red-500"}>{losses >= 0 ? losses : "-"}</span>;
-        },
-        enableHiding: true,
-    },
-    {
-        accessorKey: "matchesPlayed",
-        header: ({ column }) => {
-            return <SortingBtnHeader column={column}>Parties jouées</SortingBtnHeader>
-        },
-        cell: ({ row }) => {
-            const matchesPlayed = row.getValue<number>("matchesPlayed");
-            return <span>{matchesPlayed >= 0 ? matchesPlayed : "-"}</span>;
-        },
-        enableHiding: true,
-    },
-    {
-        accessorKey: "winRate",
-        header: ({ column }) =>
-            <SortingBtnHeader column={column}>Taux de victoire</SortingBtnHeader>,
-        cell: ({ row }) => {
-            const wins = row.getValue<number>("wins");
-            const losses = row.getValue<number>("losses");
-            const winRate = row.getValue<number>("winRate");
-            return <span>{wins + losses > 0 ? `${winRate}%` : "-"}</span>;
-        },
-        enableHiding: true,
-    },
-    {
         accessorKey: "eloRating",
         header: ({ column }) => {
             return (

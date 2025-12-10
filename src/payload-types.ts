@@ -244,10 +244,16 @@ export interface Ranking {
   rank: number;
   playerName: string;
   eloRating: number;
+  /**
+   * Deprecated field
+   */
   wins: number;
+  /**
+   * Deprecated field
+   */
   losses?: number | null;
   /**
-   * Auto-calculated from wins + losses
+   * Deprecated field
    */
   matches?: number | null;
   updatedAt: string;

@@ -42,6 +42,7 @@ const Header: FunctionComponent<{
 }> = ({
           signupUrl: CURRENT_SIGNUP_URL,
           availableRankings = [],
+          isLoggedIn = false,
       }) => {
     const [showStickyBtn, setShowStickyBtn] = useState<boolean>(false);
     const [isRankingsLoading, setIsRankingsLoading] = useState<boolean>(false);
@@ -208,6 +209,7 @@ const Header: FunctionComponent<{
                     nestedLinks={navigationMenuLinks}
                     links={otherLinks}
                     isRankingsLoading={isRankingsLoading}
+                    isLoggedIn={isLoggedIn}
                 />
                 <Link href={CURRENT_SIGNUP_URL} target={"_blank"}>
                     <Button
@@ -251,11 +253,13 @@ function Navbar({
                     links,
                     availableRankings,
                     isRankingsLoading,
+                    isLoggedIn
                 }: {
     nestedLinks: NavLink[];
     links: NavLink[];
     availableRankings?: Season[];
     isRankingsLoading?: boolean;
+    isLoggedIn?: boolean;
 }) {
     return (
         <NavigationMenu>
@@ -306,6 +310,16 @@ function Navbar({
                             <ul
                                 className={`w-[400px] grid grid-rows-${availableRankings.length} grid-cols-1`}
                             >
+                                {isLoggedIn && (
+                                    <li>
+                                        <NavigationMenuLink asChild>
+                                            <Link prefetch className={cn(buttonVariants({variant: "link"}), "text-primary-500")}
+                                                  href={"/rankings/upload"}>
+                                                Importer un classement
+                                            </Link>
+                                        </NavigationMenuLink>
+                                    </li>
+                                )}
                                 {availableRankings.map((season) => (
                                     <li key={season.id}>
                                         <NavigationMenuLink asChild>

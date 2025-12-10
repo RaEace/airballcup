@@ -9,10 +9,13 @@ import {Carousel, Gallery} from "@/payload-types.ts";
 import RankingsService from "@/services/rankings.service.ts";
 import config from "@payload-config";
 import {getPayload} from "payload";
+import {headers} from "next/headers";
 
 export const dynamic = 'auto';
 
 export default async function Page() {
+    const headersList = await headers();
+
     const sectionsText = await getContentForSections();
     const tournamentContent = await getTournamentInfo();
     const rulesContent = await getRules();
@@ -23,10 +26,13 @@ export default async function Page() {
     const rankingService = new RankingsService(payload);
     const availableRankings = await rankingService.getSeasons();
 
+    const {user} = await payload.auth({headers: headersList});
+
     return <>
         <Header 
             signupUrl={tournamentContent.registrationLink} 
-            availableRankings={availableRankings || []} 
+            availableRankings={availableRankings || []}
+            isLoggedIn={!!user}
         />
         <ClientOnly contents={{
             sectionsText,
