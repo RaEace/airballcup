@@ -76,8 +76,6 @@ async function Page(props: { params: Promise<{ id: string }> }) {
 }
 
 function transformEloData(data: Ranking[]): CompleteRanking[] {
-    const eloSort = (a: string, b: string) => parseInt(b) - parseInt(a);
-
     return data
         .map((entry) => ({
             ...entry,
@@ -90,7 +88,7 @@ function transformEloData(data: Ranking[]): CompleteRanking[] {
                     : 0,
         }))
         .sort((a, b) =>
-            eloSort(a.eloRating.toString(), b.eloRating.toString()))
+            a.rank - b.rank)
 }
 
 export default Page;
