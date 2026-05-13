@@ -21,6 +21,8 @@ export default {
 				easeOut: 'easeOut 0.3s',
 				marquee: 'marquee 14s linear infinite',
     			marquee2: 'marquee2 14s linear infinite',
+				'marquee-left': 'marquee-left 40s linear infinite',
+				'marquee-right': 'marquee-right 40s linear infinite',
     			'float-left': 'float-left 5s ease-in-out infinite',
     			'float-right': 'float-right 5s ease-in-out infinite',
     			slideInRight: 'slideInRight 0.3s ease-in-out',
@@ -68,6 +70,14 @@ export default {
     					transform: 'translateX(0%)'
     				}
     			},
+				'marquee-left': {
+					'0%': { transform: 'translateX(0)' },
+					'100%': { transform: 'translateX(-50%)' },
+				},
+				'marquee-right': {
+					'0%': { transform: 'translateX(-50%)' },
+					'100%': { transform: 'translateX(0)' },
+				},
     			slideInRight: {
     				'0%': {
     					transform: 'translateX(100%)',
