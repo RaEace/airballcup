@@ -1,68 +1,91 @@
-"use client";
-
-import {FunctionComponent, useEffect, useState} from "react";
-import {
-    Carousel,
-    CarouselContent,
-    CarouselItem,
-    CarouselNext,
-    CarouselPrevious,
-    useCarousel
-} from "@/components/ui/carousel.tsx";
+import {FunctionComponent} from "react";
 import placeholder from "@/assets/photos/arthur-et-romain.png";
-import {cn} from "@/lib/utils.ts";
-import {useAppContext} from "@/contents/App.tsx";
 
-const WinnerCarousel: FunctionComponent = () => {
-    const app = useAppContext();
-    const [images, setImages] = useState<string[]>(Array.from({length: 10}, () => placeholder.src));
+const PRIMARY = "#E51C21";
+const ROOT_ID = "winner-carousel";
 
-    useEffect(() => {
-        const imgs = app.carousel.images.reduce<string[]>((acc, curr) => {
-            if (typeof curr.image === "string") {
-                acc.push(curr.image);
-            } else {
-                if (curr.image.url != null) {
-                    acc.push(curr.image.url);
-                } else {
-                    acc.push(placeholder.src);
-                }
-            }
-            return acc;
-        }, []);
-        setImages(imgs);
-    }, []);
+/**
+ * Pure-CSS carousel built on DaisyUI's scroll-snap pattern.
+ * - Prev/Next: <a href="#winner-N"> anchor links inside each slide (no JS scroll needed)
+ * - Active dot:  CSS :has(:target) — highlights the dot whose slide is the URL target
+ */
+const WinnerCarousel: FunctionComponent<{images: string[]}> = ({images}) => {
+    const srcs = images.length > 0 ? images : [placeholder.src];
+    const n = srcs.length;
 
-    return <section className={"w-full"}>
-        <Carousel opts={{
-            loop: true,
-            axis: "x",
-        }}>
-            <CarouselImages images={images} />
-        </Carousel>
-    </section>;
+    // Scoped CSS — no client JS needed.
+    // :has(:target) resets all dots when any slide is targeted, then re-highlights the right one.
+    // The default rule (no :has) shows the first dot active on initial load.
+    const css = [
+        `#${ROOT_ID} nav a { background-color: rgba(255,255,255,0.3); }`,
+        `#${ROOT_ID} nav a:first-child { background-color: ${PRIMARY}; }`,
+        `#${ROOT_ID}:has(:target) nav a { background-color: rgba(255,255,255,0.3); }`,
+        ...srcs.map((_, i) =>
+            `#${ROOT_ID}:has(#winner-${i}:target) nav a:nth-child(${i + 1}) { background-color: ${PRIMARY}; }`
+        ),
+    ].join(" ");
+
+    return (
+        <section id={ROOT_ID} className={"w-full"} aria-label={"Galerie des vainqueurs"}>
+            {/* Scoped style — React 19 hoists <style> tags automatically */}
+            <style>{css}</style>
+
+            <div className={"carousel w-full rounded-xl"}>
+                {srcs.map((src, i) => (
+                    <div
+                        key={i}
+                        id={`winner-${i}`}
+                        className={"carousel-item relative w-full flex-col items-center justify-center"}
+                    >
+                        {/* Image wrapper is the positioning root for the buttons */}
+                        <div className={"relative w-full"}>
+                            <img
+                                className={"w-full max-h-[220px] md:max-h-[320px] object-cover rounded-xl"}
+                                src={src}
+                                alt={`Vainqueur ${i + 1}`}
+                                loading={i === 0 ? "eager" : "lazy"}
+                            />
+                            {n > 1 && (
+                                <div className={"absolute inset-x-3 top-1/2 -translate-y-1/2 flex justify-between"}>
+                                    <a
+                                        href={`#winner-${(i - 1 + n) % n}`}
+                                        aria-label={"Image précédente"}
+                                        className={"flex items-center justify-center size-8 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors text-sm leading-none"}
+                                    >
+                                        ❮
+                                    </a>
+                                    <a
+                                        href={`#winner-${(i + 1) % n}`}
+                                        aria-label={"Image suivante"}
+                                        className={"flex items-center justify-center size-8 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors text-sm leading-none"}
+                                    >
+                                        ❯
+                                    </a>
+                                </div>
+                            )}
+                        </div>
+
+                        <p className={"text-white text-center mt-2 font-text text-text-m"}>
+                            {i + 1}/{n}
+                        </p>
+                    </div>
+                ))}
+            </div>
+
+            {n > 1 && (
+                <nav className={"flex justify-center gap-3 mt-4"} aria-label={"Sélecteur de vainqueur"}>
+                    {srcs.map((_, i) => (
+                        <a
+                            key={i}
+                            href={`#winner-${i}`}
+                            aria-label={`Vainqueur ${i + 1}`}
+                            className={"size-3 rounded-full transition-colors hover:opacity-80"}
+                        />
+                    ))}
+                </nav>
+            )}
+        </section>
+    );
 };
-
-
-function CarouselImages({ images }: { images: string[] }) {
-    const { currentSlide } = useCarousel();
-
-    return <>
-        <CarouselContent>
-            {images.map((src, index) => (
-                <CarouselItem key={src+index} className={cn("smooth max-h-[300px] md:max-h-[455px] rounded-xl flex flex-col items-center justify-center", {
-                    "invisible opacity-0 transition-opacity duration-500": currentSlide !== index,
-                })}>
-                    <img className={"max-h-full rounded-xl"} src={src} alt={"Winner-" + index} loading={'lazy'} />
-                    <p className={"text-white text-center"}>
-                        {index+1}/{images.length}
-                    </p>
-                </CarouselItem>
-            ))}
-        </CarouselContent>
-        <CarouselPrevious className={"top-[115%] left-1/3"} />
-        <CarouselNext className={"top-[115%] right-1/3"} />
-    </>;
-}
 
 export default WinnerCarousel;

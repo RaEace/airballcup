@@ -1,16 +1,20 @@
-import {FunctionComponent, ImgHTMLAttributes} from "react";
+import {CSSProperties, FunctionComponent} from "react";
+import Image, {StaticImageData} from "next/image";
 import {cn} from "@/lib/utils.ts";
 
-interface FloatingPictureProps extends ImgHTMLAttributes<HTMLImageElement> {
+interface FloatingPictureProps {
     floatingDirection?: "left" | "right";
+    src: StaticImageData;
+    alt: string;
+    className?: string;
+    style?: CSSProperties;
 }
 
-const FloatingPicture: FunctionComponent<FloatingPictureProps> = ({ src, alt, className, floatingDirection, ...props }) => {
+const FloatingPicture: FunctionComponent<FloatingPictureProps> = ({src, alt, className, floatingDirection, style}) => {
     const animation = floatingDirection === "left" ? "animate-float-left" : "animate-float-right";
-
     return (
-        <img {...props} src={src} alt={alt} className={cn(className, animation)}/>
-    )
+        <Image src={src} alt={alt} className={cn(className, animation)} style={style}/>
+    );
 };
 
 export default FloatingPicture;
