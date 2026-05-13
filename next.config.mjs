@@ -2,8 +2,13 @@ import {withPayload} from "@payloadcms/next/withPayload";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    basePath: '', // Changes the base path to `/app`.
-    images: { unoptimized: false },
+    basePath: '',
+    images: {
+        remotePatterns: [
+            { protocol: "https", hostname: "storage.googleapis.com" },
+            { protocol: "https", hostname: "www.ratp.fr" },
+        ],
+    },
     webpack: (config) => {
         config.module.rules.push(
             {
