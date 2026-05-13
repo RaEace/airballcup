@@ -1,4 +1,3 @@
-import {columns} from "@/components/rankings/columns.tsx";
 import mascotte from "@/assets/icons/rankings_icon.svg";
 import Image from "next/image";
 import EloRankingTable from "@/components/rankings/elo-ranking-table.tsx";
@@ -71,7 +70,11 @@ async function Page(props: { params: Promise<{ id: string }> }) {
                     </h1>
                 </div>
                 <div className={"w-full h-1/2"}>
-                    <EloRankingTable columns={columns} rankings={transformEloData(rankings)}/>
+                    <EloRankingTable
+                        rankings={transformEloData(rankings)}
+                        seasonId={id}
+                        isAdmin={!!user}
+                    />
                 </div>
             </section>
         </>
