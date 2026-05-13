@@ -71,15 +71,6 @@ const EloRankingTable: FunctionComponent<EloRankingProps> = ({rankings: initialD
     }, []);
 
     const handleSave = useCallback(async (rowId: string) => {
-        const row = data.find((_, i) => String(i) === rowId) ?? data.find((r) => r.id === rowId);
-        // TanStack row IDs are index-based strings when no getRowId is set.
-        // We find the actual ranking document ID from the current page rows via the table.
-        // Instead, we store it on save via the actions column, which has row.original.id.
-        // Since handleSave receives rowId (TanStack row id, e.g. "0"), we need to look it up.
-        // The table will pass row.original.id from the actions column — but currently we pass row.id.
-        // Let's re-examine: in columns.tsx onSave(row.id) passes the TanStack row id.
-        // We need the Payload document id. We'll change the approach: store the document id alongside.
-        // Actually, the cleanest fix is to find the matching row from data by TanStack index.
         const index = parseInt(rowId, 10);
         const target = isNaN(index) ? data.find((r) => r.id === rowId) : data[index];
         if (!target) return;
