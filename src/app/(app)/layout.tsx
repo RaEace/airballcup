@@ -10,10 +10,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({children}: { children: ReactNode }) {
     return (
-        <html lang="en">
+        <html lang="fr">
         <head>
             <link href="/logo.svg" rel="icon" type="image/svg+xml"/>
-            <link href="https://fonts.cdnfonts.com/css/humane" rel="stylesheet"/>
         </head>
         <GoogleTagManager gtmId={String(process.env.GTM_ID)} />
         <body>

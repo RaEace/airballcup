@@ -1,9 +1,8 @@
 "use client";
 
-import {FunctionComponent, useEffect, useState} from "react";
+import {FunctionComponent, useCallback, useEffect, useState} from "react";
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table.tsx";
 import {
-    ColumnDef,
     ExpandedState,
     flexRender,
     getCoreRowModel,
@@ -21,10 +20,13 @@ import {Button} from "@/components/ui/button.tsx";
 import {ArrowLeft, ArrowRight} from "lucide-react";
 import {DoubleArrowLeftIcon, DoubleArrowRightIcon} from "@radix-ui/react-icons";
 import {CompleteRanking} from "@/app/(app)/rankings/[id]/page.tsx";
+import {getColumns, EditingState} from "@/components/rankings/columns.tsx";
+import {deleteRanking, updateRanking} from "@/components/rankings/actions.ts";
 
 interface EloRankingProps {
-    columns: ColumnDef<CompleteRanking>[];
     rankings: CompleteRanking[];
+    seasonId: string;
+    isAdmin?: boolean;
 }
 
 function sortNumberRows(a: Row<number>, b: Row<number>) {
@@ -35,11 +37,15 @@ function sortStringRows(a: Row<string>, b: Row<string>) {
     return a.original.localeCompare(b.original);
 }
 
-const EloRankingTable: FunctionComponent<EloRankingProps> = ({rankings: data, columns}) => {
+const EloRankingTable: FunctionComponent<EloRankingProps> = ({rankings: initialData, seasonId, isAdmin = false}) => {
+    const [data, setData] = useState<CompleteRanking[]>(initialData);
     const [sort, setSort] = useState<SortingState>([]);
     const [visibility, setVisibility] = useState<VisibilityState>({});
     const [expanded, setExpanded] = useState<ExpandedState>({});
     const [pagination, setPagination] = useState({pageIndex: 0, pageSize: 10});
+    const [editingRowId, setEditingRowId] = useState<string | null>(null);
+    const [editingValues, setEditingValues] = useState<EditingState>({rank: 0, playerName: "", eloRating: 0});
+    const [busy, setBusy] = useState(false);
     const isMedium = useMediaQuery("(max-width: 768px)");
 
     // [[header, color]]
@@ -50,6 +56,74 @@ const EloRankingTable: FunctionComponent<EloRankingProps> = ({rankings: data, co
         matchesPlayed: ["J"],
         winRate: ["WR"],
     };
+
+    const handleEdit = useCallback((rowId: string, values: EditingState) => {
+        setEditingRowId(rowId);
+        setEditingValues(values);
+    }, []);
+
+    const handleCancel = useCallback(() => {
+        setEditingRowId(null);
+    }, []);
+
+    const handleChangeField = useCallback((field: keyof EditingState, value: string | number) => {
+        setEditingValues((prev) => ({...prev, [field]: value}));
+    }, []);
+
+    const handleSave = useCallback(async (rowId: string) => {
+        const index = parseInt(rowId, 10);
+        const target = isNaN(index) ? data.find((r) => r.id === rowId) : data[index];
+        if (!target) return;
+
+        setBusy(true);
+        const result = await updateRanking(target.id, seasonId, {
+            rank: editingValues.rank,
+            playerName: editingValues.playerName,
+            eloRating: editingValues.eloRating,
+        });
+        setBusy(false);
+
+        if (result.success) {
+            setData((prev) =>
+                prev.map((r) =>
+                    r.id === target.id
+                        ? {...r, rank: editingValues.rank, playerName: editingValues.playerName, eloRating: editingValues.eloRating}
+                        : r
+                )
+            );
+            setEditingRowId(null);
+        } else {
+            alert(`Erreur: ${result.message}`);
+        }
+    }, [data, editingValues, seasonId]);
+
+    const handleDelete = useCallback(async (rowId: string) => {
+        const index = parseInt(rowId, 10);
+        const target = isNaN(index) ? data.find((r) => r.id === rowId) : data[index];
+        if (!target) return;
+
+        if (!window.confirm(`Supprimer "${target.playerName}" du classement ?`)) return;
+
+        setBusy(true);
+        const result = await deleteRanking(target.id, seasonId);
+        setBusy(false);
+
+        if (result.success) {
+            setData((prev) => prev.filter((r) => r.id !== target.id));
+        } else {
+            alert(`Erreur: ${result.message}`);
+        }
+    }, [data, seasonId]);
+
+    const columns = getColumns(isAdmin, isAdmin ? {
+        editingRowId,
+        editingValues,
+        onEdit: handleEdit,
+        onSave: handleSave,
+        onCancel: handleCancel,
+        onDelete: handleDelete,
+        onChangeField: handleChangeField,
+    } : undefined);
 
     const table = useReactTable<CompleteRanking>({
         data,
@@ -104,6 +178,11 @@ const EloRankingTable: FunctionComponent<EloRankingProps> = ({rankings: data, co
 
     return (
         <div className={"w-full"}>
+            {busy && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+                    <div className="text-white text-sm font-text animate-pulse">Chargement…</div>
+                </div>
+            )}
             <Table className={"w-full h-[50vh]"}>
                 <TableHeader>
                     {table.getHeaderGroups().map((headerGroup) => (
@@ -123,8 +202,11 @@ const EloRankingTable: FunctionComponent<EloRankingProps> = ({rankings: data, co
                     {table.getRowModel().rows?.length ? (
                         table.getRowModel().rows.map((row) => (
                             <>
-                                <TableRow key={row.id} onClick={row.getToggleExpandedHandler()}
-                                          className={cn({"hover:bg-gray-900 hover:cursor-pointer": isMedium})}>
+                                <TableRow
+                                    key={row.id}
+                                    onClick={editingRowId === row.id ? undefined : row.getToggleExpandedHandler()}
+                                    className={cn({"hover:bg-gray-900 hover:cursor-pointer": isMedium && editingRowId !== row.id})}
+                                >
                                     {row.getVisibleCells().map((cell) => (
                                         <TableCell key={cell.id}>
                                             {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -132,10 +214,10 @@ const EloRankingTable: FunctionComponent<EloRankingProps> = ({rankings: data, co
                                     ))}
                                 </TableRow>
                                 {row.getIsExpanded() && isMedium && (
-                                    <TableRow key={row.id} className={"w-full"}>
-                                        <TableCell key={row.id} colSpan={row.getVisibleCells().length}>
-                                            <Table key={row.id} className={"max-w-full rounded-t-none"}>
-                                                <TableHeader key={row.id}>
+                                    <TableRow key={`${row.id}-expanded`} className={"w-full"}>
+                                        <TableCell key={`${row.id}-expanded-cell`} colSpan={row.getVisibleCells().length}>
+                                            <Table key={`${row.id}-inner`} className={"max-w-full rounded-t-none"}>
+                                                <TableHeader key={`${row.id}-inner-header`}>
                                                     {Object.entries(hiddenHeaders).map(([_, [header, color]], _i, arr) => (
                                                         <TableHead colSpan={arr.length}
                                                                    className={cn("font-text text-text-m font-bold text-white", color)}
@@ -144,8 +226,8 @@ const EloRankingTable: FunctionComponent<EloRankingProps> = ({rankings: data, co
                                                         </TableHead>
                                                     ))}
                                                 </TableHeader>
-                                                <TableBody key={row.id}>
-                                                    <TableRow key={row.id}>
+                                                <TableBody key={`${row.id}-inner-body`}>
+                                                    <TableRow key={`${row.id}-inner-row`}>
                                                         {row.getAllCells()
                                                             .filter((cell) => Object.keys(hiddenHeaders).includes(cell.column.id))
                                                             .map((cell, _, arr) => (
@@ -167,9 +249,10 @@ const EloRankingTable: FunctionComponent<EloRankingProps> = ({rankings: data, co
                     </TableRow>}
                 </TableBody>
             </Table>
-            <div className={"bg-gray-950 border-t border-gray-800 py-2 w-full flex items-center justify-center gap-4"}>
+            <div
+                className={"bg-gray-950 border-t border-gray-800 py-2 w-full flex items-center justify-center gap-4"}>
                 <Button disabled={!table.getCanPreviousPage()} onClick={() => table.firstPage()}>
-                    <DoubleArrowLeftIcon className={"size-4"} />
+                    <DoubleArrowLeftIcon className={"size-4"}/>
                 </Button>
                 <Button onClick={() => table.previousPage()}
                         disabled={!table.getCanPreviousPage()}>
@@ -183,7 +266,7 @@ const EloRankingTable: FunctionComponent<EloRankingProps> = ({rankings: data, co
                     <ArrowRight className={"size-4"}/>
                 </Button>
                 <Button onClick={() => table.lastPage()} disabled={!table.getCanNextPage()}>
-                    <DoubleArrowRightIcon className={"size-4"} />
+                    <DoubleArrowRightIcon className={"size-4"}/>
                 </Button>
             </div>
         </div>

@@ -142,3 +142,31 @@ body {
   display: inline-block;
   animation: marquee 10s linear infinite;
 }
+
+/* daisyUI-style carousel */
+.carousel {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.carousel::-webkit-scrollbar {
+  display: none;
+}
+.carousel-item {
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  display: flex;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee-left,
+  .animate-marquee-right,
+  .animate-float-left,
+  .animate-float-right {
+    animation: none;
+  }
+}

@@ -1,5 +1,3 @@
-"use client";
-
 import {FunctionComponent} from "react";
 import {Badge} from "@/components/ui/badge.tsx";
 import {Tag, TrophyIcon} from "lucide-react";
@@ -22,14 +20,14 @@ const Cost: FunctionComponent = () => {
             🎉 HAVE FUN
           </p>
         </Badge>
-        <h1
+        <h2
           className={
             "smooth font-display lg:text-title-l md:text-title-m text-title-s font-bold uppercase text-center w-2/3"
           }
         >
           Tarif par équipe et{" "}
           <span className={"text-secondary-500"}>récompenses</span>
-        </h1>
+        </h2>
       </div>
 
       <section

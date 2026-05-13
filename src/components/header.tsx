@@ -2,7 +2,8 @@
 
 import {type FunctionComponent, type HTMLAttributeAnchorTarget, useEffect, useState,} from "react";
 import airballCupLogo from "@/assets/logo.svg";
-import {Button, buttonVariants} from "@/components/ui/button.tsx";
+import {Button} from "@/components/ui/button.tsx";
+import {buttonVariants} from "@/components/ui/button-variants";
 import ArrowButton from "@/components/arrow-button.tsx";
 import {AlignJustifyIcon, ArrowRight} from "lucide-react";
 import {
@@ -45,7 +46,6 @@ const Header: FunctionComponent<{
           isLoggedIn = false,
       }) => {
     const [showStickyBtn, setShowStickyBtn] = useState<boolean>(false);
-    const [isRankingsLoading, setIsRankingsLoading] = useState<boolean>(false);
     const pathname = usePathname();
     const slug = pathname === "/" ? "" : "/";
 
@@ -81,24 +81,16 @@ const Header: FunctionComponent<{
         }
     }, [inView]);
 
-    useEffect(() => {
-        if (availableRankings.length === 0) {
-            setIsRankingsLoading(true);
-        } else {
-            setIsRankingsLoading(false);
-        }
-    }, [availableRankings]);
-
     function InnerBurgerMenu() {
         return (
             <Sheet>
-                <SheetTrigger>
-                    <div
-                        role={"button"}
+                <SheetTrigger asChild>
+                    <button
+                        aria-label={"Ouvrir le menu"}
                         className={cn(buttonVariants({variant: "outline", size: "icon"}))}
                     >
-                        <AlignJustifyIcon/>
-                    </div>
+                        <AlignJustifyIcon aria-hidden="true"/>
+                    </button>
                 </SheetTrigger>
                 <SheetContent side={"full"} className={"z-[101] bg-gray-950"}>
                     <SheetTitle>
@@ -136,17 +128,7 @@ const Header: FunctionComponent<{
                                 </SheetClose>
                             ))}
 
-                            {isRankingsLoading ? (
-                                <div
-                                    className={cn(
-                                        buttonVariants({variant: "link"}),
-                                        "font-display font-bold text-title-m"
-                                    )}
-                                >
-                                    Chargement...
-                                </div>
-                            ) : (
-                                availableRankings.length > 0 &&
+                            {availableRankings.length > 0 &&
                                 availableRankings.map((season) => (
                                     <SheetClose key={season.id}>
                                         <Link
@@ -168,7 +150,7 @@ const Header: FunctionComponent<{
                                         </Link>
                                     </SheetClose>
                                 ))
-                            )}
+                            }
                         </div>
                     </SheetDescription>
                     <SheetFooter className={"mt-10"}>
@@ -208,7 +190,6 @@ const Header: FunctionComponent<{
                     availableRankings={availableRankings}
                     nestedLinks={navigationMenuLinks}
                     links={otherLinks}
-                    isRankingsLoading={isRankingsLoading}
                     isLoggedIn={isLoggedIn}
                 />
                 <Link href={CURRENT_SIGNUP_URL} target={"_blank"}>
@@ -252,13 +233,11 @@ function Navbar({
                     nestedLinks,
                     links,
                     availableRankings,
-                    isRankingsLoading,
                     isLoggedIn
                 }: {
     nestedLinks: NavLink[];
     links: NavLink[];
     availableRankings?: Season[];
-    isRankingsLoading?: boolean;
     isLoggedIn?: boolean;
 }) {
     return (
@@ -301,9 +280,8 @@ function Navbar({
                             buttonVariants({variant: "link"}),
                             "lg:text-button-m"
                         )}
-                        disabled={isRankingsLoading}
                     >
-                        {isRankingsLoading ? "Chargement..." : "Classement"}
+                        Classement
                     </NavigationMenuTrigger>
                     <NavigationMenuContent>
                         {availableRankings && availableRankings.length > 0 ? (
@@ -337,9 +315,7 @@ function Navbar({
                             </ul>
                         ) : (
                             <div className="w-[400px] p-4 text-center">
-                                {isRankingsLoading
-                                    ? "Chargement des classements..."
-                                    : "Aucun classement disponible"}
+                                Aucun classement disponible
                             </div>
                         )}
                     </NavigationMenuContent>

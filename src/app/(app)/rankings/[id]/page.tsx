@@ -1,9 +1,9 @@
-import {columns} from "@/components/rankings/columns.tsx";
 import mascotte from "@/assets/icons/rankings_icon.svg";
+import Image from "next/image";
 import EloRankingTable from "@/components/rankings/elo-ranking-table.tsx";
 import getTournamentInfo from "@/contents/sections/tournamentInfo/actions.ts";
 import Header from "@/components/header.tsx";
-import RankingsService from "@/services/rankings.service.ts";
+import {getSeasons, getRankings} from "@/services/rankings-queries.ts";
 import {Ranking} from "@/payload-types.ts";
 import {getPayload} from "payload";
 import config from "@payload-config";
@@ -15,21 +15,22 @@ export type CompleteRanking = Ranking & { matchesPlayed: number; winRate: number
 async function Page(props: { params: Promise<{ id: string }> }) {
     const id = (await props.params).id;
     const headersList = await headers();
-    const {registrationLink} = await getTournamentInfo();
-    const payload = await getPayload({config});
-    const rankingService = new RankingsService(payload);
-    const availableRankings = await rankingService.getSeasons();
 
-    const {user} = await payload.auth({headers: headersList})
-    const currentSeason = availableRankings?.find((season) => season.id === id);
-    const rankings = await rankingService.getRankings(id);
+    const [{registrationLink}, availableRankings, rankings, {user}] = await Promise.all([
+        getTournamentInfo(),
+        getSeasons(),
+        getRankings(id),
+        getPayload({config}).then(p => p.auth({headers: headersList})),
+    ]);
+
+    const currentSeason = availableRankings.find((season) => season.id === id);
 
     if (!currentSeason) {
         return <>
-            <Header signupUrl={registrationLink} availableRankings={availableRankings} isLoggedIn={!!user}/>
-            <section>
-                <p>
-                    Le classement pour cette saison n'existe pas. Veuillez
+            <Header signupUrl={registrationLink} availableRankings={availableRankings ?? []} isLoggedIn={!!user}/>
+            <section className={"flex items-center justify-center w-screen h-screen bg-secondary-500"}>
+                <p className={"font-display text-title-m font-bold uppercase"}>
+                    Ce classement n'existe pas.
                 </p>
             </section>
         </>
@@ -47,12 +48,13 @@ async function Page(props: { params: Promise<{ id: string }> }) {
                     "relative flex flex-col justify-center items-center w-screen h-screen bg-secondary-500"
                 }
             >
-                <img
+                <Image
                     className={
                         "smooth absolute top-[36%] lg:top-[19%] right-0 max-w-[170px] lg:max-w-[762px] -z-4"
                     }
-                    src={mascotte.src}
+                    src={mascotte}
                     alt={"mascotte rankings"}
+                    priority
                 />
                 <div
                     className={
@@ -68,7 +70,11 @@ async function Page(props: { params: Promise<{ id: string }> }) {
                     </h1>
                 </div>
                 <div className={"w-full h-1/2"}>
-                    <EloRankingTable columns={columns} rankings={transformEloData(rankings ?? [])}/>
+                    <EloRankingTable
+                        rankings={transformEloData(rankings)}
+                        seasonId={id}
+                        isAdmin={!!user}
+                    />
                 </div>
             </section>
         </>

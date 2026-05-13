@@ -4,15 +4,20 @@ function useParallax(offsetMultiplier: number): number {
     const [offset, setOffset] = useState<number>(0);
 
     useEffect(() => {
+        let rafId: number;
+
         const handleScroll = () => {
-            const scrollY = window.scrollY;
-            setOffset(scrollY * offsetMultiplier);
+            cancelAnimationFrame(rafId);
+            rafId = requestAnimationFrame(() => {
+                setOffset(window.scrollY * offsetMultiplier);
+            });
         };
 
-        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('scroll', handleScroll, {passive: true});
 
         return () => {
             window.removeEventListener('scroll', handleScroll);
+            cancelAnimationFrame(rafId);
         };
     }, [offsetMultiplier]);
 

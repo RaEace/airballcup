@@ -1,8 +1,10 @@
+/* Thunder — Black */
 @font-face {
     font-family: 'Thunder';
     src: url('../../assets/thunder/Web-TT/Thunder-BlackHC.ttf') format('truetype');
     font-weight: 900;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -10,6 +12,7 @@
     src: url('../../assets/thunder/Web-TT/Thunder-BlackHCItalic.ttf') format('truetype');
     font-weight: 900;
     font-style: italic;
+    font-display: swap;
 }
 
 @font-face {
@@ -17,6 +20,7 @@
     src: url('../../assets/thunder/Web-TT/Thunder-BlackLC.ttf') format('truetype');
     font-weight: 900;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -24,14 +28,16 @@
     src: url('../../assets/thunder/Web-TT/Thunder-BlackLCItalic.ttf') format('truetype');
     font-weight: 900;
     font-style: italic;
+    font-display: swap;
 }
 
-/* Bold */
+/* Thunder — Bold */
 @font-face {
     font-family: 'Thunder';
     src: url('../../assets/thunder/Web-TT/Thunder-BoldHC.ttf') format('truetype');
     font-weight: bold;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -39,6 +45,7 @@
     src: url('../../assets/thunder/Web-TT/Thunder-BoldHCItalic.ttf') format('truetype');
     font-weight: bold;
     font-style: italic;
+    font-display: swap;
 }
 
 @font-face {
@@ -46,6 +53,7 @@
     src: url('../../assets/thunder/Web-TT/Thunder-BoldLC.ttf') format('truetype');
     font-weight: bold;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -53,14 +61,16 @@
     src: url('../../assets/thunder/Web-TT/Thunder-BoldLCItalic.ttf') format('truetype');
     font-weight: bold;
     font-style: italic;
+    font-display: swap;
 }
 
-/* ExtraBold */
+/* Thunder — ExtraBold */
 @font-face {
     font-family: 'Thunder';
     src: url('../../assets/thunder/Web-TT/Thunder-ExtraBoldHC.ttf') format('truetype');
     font-weight: 800;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -68,6 +78,7 @@
     src: url('../../assets/thunder/Web-TT/Thunder-ExtraBoldHCItalic.ttf') format('truetype');
     font-weight: 800;
     font-style: italic;
+    font-display: swap;
 }
 
 @font-face {
@@ -75,6 +86,7 @@
     src: url('../../assets/thunder/Web-TT/Thunder-ExtraBoldLC.ttf') format('truetype');
     font-weight: 800;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -82,14 +94,16 @@
     src: url('../../assets/thunder/Web-TT/Thunder-ExtraBoldLCItalic.ttf') format('truetype');
     font-weight: 800;
     font-style: italic;
+    font-display: swap;
 }
 
-/* ExtraLight */
+/* Thunder — ExtraLight */
 @font-face {
     font-family: 'Thunder';
     src: url('../../assets/thunder/Web-TT/Thunder-ExtraLightHC.ttf') format('truetype');
     font-weight: 200;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -97,6 +111,7 @@
     src: url('../../assets/thunder/Web-TT/Thunder-ExtraLightHCItalic.ttf') format('truetype');
     font-weight: 200;
     font-style: italic;
+    font-display: swap;
 }
 
 @font-face {
@@ -104,6 +119,7 @@
     src: url('../../assets/thunder/Web-TT/Thunder-ExtraLightLC.ttf') format('truetype');
     font-weight: 200;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -111,14 +127,16 @@
     src: url('../../assets/thunder/Web-TT/Thunder-ExtraLightLCItalic.ttf') format('truetype');
     font-weight: 200;
     font-style: italic;
+    font-display: swap;
 }
 
-/* Light */
+/* Thunder — Light */
 @font-face {
     font-family: 'Thunder';
     src: url('../../assets/thunder/Web-TT/Thunder-LightHC.ttf') format('truetype');
     font-weight: 300;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -126,6 +144,7 @@
     src: url('../../assets/thunder/Web-TT/Thunder-LightHCItalic.ttf') format('truetype');
     font-weight: 300;
     font-style: italic;
+    font-display: swap;
 }
 
 @font-face {
@@ -133,6 +152,7 @@
     src: url('../../assets/thunder/Web-TT/Thunder-LightLC.ttf') format('truetype');
     font-weight: 300;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -140,14 +160,16 @@
     src: url('../../assets/thunder/Web-TT/Thunder-LightLCItalic.ttf') format('truetype');
     font-weight: 300;
     font-style: italic;
+    font-display: swap;
 }
 
-/* Medium */
+/* Thunder — Medium */
 @font-face {
     font-family: 'Thunder';
     src: url('../../assets/thunder/Web-TT/Thunder-MediumHC.ttf') format('truetype');
     font-weight: 500;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -155,6 +177,7 @@
     src: url('../../assets/thunder/Web-TT/Thunder-MediumHCItalic.ttf') format('truetype');
     font-weight: 500;
     font-style: italic;
+    font-display: swap;
 }
 
 @font-face {
@@ -162,6 +185,7 @@
     src: url('../../assets/thunder/Web-TT/Thunder-MediumLC.ttf') format('truetype');
     font-weight: 500;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -169,14 +193,16 @@
     src: url('../../assets/thunder/Web-TT/Thunder-MediumLCItalic.ttf') format('truetype');
     font-weight: 500;
     font-style: italic;
+    font-display: swap;
 }
 
-/* SemiBold */
+/* Thunder — SemiBold */
 @font-face {
     font-family: 'Thunder';
     src: url('../../assets/thunder/Web-TT/Thunder-SemiBoldHC.ttf') format('truetype');
     font-weight: 600;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -184,6 +210,7 @@
     src: url('../../assets/thunder/Web-TT/Thunder-SemiBoldHCItalic.ttf') format('truetype');
     font-weight: 600;
     font-style: italic;
+    font-display: swap;
 }
 
 @font-face {
@@ -191,6 +218,7 @@
     src: url('../../assets/thunder/Web-TT/Thunder-SemiBoldLC.ttf') format('truetype');
     font-weight: 600;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -198,14 +226,16 @@
     src: url('../../assets/thunder/Web-TT/Thunder-SemiBoldLCItalic.ttf') format('truetype');
     font-weight: 600;
     font-style: italic;
+    font-display: swap;
 }
 
-/* Thin */
+/* Thunder — Thin */
 @font-face {
     font-family: 'Thunder';
     src: url('../../assets/thunder/Web-TT/Thunder-ThinHC.ttf') format('truetype');
     font-weight: 100;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -213,6 +243,7 @@
     src: url('../../assets/thunder/Web-TT/Thunder-ThinHCItalic.ttf') format('truetype');
     font-weight: 100;
     font-style: italic;
+    font-display: swap;
 }
 
 @font-face {
@@ -220,6 +251,7 @@
     src: url('../../assets/thunder/Web-TT/Thunder-ThinLC.ttf') format('truetype');
     font-weight: 100;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -227,34 +259,41 @@
     src: url('../../assets/thunder/Web-TT/Thunder-ThinLCItalic.ttf') format('truetype');
     font-weight: 100;
     font-style: italic;
+    font-display: swap;
 }
 
+/* Obviously */
 @font-face {
     font-family: "Obviously", "sans-serif";
     src: url("../../assets/obviously/Obviously-Regular.otf") format("opentype");
     font-weight: normal;
+    font-display: swap;
 }
 
 @font-face {
     font-family: "Obviously", "sans-serif";
     src: url("../../assets/obviously/Obviously-Bold.otf") format("opentype");
     font-weight: bold;
+    font-display: swap;
 }
 
 @font-face {
     font-family: "Obviously", "sans-serif";
     src: url("../../assets/obviously/Obviously-Black.otf") format("opentype");
     font-weight: 800;
+    font-display: swap;
 }
 
 @font-face {
     font-family: "Obviously", "sans-serif";
     src: url("../../assets/obviously/Obviously-Medium.otf") format("opentype");
     font-weight: 500;
+    font-display: swap;
 }
 
 @font-face {
     font-family: "Obviously", "sans-serif";
     src: url("../../assets/obviously/Obviously-Light.otf") format("opentype");
     font-weight: 300;
+    font-display: swap;
 }
