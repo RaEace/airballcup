@@ -48,7 +48,7 @@ const AnimatedText: FunctionComponent = () => {
                         aria-hidden={index >= repeated.length ? "true" : undefined}
                     >
                         {item}
-                        <img className={"mb-2 size-5"} src={pongBall.src} alt={""}/>
+                        <img className={"mb-2 ml-4 mr-5 size-5"} src={pongBall.src} alt={"ping pong ball"}/>
                     </span>
                 ))}
             </div>

@@ -17,6 +17,8 @@ const WinnerCarousel: FunctionComponent<{images: string[]}> = ({images}) => {
     // :has(:target) resets all dots when any slide is targeted, then re-highlights the right one.
     // The default rule (no :has) shows the first dot active on initial load.
     const css = [
+        // Offset anchor scroll by the header height so the carousel doesn't slide under it
+        `[id^="winner-"] { scroll-margin-top: 104px; }`,
         `#${ROOT_ID} nav a { background-color: rgba(255,255,255,0.3); }`,
         `#${ROOT_ID} nav a:first-child { background-color: ${PRIMARY}; }`,
         `#${ROOT_ID}:has(:target) nav a { background-color: rgba(255,255,255,0.3); }`,
@@ -38,9 +40,9 @@ const WinnerCarousel: FunctionComponent<{images: string[]}> = ({images}) => {
                         className={"carousel-item relative w-full flex-col items-center justify-center"}
                     >
                         {/* Image wrapper is the positioning root for the buttons */}
-                        <div className={"relative w-full"}>
+                        <div className={"relative w-full flex justify-center"}>
                             <img
-                                className={"w-full max-h-[220px] md:max-h-[320px] object-cover rounded-xl"}
+                                className={"block w-auto h-auto max-w-full max-h-[55vh] rounded-xl"}
                                 src={src}
                                 alt={`Vainqueur ${i + 1}`}
                                 loading={i === 0 ? "eager" : "lazy"}
