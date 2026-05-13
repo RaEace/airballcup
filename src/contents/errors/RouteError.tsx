@@ -3,7 +3,7 @@ import {Home} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import {cn} from "@/lib/utils.ts";
-import {buttonVariants} from "@/components/ui/button.tsx";
+import {buttonVariants} from "@/components/ui/button-variants";
 
 const RouteError = () => {
   return (

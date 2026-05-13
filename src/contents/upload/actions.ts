@@ -6,6 +6,7 @@ import {Ranking} from "@/payload-types.ts";
 import {getPayload} from "payload";
 import config from "@payload-config";
 import {z} from "zod";
+import {invalidateRankingsCache} from "@/services/rankings-queries.ts";
 
 const csvSchema = z.object({
     Rank: z.number(),
@@ -88,6 +89,8 @@ export default async function uploadAction(_initialState: { success: boolean; me
                 }
             }
         }
+
+        invalidateRankingsCache(seasonId);
 
         return {success: true, message: 'Rankings uploaded successfully. '};
     } catch (error) {
