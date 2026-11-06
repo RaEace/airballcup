@@ -1,22 +1,15 @@
 import {FunctionComponent} from "react";
 import {Badge} from "@/components/ui/badge.tsx";
 import WinnerCarousel from "@/components/winner-carousel.tsx";
-import {PhotoSource} from "@/components/photo-displayer/photo-displayer.tsx";
+import {toPhoto} from "@/components/photo-displayer/photo-displayer.tsx";
 import {Carousel} from "@/payload-types.ts";
 import placeholder from "@/assets/photos/arthur-et-romain.webp";
 
 const Winners: FunctionComponent<{carousel: Carousel}> = ({carousel}) => {
-    const images = carousel.images.reduce<PhotoSource[]>((acc, curr) => {
-        if (typeof curr.image === "string" || curr.image.url == null) {
-            acc.push(placeholder);
-        } else {
-            acc.push({src: curr.image.url, width: curr.image.width ?? 800, height: curr.image.height ?? 600});
-        }
-        return acc;
-    }, []);
+    const images = carousel.images.map((curr) => toPhoto(curr.image, placeholder));
 
     return (
-        <article id={"champions"} className={"overflow-hidden relative w-full h-full flex flex-col items-center bg-secondary-500 px-6 pt-32 pb-20"}>
+        <article id={"champions"} className={"overflow-hidden relative w-full min-h-svh flex flex-col items-center bg-secondary-500 px-6 pt-32 pb-20"}>
             <CircleBackground/>
             <section className={"z-20 w-full h-full grid md:grid-cols-5 md:grid-rows-1 grid-rows-4 grid-cols-1 gap-6"}>
                 <div className={"mx-4 md:col-span-2 row-span-1 flex flex-col gap md:items-start justify-center items-center md:text-left text-center gap-4"}>

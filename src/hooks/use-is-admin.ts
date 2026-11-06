@@ -10,7 +10,7 @@ export function useIsAdmin(): boolean {
         fetch("/api/users/me", {credentials: "include"})
             .then((res) => res.json())
             .then((data) => setIsAdmin(!!data?.user))
-            .catch(() => setIsAdmin(false));
+            .catch(() => {});
     }, []);
 
     return isAdmin;

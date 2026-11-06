@@ -9,7 +9,7 @@ const Rules: FunctionComponent<{rules: Rule[]}> = ({rules}) => {
     return (
         <article
             id={"rules"}
-            className={"smooth md:grid md:grid-cols-2 md:grid-rows-1 relative overflow-x-clip font-display w-full min-h-full bg-gray-900 uppercase flex flex-col items-center justify-start px-4 pt-[11rem] gap-6"}
+            className={"smooth md:grid md:grid-cols-2 md:grid-rows-1 relative overflow-x-clip font-display w-full min-h-svh bg-gray-900 uppercase flex flex-col items-center justify-start px-4 pt-[11rem] gap-6"}
         >
             <AnimatedText/>
             <div className={"w-full h-full mb-12 md:pt-10 flex flex-col items-center md:items-center justify-center md:justify-start gap-2"}>

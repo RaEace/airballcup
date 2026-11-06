@@ -1,19 +1,7 @@
 "use server";
 
-import { getPayload } from "payload";
-import config from "@payload-config";
-import { headers } from "next/headers";
+import { requireAdmin } from "@/lib/require-admin.ts";
 import { invalidateRankingsCache } from "@/services/rankings-queries.ts";
-
-async function requireAdmin() {
-    const payload = await getPayload({ config });
-    const headersList = await headers();
-    const { user } = await payload.auth({ headers: headersList });
-    if (!user) {
-        throw new Error("Unauthorized: admin access required.");
-    }
-    return payload;
-}
 
 export async function deleteRanking(id: string, seasonId: string): Promise<{ success: boolean; message: string }> {
     try {

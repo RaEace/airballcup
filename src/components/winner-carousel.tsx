@@ -50,8 +50,7 @@ const WinnerCarousel: FunctionComponent<{images: PhotoSource[]}> = ({images}) =>
                                 height={src.height}
                                 sizes={"(min-width: 768px) 500px, 100vw"}
                                 alt={`Vainqueur ${i + 1}`}
-                                loading={i === 0 ? "eager" : "lazy"}
-                                priority={i === 0}
+                                loading={"lazy"}
                             />
                             {n > 1 && (
                                 <div className={"absolute inset-x-3 top-1/2 -translate-y-1/2 flex justify-between"}>

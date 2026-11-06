@@ -11,7 +11,7 @@ import Image from "next/image";
 import {cn} from "@/lib/utils.ts";
 
 const History: FunctionComponent = () => {
-    return <article id={"about"} className={"w-full min-h-full overflow-x-clip bg-gray-950 flex flex-col items-center pt-20 gap-6"}>
+    return <article id={"about"} className={"w-full min-h-svh overflow-x-clip bg-gray-950 flex flex-col items-center pt-20 gap-6"}>
         <div className={"relative sm:w-1/2 z-10 flex flex-col items-center justify-start gap-4"}>
             <FloatingPicture
                 floatingDirection={"right"}

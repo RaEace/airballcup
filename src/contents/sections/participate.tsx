@@ -13,7 +13,7 @@ const belushisAddress = "https://maps.app.goo.gl/Xq6KDifHZRUGahjH8";
 
 const Participate: FunctionComponent<{tournamentInfo: Tournament}> = ({tournamentInfo}) => {
     return (
-        <article id={"participate"} className={"bg-gray-950 w-full min-h-full flex flex-col items-center justify-start py-20 px-10 lg:px-40 sm:py-4"}>
+        <article id={"participate"} className={"bg-gray-950 w-full min-h-svh flex flex-col items-center justify-start py-20 px-10 lg:px-40 sm:py-4"}>
             <div className={"w-full h-full my-auto sm:mx-0 mx-auto space-y-6"}>
                 <div className={"md:grid md:grid-cols-2 md:grid-rows-1 mt-4"}>
                     <div className={"flex flex-col items-center justify-start md:items-start md:text-left text-center gap-4"}>

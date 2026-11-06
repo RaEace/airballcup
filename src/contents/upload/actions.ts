@@ -5,6 +5,7 @@ import Papaparse from "papaparse";
 import {Ranking} from "@/payload-types.ts";
 import {getPayload} from "payload";
 import config from "@payload-config";
+import {requireAdmin} from "@/lib/require-admin.ts";
 import {z} from "zod";
 import {invalidateRankingsCache} from "@/services/rankings-queries.ts";
 
@@ -17,6 +18,7 @@ const csvSchema = z.object({
 type ParsedCsv = z.infer<typeof csvSchema>;
 
 export default async function uploadAction(_initialState: { success: boolean; message: string }, formData: FormData) {
+    await requireAdmin();
     const rankingFile = formData.get("rankingFile") as File;
     const seasonId = formData.get("seasonId") as string;
 

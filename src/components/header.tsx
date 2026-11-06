@@ -176,7 +176,7 @@ const Header: FunctionComponent<{
     return (
         <header
             className={
-                "absolute backdrop-blur-[2px] font-display uppercase z-[100] px-6 flex items-center justify-between w-full h-16 lg:h-[104px] bg-transparent"
+                "fixed top-0 inset-x-0 backdrop-blur-[2px] font-display uppercase z-[100] px-6 flex items-center justify-between w-full h-16 lg:h-[104px] bg-transparent max-lg:bg-gray-950/80"
             }
         >
             <Link prefetch title={"back-home-link"} href="/">
