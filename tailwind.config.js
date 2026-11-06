@@ -163,8 +163,8 @@ export default {
     			sm: 'calc(var(--radius) - 4px)'
     		},
     		fontFamily: {
-    			display: ["Thunder", "sans-serif"],
-    			text: ["Obviously", "sans-serif"]
+    			display: ["var(--font-thunder)", "sans-serif"],
+    			text: ["var(--font-obviously)", "sans-serif"]
     		},
     		colors: {
     			gray: {

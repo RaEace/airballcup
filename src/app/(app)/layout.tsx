@@ -2,6 +2,7 @@ import {ReactNode} from "react";
 import {Metadata} from "next";
 import "./index.css";
 import {GoogleTagManager} from "@next/third-parties/google";
+import {obviously, thunder} from "./fonts";
 
 export const metadata: Metadata = {
     title: "Airball Cup - Tournoi mensuel de beer pong",
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({children}: { children: ReactNode }) {
     return (
-        <html lang="fr">
+        <html lang="fr" className={`${thunder.variable} ${obviously.variable}`}>
         <head>
             <link href="/logo.svg" rel="icon" type="image/svg+xml"/>
         </head>
