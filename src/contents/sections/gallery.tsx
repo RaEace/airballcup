@@ -1,25 +1,23 @@
 import {FunctionComponent} from "react";
 import {Badge} from "@/components/ui/badge.tsx";
-import PhotoDisplayer from "@/components/photo-displayer/photo-displayer.tsx";
+import PhotoDisplayer, {PhotoSource} from "@/components/photo-displayer/photo-displayer.tsx";
 import placeholder1 from "@/assets/photos/photo-1-airballcup.jpeg";
 import placeholder2 from "@/assets/photos/photo-2-airballcup.jpeg";
 import placeholder3 from "@/assets/photos/photo-3-airballcup.jpeg";
 import {Gallery as GalleryType} from "@/payload-types.ts";
-import placeholder from "@/assets/photos/arthur-et-romain.png";
+import placeholder from "@/assets/photos/arthur-et-romain.webp";
 
 const Gallery: FunctionComponent<{gallery: GalleryType}> = ({gallery}) => {
-    const images = gallery.images.length > 0
-        ? gallery.images.reduce<string[]>((acc, curr) => {
-            if (typeof curr.image === "string") {
-                acc.push(curr.image);
-            } else if (curr.image.url != null) {
-                acc.push(curr.image.url);
+    const images: PhotoSource[] = gallery.images.length > 0
+        ? gallery.images.reduce<PhotoSource[]>((acc, curr) => {
+            if (typeof curr.image === "string" || curr.image.url == null) {
+                acc.push(placeholder);
             } else {
-                acc.push(placeholder.src);
+                acc.push({src: curr.image.url, width: curr.image.width ?? 800, height: curr.image.height ?? 600});
             }
             return acc;
         }, [])
-        : [placeholder1.src, placeholder2.src, placeholder3.src];
+        : [placeholder1, placeholder2, placeholder3];
 
     return (
         <article id={"gallery"} className="flex min-h-full w-full flex-col items-center gap-4 px-6 pt-20 pb-4">

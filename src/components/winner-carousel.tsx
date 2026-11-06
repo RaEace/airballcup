@@ -1,5 +1,7 @@
 import {FunctionComponent} from "react";
-import placeholder from "@/assets/photos/arthur-et-romain.png";
+import Image from "next/image";
+import placeholder from "@/assets/photos/arthur-et-romain.webp";
+import {PhotoSource} from "@/components/photo-displayer/photo-displayer.tsx";
 
 const PRIMARY = "#E51C21";
 const ROOT_ID = "winner-carousel";
@@ -9,8 +11,8 @@ const ROOT_ID = "winner-carousel";
  * - Prev/Next: <a href="#winner-N"> anchor links inside each slide (no JS scroll needed)
  * - Active dot:  CSS :has(:target) — highlights the dot whose slide is the URL target
  */
-const WinnerCarousel: FunctionComponent<{images: string[]}> = ({images}) => {
-    const srcs = images.length > 0 ? images : [placeholder.src];
+const WinnerCarousel: FunctionComponent<{images: PhotoSource[]}> = ({images}) => {
+    const srcs = images.length > 0 ? images : [placeholder];
     const n = srcs.length;
 
     // Scoped CSS — no client JS needed.
@@ -41,11 +43,15 @@ const WinnerCarousel: FunctionComponent<{images: string[]}> = ({images}) => {
                     >
                         {/* Image wrapper is the positioning root for the buttons */}
                         <div className={"relative w-full flex justify-center"}>
-                            <img
+                            <Image
                                 className={"block w-auto h-auto max-w-full max-h-[55vh] rounded-xl"}
-                                src={src}
+                                src={src.src}
+                                width={src.width}
+                                height={src.height}
+                                sizes={"(min-width: 768px) 500px, 100vw"}
                                 alt={`Vainqueur ${i + 1}`}
                                 loading={i === 0 ? "eager" : "lazy"}
+                                priority={i === 0}
                             />
                             {n > 1 && (
                                 <div className={"absolute inset-x-3 top-1/2 -translate-y-1/2 flex justify-between"}>
