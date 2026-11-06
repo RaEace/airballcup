@@ -1,7 +1,7 @@
 # Responsive mobile et performances de chargement
 
 Date : 2026-11-06
-Statut : à valider
+Statut : implémentée, mesures finales à faire sur le deploy preview
 
 ## Intention
 
@@ -145,3 +145,24 @@ Responsive :
 11. Une deuxième visite de l'accueil sur Netlify est servie depuis le cache : l'en-tête de réponse indique un hit du cache Netlify (`cache-status` contenant `"Netlify Edge"; hit` ou `"Netlify Durable"; hit`), vérifiable par `curl -sI <url> | grep -i cache-status`.
 12. Les images de la galerie et du carrousel passent par Netlify Image CDN (URL en `/_next/image?...` ou `/.netlify/images?...` dans le HTML rendu), vérifiable par `curl -s <url> | grep -c "_next/image\|.netlify/images"` (résultat supérieur à 0).
 13. Les dépendances `react-router`, `react-router-dom`, `easy-peasy`, `xlsx`, `react-intl`, `react-dropzone`, `graphql`, `markdown-it` ne figurent plus dans `package.json`, sauf si un usage hors `src/` est découvert (à justifier dans la PR).
+
+## Réconciliation (implémentation vs spec)
+
+### Écarts assumés
+- **Lint (critère 1)** : `.eslintrc.cjs` était invalide (`"disabled"`), le lint ne tournait pas. Corrigé en `"off"`. Il reste 8 problèmes préexistants (7 erreurs, 1 avertissement) hors périmètre : `pnpm lint` ne sort donc pas à zéro. Aucun nouveau problème introduit (11 → 8).
+- **Dépendances (critère 13)** : `graphql` conservé, c'est un peer requis de `payload`. Retirés en plus : `@std/toml`, `framer-motion`, `@types/markdown-it`.
+- **Polices** : Thunder LC uniquement (500, 700, 800) et Obviously 400/500/700 ; Thunder 600 et Obviously 300/800 retirés faute d'usage. Comparaison visuelle HC/LC non faite à l'écran.
+- **Logo/images** : `logo.svg` → `logo.webp` (27 Ko), `bg-img.png` → `bg-img.webp` (91 Ko), `arthur-et-romain.png` → `.webp` (51 Ko). Favicon en WebP (support Safari à vérifier).
+- **Lien admin** : composant client via `/api/users/me` (hook `useIsAdmin`), partagé avec le tableau de classement pour l'édition/suppression.
+- **Classement** : seules 3 colonnes existent (rang, équipe, ELO) depuis un commit antérieur ; l'expansion de ligne mobile, devenue inopérante, est supprimée. V/D/J/WR non recréées.
+- **Server action d'upload** : `uploadAction` n'avait aucun contrôle d'accès (défaut préexistant) ; `requireAdmin` y est ajouté (module partagé `src/lib/require-admin.ts`). Un non-admin déclenche une exception au lieu d'un message.
+- **Scroll-snap** en `proximity` ; header `fixed`.
+
+### Écarts non assumés / non vérifiés (à traiter sur le deploy preview)
+- Aucune mesure Lighthouse « après » (critères 3, 6, 8, 11, 12) : `.env` local inutilisable, pas de `pnpm build` ni de rendu navigateur. Tâche 11 non faite.
+- `/` et `/rankings/[id]` en ISR non confirmés (marqueur de build ; `/rankings/[id]` sans `generateStaticParams`, un ID inexistant renvoie 200).
+- Fraîcheur : `unstable_cache` 60 s sous ISR 60 s peut servir ~2 min ; les modifications faites dans l'admin Payload n'appellent pas `invalidateRankingsCache` (pas de hook `afterChange`) ; `getSeasons` (60 s) peut abaisser le revalidate de l'accueil à 60 s.
+- Fondu sur tout `<main>` : impact sur le LCP à mesurer.
+- Débordements : le `overflow-x: clip` sur `body` masque le test `scrollWidth` ; vérifier en comptant les éléments dont `getBoundingClientRect().right > innerWidth`.
+- `useInView` (seuil 0.5) ne se déclenche pas pour les sections plus hautes que 2 écrans (préexistant).
+- Hook `useIsAdmin` : `isAdmin` passe à vrai après hydratation, léger décalage de la colonne d'actions pour l'admin.
