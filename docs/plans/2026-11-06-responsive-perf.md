@@ -128,6 +128,7 @@
 - [ ] Colonne du rang toujours visible ; colonnes secondaires masquées par classes Tailwind responsives, plus de `useMediaQuery`.
 - [ ] Retirer `h-screen`/`h-1/2`/`h-[50vh]` : le tableau prend sa hauteur naturelle ; mascotte sans chevauchement du titre (320 px) ; titre sans `mt-40` fixe.
 - [ ] Clé sur les lignes rendues dans un fragment (`<Fragment key=…>`) ; pagination avec cibles ≥ 44 px ; 0 ligne et 1 page sans erreur.
+- [ ] **Régression tâche 6 à corriger :** `EloRankingTable` ne reçoit plus `isAdmin` (retiré avec `payload.auth`) ; l'admin ne voit plus l'édition/suppression des lignes. Extraire un hook client `useIsAdmin()` (fetch `/api/users/me`, partagé avec `src/components/admin-upload-link.tsx`) et l'utiliser dans le tableau. Les server actions gardent `requireAdmin`.
 - [ ] Commit `feat(responsive-perf): tâche 9 — classement mobile`.
 
 **Done :** `! grep -rn "useMediaQuery" src/components/rankings "src/app/(app)/rankings" && GATE`.
