@@ -20,11 +20,18 @@ const CallToAction: FunctionComponent<{tournamentInfo: Tournament}> = ({tourname
                         TOURNOI MENSUEL DE BEERPONG A PARIS
                     </h1>
                 </div>
-                <Link href={tournamentInfo.registrationLink}>
-                    <ArrowButton size={"lg"} variant={"primary"} iconPlacement={"right"}>
-                        Je m'inscris
-                    </ArrowButton>
-                </Link>
+                <div className={"flex flex-col sm:flex-row gap-4 items-start"}>
+                    <Link href={tournamentInfo.registrationLink}>
+                        <ArrowButton size={"lg"} variant={"primary"} iconPlacement={"right"}>
+                            Je m'inscris
+                        </ArrowButton>
+                    </Link>
+                    <Link href={"https://live.airballcup.com"}>
+                        <ArrowButton size={"lg"} variant={"invertedPrimary"} iconPlacement={"right"}>
+                            Suivre le live
+                        </ArrowButton>
+                    </Link>
+                </div>
             </div>
         </article>
     );
