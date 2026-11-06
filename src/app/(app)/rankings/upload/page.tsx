@@ -39,7 +39,7 @@ export default async function UploadPage() {
     }
 
     return (
-        <div className={'w-screen h-screen'}>
+        <div className={'w-full min-h-svh'}>
             <Header
                 signupUrl={registrationLink}
                 availableRankings={seasons}

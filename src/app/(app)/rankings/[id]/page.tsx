@@ -23,7 +23,7 @@ async function Page(props: { params: Promise<{ id: string }> }) {
     if (!currentSeason) {
         return <>
             <Header signupUrl={registrationLink} availableRankings={availableRankings ?? []}/>
-            <section className={"flex items-center justify-center w-screen h-screen bg-secondary-500"}>
+            <section className={"flex items-center justify-center w-full min-h-svh bg-secondary-500"}>
                 <p className={"font-display text-title-m font-bold uppercase"}>
                     Ce classement n'existe pas.
                 </p>
@@ -39,12 +39,13 @@ async function Page(props: { params: Promise<{ id: string }> }) {
             />
             <section
                 className={
-                    "relative flex flex-col justify-center items-center w-screen h-screen bg-secondary-500"
+                    "relative flex flex-col items-center w-full pt-32 pb-10 bg-secondary-500 lg:pt-40"
                 }
             >
+                {/* En flux sur mobile (pas de chevauchement du titre) ; absolue en haut à droite sur desktop */}
                 <Image
                     className={
-                        "smooth absolute top-[36%] lg:top-[19%] right-0 max-w-[170px] lg:max-w-[762px] -z-4"
+                        "smooth self-end w-[140px] h-auto mr-5 lg:absolute lg:top-40 lg:right-0 lg:w-[762px] -z-4"
                     }
                     src={mascotte}
                     alt={"mascotte rankings"}
@@ -52,7 +53,7 @@ async function Page(props: { params: Promise<{ id: string }> }) {
                 />
                 <div
                     className={
-                        "h-full mt-40 flex items-center justify-start w-full sm:w-full px-5 pb-10"
+                        "flex items-center justify-start w-full px-5 pb-10"
                     }
                 >
                     <h1
@@ -63,7 +64,7 @@ async function Page(props: { params: Promise<{ id: string }> }) {
                         CLASSEMENT <br/> {currentSeason?.name ?? id}
                     </h1>
                 </div>
-                <div className={"w-full h-1/2"}>
+                <div className={"w-full"}>
                     <EloRankingTable
                         rankings={transformEloData(rankings)}
                         seasonId={id}

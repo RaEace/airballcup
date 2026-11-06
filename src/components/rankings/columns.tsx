@@ -2,7 +2,7 @@
 
 import {Column, ColumnDef} from "@tanstack/react-table";
 import {Button} from "@/components/ui/button.tsx";
-import {ArrowDown, ArrowUp, ChevronDown, ChevronUp, Pencil, Trash2, Check, X} from "lucide-react";
+import {ArrowDown, ArrowUp, Pencil, Trash2, Check, X} from "lucide-react";
 import {cn} from "@/lib/utils.ts";
 import {FunctionComponent, ReactNode} from "react";
 import {CompleteRanking} from "@/app/(app)/rankings/[id]/page.tsx";
@@ -89,7 +89,6 @@ export function getColumns(isAdmin: boolean, actions?: ActionsCallbacks): Column
             cell: ({row}) => {
                 const rank = row.getValue<number>("rank");
                 const eloRating = row.getValue<number>("eloRating");
-                const Chevron = row.getIsExpanded() ? ChevronUp : ChevronDown;
 
                 if (isAdmin && actions && actions.editingRowId === row.id) {
                     return (
@@ -103,15 +102,12 @@ export function getColumns(isAdmin: boolean, actions?: ActionsCallbacks): Column
                 }
 
                 return (
-                    <div className={"flex justify-between items-center gap-2 w-full"}>
-                        <span className={cn(
-                            "font-text",
-                            {"text-yellow-300": rank === 1},
-                            {"text-gray-300": rank === 2},
-                            {"text-orange-300": rank === 3},
-                        )}>{eloRating}</span>
-                        {row.getCanExpand() && <Chevron className={"size-4"}/>}
-                    </div>
+                    <span className={cn(
+                        "font-text",
+                        {"text-yellow-300": rank === 1},
+                        {"text-gray-300": rank === 2},
+                        {"text-orange-300": rank === 3},
+                    )}>{eloRating}</span>
                 );
             },
         },

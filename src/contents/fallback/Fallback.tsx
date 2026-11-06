@@ -4,7 +4,7 @@ import airballCupLogo from "@/assets/logo.webp";
 
 const Fallback: React.FunctionComponent = () => {
   return (
-      <div className={"flex h-screen justify-center items-center"}>
+      <div className={"flex min-h-svh justify-center items-center"}>
         <img className={"w-52 animate-bounce"} src={airballCupLogo.src} alt="Airball cup logo"/>
       </div>
   );

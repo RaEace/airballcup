@@ -1,32 +1,27 @@
 "use client";
 
-import {FunctionComponent, useCallback, useEffect, useState} from "react";
+import {FunctionComponent, useCallback, useState} from "react";
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table.tsx";
 import {
-    ExpandedState,
     flexRender,
     getCoreRowModel,
-    getExpandedRowModel,
     getPaginationRowModel,
     getSortedRowModel,
     Row,
     SortingState,
     useReactTable,
-    VisibilityState
 } from "@tanstack/react-table";
-import useMediaQuery from "@/hooks/use-media-query.ts";
-import {cn} from "@/lib/utils.ts";
 import {Button} from "@/components/ui/button.tsx";
 import {ArrowLeft, ArrowRight} from "lucide-react";
 import {DoubleArrowLeftIcon, DoubleArrowRightIcon} from "@radix-ui/react-icons";
 import {CompleteRanking} from "@/app/(app)/rankings/[id]/page.tsx";
 import {getColumns, EditingState} from "@/components/rankings/columns.tsx";
 import {deleteRanking, updateRanking} from "@/components/rankings/actions.ts";
+import {useIsAdmin} from "@/hooks/use-is-admin.ts";
 
 interface EloRankingProps {
     rankings: CompleteRanking[];
     seasonId: string;
-    isAdmin?: boolean;
 }
 
 function sortNumberRows(a: Row<number>, b: Row<number>) {
@@ -37,25 +32,14 @@ function sortStringRows(a: Row<string>, b: Row<string>) {
     return a.original.localeCompare(b.original);
 }
 
-const EloRankingTable: FunctionComponent<EloRankingProps> = ({rankings: initialData, seasonId, isAdmin = false}) => {
+const EloRankingTable: FunctionComponent<EloRankingProps> = ({rankings: initialData, seasonId}) => {
+    const isAdmin = useIsAdmin();
     const [data, setData] = useState<CompleteRanking[]>(initialData);
     const [sort, setSort] = useState<SortingState>([]);
-    const [visibility, setVisibility] = useState<VisibilityState>({});
-    const [expanded, setExpanded] = useState<ExpandedState>({});
     const [pagination, setPagination] = useState({pageIndex: 0, pageSize: 10});
     const [editingRowId, setEditingRowId] = useState<string | null>(null);
     const [editingValues, setEditingValues] = useState<EditingState>({rank: 0, playerName: "", eloRating: 0});
     const [busy, setBusy] = useState(false);
-    const isMedium = useMediaQuery("(max-width: 768px)");
-
-    // [[header, color]]
-    const hiddenHeaders = {
-        rank: ["#"],
-        wins: ["V", "text-green-500"],
-        losses: ["D", "text-red-500"],
-        matchesPlayed: ["J"],
-        winRate: ["WR"],
-    };
 
     const handleEdit = useCallback((rowId: string, values: EditingState) => {
         setEditingRowId(rowId);
@@ -128,14 +112,10 @@ const EloRankingTable: FunctionComponent<EloRankingProps> = ({rankings: initialD
     const table = useReactTable<CompleteRanking>({
         data,
         columns,
-        enableExpanding: true,
-        getRowCanExpand: (row) => isMedium && row.depth === 0,
         getCoreRowModel: getCoreRowModel<CompleteRanking>(),
         getPaginationRowModel: getPaginationRowModel<CompleteRanking>(),
         getSortedRowModel: getSortedRowModel<CompleteRanking>(),
-        getExpandedRowModel: getExpandedRowModel<CompleteRanking>(),
         onSortingChange: setSort,
-        onColumnVisibilityChange: setVisibility,
         onPaginationChange: setPagination,
         sortingFns: {
             rank: sortNumberRows,
@@ -145,36 +125,11 @@ const EloRankingTable: FunctionComponent<EloRankingProps> = ({rankings: initialD
             losses: sortNumberRows,
             winRate: sortNumberRows,
         },
-        onExpandedChange: setExpanded,
         state: {
             sorting: sort,
-            columnVisibility: visibility,
-            expanded,
             pagination,
         }
     });
-
-    useEffect(() => {
-        if (isMedium) {
-            setVisibility((prev) => ({
-                ...prev,
-                rank: false,
-                wins: false,
-                losses: false,
-                matchesPlayed: false,
-                winRate: false,
-            }));
-        } else {
-            setVisibility((prev) => ({
-                ...prev,
-                rank: true,
-                wins: true,
-                losses: true,
-                matchesPlayed: true,
-                winRate: true,
-            }));
-        }
-    }, [isMedium]);
 
     return (
         <div className={"w-full"}>
@@ -183,7 +138,7 @@ const EloRankingTable: FunctionComponent<EloRankingProps> = ({rankings: initialD
                     <div className="text-white text-sm font-text animate-pulse">Chargement…</div>
                 </div>
             )}
-            <Table className={"w-full h-[50vh]"}>
+            <Table className={"w-full"}>
                 <TableHeader>
                     {table.getHeaderGroups().map((headerGroup) => (
                         <TableRow key={headerGroup.id}>
@@ -201,48 +156,13 @@ const EloRankingTable: FunctionComponent<EloRankingProps> = ({rankings: initialD
                 <TableBody>
                     {table.getRowModel().rows?.length ? (
                         table.getRowModel().rows.map((row) => (
-                            <>
-                                <TableRow
-                                    key={row.id}
-                                    onClick={editingRowId === row.id ? undefined : row.getToggleExpandedHandler()}
-                                    className={cn({"hover:bg-gray-900 hover:cursor-pointer": isMedium && editingRowId !== row.id})}
-                                >
-                                    {row.getVisibleCells().map((cell) => (
-                                        <TableCell key={cell.id}>
-                                            {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                                        </TableCell>
-                                    ))}
-                                </TableRow>
-                                {row.getIsExpanded() && isMedium && (
-                                    <TableRow key={`${row.id}-expanded`} className={"w-full"}>
-                                        <TableCell key={`${row.id}-expanded-cell`} colSpan={row.getVisibleCells().length}>
-                                            <Table key={`${row.id}-inner`} className={"max-w-full rounded-t-none"}>
-                                                <TableHeader key={`${row.id}-inner-header`}>
-                                                    {Object.entries(hiddenHeaders).map(([_, [header, color]], _i, arr) => (
-                                                        <TableHead colSpan={arr.length}
-                                                                   className={cn("font-text text-text-m font-bold text-white", color)}
-                                                                   key={header}>
-                                                            {header}
-                                                        </TableHead>
-                                                    ))}
-                                                </TableHeader>
-                                                <TableBody key={`${row.id}-inner-body`}>
-                                                    <TableRow key={`${row.id}-inner-row`}>
-                                                        {row.getAllCells()
-                                                            .filter((cell) => Object.keys(hiddenHeaders).includes(cell.column.id))
-                                                            .map((cell, _, arr) => (
-                                                                <TableCell colSpan={arr.length} key={cell.id}>
-                                                                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                                                                </TableCell>
-                                                            ))
-                                                        }
-                                                    </TableRow>
-                                                </TableBody>
-                                            </Table>
-                                        </TableCell>
-                                    </TableRow>
-                                )}
-                            </>
+                            <TableRow key={row.id}>
+                                {row.getVisibleCells().map((cell) => (
+                                    <TableCell key={cell.id}>
+                                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                                    </TableCell>
+                                ))}
+                            </TableRow>
                         ))
                     ) : <TableRow>
                         <TableCell colSpan={columns.length} className={"text-center"}>Aucune donnée</TableCell>
@@ -251,21 +171,21 @@ const EloRankingTable: FunctionComponent<EloRankingProps> = ({rankings: initialD
             </Table>
             <div
                 className={"bg-gray-950 border-t border-gray-800 py-2 w-full flex items-center justify-center gap-4"}>
-                <Button disabled={!table.getCanPreviousPage()} onClick={() => table.firstPage()}>
+                <Button className={"min-h-[44px] min-w-[44px]"} disabled={!table.getCanPreviousPage()} onClick={() => table.firstPage()}>
                     <DoubleArrowLeftIcon className={"size-4"}/>
                 </Button>
-                <Button onClick={() => table.previousPage()}
+                <Button className={"min-h-[44px] min-w-[44px]"} onClick={() => table.previousPage()}
                         disabled={!table.getCanPreviousPage()}>
                     <ArrowLeft className={"size-4"}/>
                 </Button>
                 <div className={"text-center text-gray-500"}>
-                    Page {pagination.pageIndex + 1} sur {table.getPageCount()}
+                    Page {pagination.pageIndex + 1} sur {Math.max(table.getPageCount(), 1)}
                 </div>
-                <Button onClick={() => table.nextPage()}
+                <Button className={"min-h-[44px] min-w-[44px]"} onClick={() => table.nextPage()}
                         disabled={!table.getCanNextPage()}>
                     <ArrowRight className={"size-4"}/>
                 </Button>
-                <Button onClick={() => table.lastPage()} disabled={!table.getCanNextPage()}>
+                <Button className={"min-h-[44px] min-w-[44px]"} onClick={() => table.lastPage()} disabled={!table.getCanNextPage()}>
                     <DoubleArrowRightIcon className={"size-4"}/>
                 </Button>
             </div>

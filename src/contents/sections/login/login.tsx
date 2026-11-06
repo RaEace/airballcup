@@ -1,7 +1,7 @@
 import {ReactElement} from "react";
 
 function Login(): ReactElement {
-    return <section className={"h-screen w-screen flex justify-center items-center bg-secondary"}>
+    return <section className={"min-h-svh w-full flex justify-center items-center bg-secondary"}>
         test
     </section>
 }
