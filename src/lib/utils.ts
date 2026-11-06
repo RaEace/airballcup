@@ -1,7 +1,6 @@
 import {type ClassValue, clsx} from "clsx"
 import {extendTailwindMerge} from "tailwind-merge"
 import {MouseEventHandler} from "react";
-import {parse} from "@std/toml";
 
 const twMerge = extendTailwindMerge({
   extend: {
@@ -48,32 +47,3 @@ export const sectionsLinkedList = [
     { prev: "gallery", current: "tournament-info", next: null },
 ];
 
-function sanitizeString(str: string): string {
-    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-}
-
-function toPlainObject<T>(obj: T): T {
-    if (obj === null || typeof obj !== 'object') {
-        return obj;
-    }
-
-    if (Array.isArray(obj)) {
-        return obj.map(toPlainObject) as T;
-    }
-
-    // Convert to plain object with normal prototype
-    const plainObj: any = {};
-    for (const key in obj) {
-        if (Object.prototype.hasOwnProperty.call(obj, key)) {
-            plainObj[key] = toPlainObject((obj as any)[key]);
-        }
-    }
-
-    return plainObj as T;
-}
-
-export function translateTomlToJson<T extends Object>(tomlContent: string): T {
-    const json = parse(sanitizeString(tomlContent)) as unknown as T;
-    const plainJson = toPlainObject(json);
-    return plainJson;
-}
