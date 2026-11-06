@@ -1,5 +1,3 @@
-"use client";
-
 import {FunctionComponent} from "react";
 import {Badge} from "@/components/ui/badge.tsx";
 import airballCup from "@/assets/logo.webp";
@@ -11,20 +9,13 @@ import history4 from "@/assets/photos/photo-4-history.png";
 import FloatingPicture from "@/components/floating-picture.tsx";
 import Image from "next/image";
 import {cn} from "@/lib/utils.ts";
-import useParallax from "@/hooks/use-parallax.ts";
 
 const History: FunctionComponent = () => {
-    const offset1 = useParallax(0.2);
-    const offset2 = useParallax(0.3);
-    const offset3 = useParallax(0.4);
-    const offset4 = useParallax(0.5);
-
     return <article id={"about"} className={"w-full min-h-full bg-gray-950 flex flex-col items-center pt-20 gap-6"}>
         <div className={"relative sm:w-1/2 z-10 flex flex-col items-center justify-start gap-4"}>
             <FloatingPicture
                 floatingDirection={"right"}
                 className={cn("absolute -z-10 -left-20 w-40")}
-                style={{transform: `translateY(${offset1}px)`}}
                 src={history1}
                 alt={"Joueur 1"}
             />
@@ -32,20 +23,17 @@ const History: FunctionComponent = () => {
                 floatingDirection={"left"}
                 className={"absolute -z-10 -right-40 w-60"}
                 src={history2}
-                style={{transform: `translateY(${offset2}px)`}}
                 alt={"Joueur 2"}
             />
             <FloatingPicture
                 floatingDirection={"right"}
                 className={cn("sm:absolute sm:block hidden -z-10 -left-60 top-60 w-60")}
-                style={{transform: `translateY(${offset3}px)`}}
                 src={history3}
                 alt={"Joueur 3"}
             />
             <FloatingPicture
                 floatingDirection={"left"}
                 className={"sm:absolute sm:block hidden -z-10 -right-60 top-80 w-80"}
-                style={{transform: `translateY(${offset4}px)`}}
                 src={history4}
                 alt={"Joueur 4"}
             />
