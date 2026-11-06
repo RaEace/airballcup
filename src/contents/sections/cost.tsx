@@ -40,25 +40,25 @@ const Cost: FunctionComponent = () => {
               </StyledIcon>
             }
         >
-          <b className={"smooth font-display sm:text-subtitle-l text-subtitle-m font-bold whitespace-nowrap uppercase"}>
+          <b className={"smooth font-display sm:text-subtitle-l text-subtitle-m font-bold sm:whitespace-nowrap uppercase"}>
             15€/ Personne
           </b>
         </StyledCard>
 
         <StyledCard>
-          <b className={"smooth font-display sm:text-subtitle-l text-subtitle-m font-bold whitespace-nowrap uppercase"}>
+          <b className={"smooth font-display sm:text-subtitle-l text-subtitle-m font-bold sm:whitespace-nowrap uppercase"}>
             1 tarif tournoi pour tes consos
           </b>
         </StyledCard>
 
         <div className={"w-full grid grid-rows-1 grid-cols-2 gap-4"}>
           <StyledCard>
-            <b className={"smooth font-display sm:text-subtitle-l text-subtitle-m font-bold whitespace-nowrap uppercase"}>
+            <b className={"smooth font-display sm:text-subtitle-l text-subtitle-m font-bold sm:whitespace-nowrap uppercase"}>
               * 2 pintes offertes
             </b>
           </StyledCard>
           <StyledCard>
-            <b className={"smooth font-display sm:text-subtitle-l text-subtitle-m font-bold whitespace-nowrap uppercase"}>
+            <b className={"smooth font-display sm:text-subtitle-l text-subtitle-m font-bold sm:whitespace-nowrap uppercase"}>
               3 matchs minimum
             </b>
           </StyledCard>
@@ -71,7 +71,7 @@ const Cost: FunctionComponent = () => {
               </StyledIcon>
             }
         >
-          <b className={"smooth font-display sm:text-subtitle-l text-subtitle-m font-bold whitespace-nowrap uppercase"}>
+          <b className={"smooth font-display sm:text-subtitle-l text-subtitle-m font-bold sm:whitespace-nowrap uppercase"}>
             **Table de beer pong (100€)
           </b>
         </StyledCard>

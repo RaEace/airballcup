@@ -58,14 +58,14 @@ const WinnerCarousel: FunctionComponent<{images: PhotoSource[]}> = ({images}) =>
                                     <a
                                         href={`#winner-${(i - 1 + n) % n}`}
                                         aria-label={"Image précédente"}
-                                        className={"flex items-center justify-center size-8 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors text-sm leading-none"}
+                                        className={"flex items-center justify-center size-11 md:size-8 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors text-sm leading-none"}
                                     >
                                         ❮
                                     </a>
                                     <a
                                         href={`#winner-${(i + 1) % n}`}
                                         aria-label={"Image suivante"}
-                                        className={"flex items-center justify-center size-8 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors text-sm leading-none"}
+                                        className={"flex items-center justify-center size-11 md:size-8 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors text-sm leading-none"}
                                     >
                                         ❯
                                     </a>

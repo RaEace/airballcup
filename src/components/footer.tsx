@@ -13,7 +13,7 @@ const links = (registrationLink: string) => [
 
 const Footer: FunctionComponent<{registrationLink: string}> = ({registrationLink}) => {
     return (
-        <footer className={"w-full bg-gray-950 md:h-[533px] h-[573px] grid sm:grid-rows-1 sm:grid-cols-2 grid-rows-2 grid-cols-1 gap-4"}>
+        <footer className={"w-full bg-gray-950 min-h-[573px] md:min-h-0 md:h-[533px] grid sm:grid-rows-1 sm:grid-cols-2 grid-rows-2 grid-cols-1 gap-4"}>
             <div className={"size-full flex flex-col items-center justify-center"}>
                 <Avatar className={"size-[208px] bg-primary-500 p-4"}>
                     <AvatarImage className={"object-contain"} src={airballCupLogo.src} alt={"Airball Cup Logo"}/>
@@ -26,7 +26,7 @@ const Footer: FunctionComponent<{registrationLink: string}> = ({registrationLink
                         key={title}
                         target={target}
                         href={href}
-                        className={cn(buttonVariants({variant: "link"}), "group font-display font-bold text-title-m md:mr-10 mr-6")}
+                        className={cn(buttonVariants({variant: "link"}), "group font-display font-bold text-title-m whitespace-normal md:whitespace-nowrap md:mr-10 mr-6 text-center")}
                     >
                         <ArrowRight
                             color={"#E51C21"}

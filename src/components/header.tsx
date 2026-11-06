@@ -59,7 +59,6 @@ const Header: FunctionComponent<{
     const navigationMenuLinks = links.filter(link => link.isNested);
     const otherLinks = links.filter(link => !link.isNested);
 
-    const hiddenSections = ["cta", "tournament-info", "participate", null];
     const sectionsToObserve = [
         "cta",
         "about",
@@ -73,6 +72,7 @@ const Header: FunctionComponent<{
     const inView = useInView(sectionsToObserve);
 
     useEffect(() => {
+        const hiddenSections = ["cta", "tournament-info", "participate", null];
         if (hiddenSections.includes(inView)) {
             setShowStickyBtn(false);
         } else {
@@ -86,7 +86,7 @@ const Header: FunctionComponent<{
                 <SheetTrigger asChild>
                     <button
                         aria-label={"Ouvrir le menu"}
-                        className={cn(buttonVariants({variant: "outline", size: "icon"}))}
+                        className={cn(buttonVariants({variant: "outline", size: "icon"}), "max-lg:size-11")}
                     >
                         <AlignJustifyIcon aria-hidden="true"/>
                     </button>

@@ -9,14 +9,14 @@ const Rules: FunctionComponent<{rules: Rule[]}> = ({rules}) => {
     return (
         <article
             id={"rules"}
-            className={"smooth md:grid md:grid-cols-2 md:grid-rows-1 relative font-display w-full min-h-full bg-gray-900 uppercase flex flex-col items-center justify-start px-4 pt-[11rem] gap-6"}
+            className={"smooth md:grid md:grid-cols-2 md:grid-rows-1 relative overflow-x-clip font-display w-full min-h-full bg-gray-900 uppercase flex flex-col items-center justify-start px-4 pt-[11rem] gap-6"}
         >
             <AnimatedText/>
             <div className={"w-full h-full mb-12 md:pt-10 flex flex-col items-center md:items-center justify-center md:justify-start gap-2"}>
                 <Badge className={"font-text lg:text-tag-l text-tag-m font-bold md:self-start md:ml-[25%] mb-1"}>
                     <p>🍺 Comment Jouer ?</p>
                 </Badge>
-                <h2 className={"smooth md:text-left text-center whitespace-nowrap font-display font-bold lg:text-display-l md:text-display-s text-title-s md:w-1/2 md:mt-4"}>
+                <h2 className={"smooth md:text-left text-center md:whitespace-nowrap font-display font-bold lg:text-display-l md:text-display-s text-title-s md:w-1/2 md:mt-4"}>
                     Règles du <br/><span className={"text-secondary-500"}>tournoi</span>
                 </h2>
             </div>

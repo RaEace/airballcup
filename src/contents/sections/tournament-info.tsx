@@ -31,7 +31,7 @@ const TournamentInfo: FunctionComponent<{tournamentInfo: Tournament}> = ({tourna
                         {formatDateIntl(info.date, "fr-FR")}
                     </h2>
                 </div>
-                <div className={"w-full grid grid-cols-3 grid-rows-1 gap-6 px-4"}>
+                <div className={"w-full grid grid-cols-1 sm:grid-cols-3 sm:grid-rows-1 gap-6 px-4"}>
                     <div className={"flex flex-col items-center text-center gap-4"}>
                         <h3 className={"text-subtitle-l uppercase font-display font-bold"}>Horaire</h3>
                         <p className={"font-text text-text-m text-white/80"}>{dayjs(tournamentInfo.date).format("HH[h]mm")}</p>
@@ -56,10 +56,10 @@ const TournamentInfo: FunctionComponent<{tournamentInfo: Tournament}> = ({tourna
                     <ArrowButton iconPlacement={"right"} variant={"primary"} className={"py-4 self-center"}>Je m'inscris</ArrowButton>
                 </Link>
             </div>
-            <div>
+            <div className={"w-full"}>
                 <iframe
                     title={"Localisation de Belushi's Canal"}
-                    className={"w-[100vw] h-[50vh] sm:w-[40vw] sm:h-[40vh]"}
+                    className={"w-full h-[50vh] sm:w-[40vw] sm:h-[40vh]"}
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d167528.9369283956!2d2.283622066391307!3d48.99841483925655!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66dd03520f50d%3A0x75e5f5b732674eeb!2sBelushi&#39;s%20Paris%20(Canal)!5e0!3m2!1sfr!2sfr!4v1726512608639!5m2!1sfr!2sfr"
                     width="600" height="450" loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"

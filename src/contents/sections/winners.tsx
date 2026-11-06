@@ -29,7 +29,7 @@ const Winners: FunctionComponent<{carousel: Carousel}> = ({carousel}) => {
                     </h2>
                 </div>
                 <div className={"md:col-span-3 row-span-3 w-full flex flex-col items-center justify-center"}>
-                    <div className={"w-1/2 min-w-[300px] max-w-[500px] h-full flex flex-col items-center justify-center z-20"}>
+                    <div className={"w-full md:w-1/2 md:min-w-[300px] max-w-[500px] h-full flex flex-col items-center justify-center z-20"}>
                         <WinnerCarousel images={images}/>
                     </div>
                 </div>
