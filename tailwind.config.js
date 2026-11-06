@@ -13,9 +13,6 @@ export default {
     		'5xl': '3.052rem'
     	},
     	extend: {
-    		backgroundImage: {
-    			cta: "url('/src/assets/photos/bg-img.png')",
-    		},
     		animation: {
 				easeIn: 'easeIn 0.3s',
 				easeOut: 'easeOut 0.3s',

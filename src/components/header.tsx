@@ -1,7 +1,7 @@
 "use client";
 
 import {type FunctionComponent, type HTMLAttributeAnchorTarget, useEffect, useState,} from "react";
-import airballCupLogo from "@/assets/logo.svg";
+import airballCupLogo from "@/assets/logo.webp";
 import {Button} from "@/components/ui/button.tsx";
 import {buttonVariants} from "@/components/ui/button-variants";
 import ArrowButton from "@/components/arrow-button.tsx";
@@ -99,6 +99,8 @@ const Header: FunctionComponent<{
                                 <img
                                     src={airballCupLogo.src || "/placeholder.svg"}
                                     alt="AirballCup Logo"
+                                    width={70}
+                                    height={72}
                                 />
                             </a>
                         </SheetClose>
@@ -182,6 +184,8 @@ const Header: FunctionComponent<{
                 <img
                     src={airballCupLogo.src || "/placeholder.svg"}
                     alt="logo airball cup"
+                    width={70}
+                    height={72}
                 />
             </Link>
 

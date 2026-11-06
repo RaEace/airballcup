@@ -2,13 +2,16 @@ import {FunctionComponent} from "react";
 import {Badge} from "@/components/ui/badge.tsx";
 import ArrowButton from "@/components/arrow-button.tsx";
 import Link from "next/link";
+import Image from "next/image";
+import heroBackground from "@/assets/photos/bg-img.webp";
 import dayjs from "dayjs";
 import {Tournament} from "@/payload-types.ts";
 
 const CallToAction: FunctionComponent<{tournamentInfo: Tournament}> = ({tournamentInfo}) => {
     return (
-        <article id={"cta"} className={"w-full h-full flex flex-col items-center justify-center bg-cta bg-cover bg-center bg-no-repeat"}>
-            <div className={"px-8 mr-2 space-y-4"}>
+        <article id={"cta"} className={"relative w-full h-full flex flex-col items-center justify-center"}>
+            <Image src={heroBackground} alt={""} fill priority sizes={"100vw"} className={"object-cover object-center"}/>
+            <div className={"relative px-8 mr-2 space-y-4"}>
                 <div className={"smooth w-full md:w-3/4 h-full space-y-4"}>
                     <Badge className={"font-text lg:text-tag-l text-tag-m text-black"}>
                         <p>{tournamentInfo.badgeText} : {new Intl.DateTimeFormat(

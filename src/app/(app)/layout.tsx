@@ -3,6 +3,7 @@ import {Metadata} from "next";
 import "./index.css";
 import {GoogleTagManager} from "@next/third-parties/google";
 import {obviously, thunder} from "./fonts";
+import airballCupLogo from "@/assets/logo.webp";
 
 export const metadata: Metadata = {
     title: "Airball Cup - Tournoi mensuel de beer pong",
@@ -13,7 +14,7 @@ export default function RootLayout({children}: { children: ReactNode }) {
     return (
         <html lang="fr" className={`${thunder.variable} ${obviously.variable}`}>
         <head>
-            <link href="/logo.svg" rel="icon" type="image/svg+xml"/>
+            <link href={airballCupLogo.src} rel="icon" type="image/webp"/>
         </head>
         <GoogleTagManager gtmId={String(process.env.GTM_ID)} />
         <body>

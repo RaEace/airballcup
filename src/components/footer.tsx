@@ -3,7 +3,7 @@ import {cn} from "@/lib/utils.ts";
 import {buttonVariants} from "@/components/ui/button-variants";
 import {ArrowRight} from "lucide-react";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar.tsx";
-import airballCupLogo from "@/assets/logo.svg";
+import airballCupLogo from "@/assets/logo.webp";
 
 const links = (registrationLink: string) => [
     {title: "s'inscrire", href: registrationLink, target: undefined},
@@ -16,7 +16,7 @@ const Footer: FunctionComponent<{registrationLink: string}> = ({registrationLink
         <footer className={"w-full bg-gray-950 md:h-[533px] h-[573px] grid sm:grid-rows-1 sm:grid-cols-2 grid-rows-2 grid-cols-1 gap-4"}>
             <div className={"size-full flex flex-col items-center justify-center"}>
                 <Avatar className={"size-[208px] bg-primary-500 p-4"}>
-                    <AvatarImage src={airballCupLogo.src} alt={"Airball Cup Logo"}/>
+                    <AvatarImage className={"object-contain"} src={airballCupLogo.src} alt={"Airball Cup Logo"}/>
                     <AvatarFallback>Logo AirballCup</AvatarFallback>
                 </Avatar>
             </div>

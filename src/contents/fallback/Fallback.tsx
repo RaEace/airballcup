@@ -1,6 +1,6 @@
 "use client";
 
-import airballCupLogo from "@/assets/logo.svg";
+import airballCupLogo from "@/assets/logo.webp";
 
 const Fallback: React.FunctionComponent = () => {
   return (

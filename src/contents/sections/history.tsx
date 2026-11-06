@@ -2,7 +2,7 @@
 
 import {FunctionComponent} from "react";
 import {Badge} from "@/components/ui/badge.tsx";
-import airballCup from "@/assets/logo.svg";
+import airballCup from "@/assets/logo.webp";
 import creators from "@/assets/photos/arthur-et-romain.png";
 import history1 from "@/assets/photos/photo-1-history.png";
 import history2 from "@/assets/photos/photo-2-history.png";
@@ -51,7 +51,7 @@ const History: FunctionComponent = () => {
             />
 
             <div className={"bg-primary-500 rounded-full p-4 rotate-12"}>
-                <Image className={"size-[88px]"} src={airballCup} alt="airball cup logo"/>
+                <Image className={"size-[88px] object-contain"} src={airballCup} alt="airball cup logo"/>
             </div>
             <Badge className={"uppercase font-text lg:text-tag-l text-tag-m"}>
                 🍻 L'aventure air ball CUP

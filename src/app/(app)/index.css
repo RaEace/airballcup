@@ -128,10 +128,6 @@ body {
   }
 }
 
-#cta {
-  background-image: url("../../assets/photos/bg-img.png");
-}
-
 * {
   scroll-behavior: smooth;
 }
