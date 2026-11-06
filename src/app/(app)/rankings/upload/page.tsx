@@ -43,7 +43,6 @@ export default async function UploadPage() {
             <Header
                 signupUrl={registrationLink}
                 availableRankings={seasons}
-                isLoggedIn={!!user}
             />
             <main className={"w-full h-full bg-secondary-500"}>
                 <RankingUploadForm seasons={seasons}/>

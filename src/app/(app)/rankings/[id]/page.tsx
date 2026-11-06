@@ -5,29 +5,24 @@ import getTournamentInfo from "@/contents/sections/tournamentInfo/actions.ts";
 import Header from "@/components/header.tsx";
 import {getSeasons, getRankings} from "@/services/rankings-queries.ts";
 import {Ranking} from "@/payload-types.ts";
-import {getPayload} from "payload";
-import config from "@payload-config";
-import {headers} from "next/headers";
 
-export const dynamic = "auto";
+export const revalidate = 60;
 export type CompleteRanking = Ranking & { matchesPlayed: number; winRate: number };
 
 async function Page(props: { params: Promise<{ id: string }> }) {
     const id = (await props.params).id;
-    const headersList = await headers();
 
-    const [{registrationLink}, availableRankings, rankings, {user}] = await Promise.all([
+    const [{registrationLink}, availableRankings, rankings] = await Promise.all([
         getTournamentInfo(),
         getSeasons(),
         getRankings(id),
-        getPayload({config}).then(p => p.auth({headers: headersList})),
     ]);
 
     const currentSeason = availableRankings.find((season) => season.id === id);
 
     if (!currentSeason) {
         return <>
-            <Header signupUrl={registrationLink} availableRankings={availableRankings ?? []} isLoggedIn={!!user}/>
+            <Header signupUrl={registrationLink} availableRankings={availableRankings ?? []}/>
             <section className={"flex items-center justify-center w-screen h-screen bg-secondary-500"}>
                 <p className={"font-display text-title-m font-bold uppercase"}>
                     Ce classement n'existe pas.
@@ -41,7 +36,6 @@ async function Page(props: { params: Promise<{ id: string }> }) {
             <Header
                 signupUrl={registrationLink}
                 availableRankings={availableRankings || []}
-                isLoggedIn={!!user}
             />
             <section
                 className={
@@ -73,7 +67,6 @@ async function Page(props: { params: Promise<{ id: string }> }) {
                     <EloRankingTable
                         rankings={transformEloData(rankings)}
                         seasonId={id}
-                        isAdmin={!!user}
                     />
                 </div>
             </section>

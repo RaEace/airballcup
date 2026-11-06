@@ -28,6 +28,7 @@ import {
 } from "@/components/ui/navigation-menu.tsx";
 import Link from "next/link";
 import type {Season} from "@/payload-types.ts";
+import AdminUploadLink from "@/components/admin-upload-link.tsx";
 
 interface NavLink {
     href: string;
@@ -39,11 +40,9 @@ interface NavLink {
 const Header: FunctionComponent<{
     signupUrl: string;
     availableRankings?: Season[];
-    isLoggedIn?: boolean;
 }> = ({
           signupUrl: CURRENT_SIGNUP_URL,
           availableRankings = [],
-          isLoggedIn = false,
       }) => {
     const [showStickyBtn, setShowStickyBtn] = useState<boolean>(false);
     const pathname = usePathname();
@@ -194,7 +193,6 @@ const Header: FunctionComponent<{
                     availableRankings={availableRankings}
                     nestedLinks={navigationMenuLinks}
                     links={otherLinks}
-                    isLoggedIn={isLoggedIn}
                 />
                 <Link href={CURRENT_SIGNUP_URL} target={"_blank"}>
                     <Button
@@ -237,12 +235,10 @@ function Navbar({
                     nestedLinks,
                     links,
                     availableRankings,
-                    isLoggedIn
                 }: {
     nestedLinks: NavLink[];
     links: NavLink[];
     availableRankings?: Season[];
-    isLoggedIn?: boolean;
 }) {
     return (
         <NavigationMenu>
@@ -292,16 +288,7 @@ function Navbar({
                             <ul
                                 className={`w-[400px] grid grid-rows-${availableRankings.length} grid-cols-1`}
                             >
-                                {isLoggedIn && (
-                                    <li>
-                                        <NavigationMenuLink asChild>
-                                            <Link prefetch className={cn(buttonVariants({variant: "link"}), "text-primary-500")}
-                                                  href={"/rankings/upload"}>
-                                                Importer un classement
-                                            </Link>
-                                        </NavigationMenuLink>
-                                    </li>
-                                )}
+                                <AdminUploadLink/>
                                 {availableRankings.map((season) => (
                                     <li key={season.id}>
                                         <NavigationMenuLink asChild>

@@ -15,20 +15,16 @@ import getTournamentInfo from "@/contents/sections/tournamentInfo/actions.ts";
 import Header from "@/components/header.tsx";
 import {Carousel, Gallery as GalleryType} from "@/payload-types.ts";
 import {getSeasons} from "@/services/rankings-queries.ts";
-import config from "@payload-config";
-import {getPayload} from "payload";
-import {headers} from "next/headers";
+
+export const revalidate = 3600;
 
 export default async function Page() {
-    const headersList = await headers();
-
-    const [tournamentContent, rulesContent, gallery, carousel, availableRankings, {user}] = await Promise.all([
+    const [tournamentContent, rulesContent, gallery, carousel, availableRankings] = await Promise.all([
         getTournamentInfo(),
         getRules(),
         loadImages("gallery") as Promise<GalleryType>,
         loadImages("carousels") as Promise<Carousel>,
         getSeasons(),
-        getPayload({config}).then(p => p.auth({headers: headersList})),
     ]);
 
     return (
@@ -36,7 +32,6 @@ export default async function Page() {
             <Header
                 signupUrl={tournamentContent.registrationLink}
                 availableRankings={availableRankings}
-                isLoggedIn={!!user}
             />
             <PageShell>
                 <CallToAction tournamentInfo={tournamentContent}/>
