@@ -176,7 +176,7 @@ const Header: FunctionComponent<{
     return (
         <header
             className={
-                "absolute backdrop-blur-[2px] font-display uppercase z-[100] px-6 flex items-center justify-between w-full h-[104px] bg-transparent"
+                "absolute backdrop-blur-[2px] font-display uppercase z-[100] px-6 flex items-center justify-between w-full h-16 lg:h-[104px] bg-transparent"
             }
         >
             <Link prefetch title={"back-home-link"} href="/">
@@ -218,7 +218,7 @@ const Header: FunctionComponent<{
                         disabled={!showStickyBtn}
                         className={cn(
                             "smooth transition",
-                            {"invisible animate-easeOut": !showStickyBtn},
+                            {"hidden": !showStickyBtn},
                             {"animate-easeIn": showStickyBtn}
                         )}
                     >

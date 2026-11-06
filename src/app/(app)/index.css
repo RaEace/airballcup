@@ -58,17 +58,24 @@
   }
 }
 
-#smooth-wrapper {
-  overflow-y: scroll;
-}
-
 .scroll-body > * {
   scroll-snap-align: start;
   width: 100%;
 }
 
 html {
-  scroll-snap-type: y mandatory;
+  scroll-snap-type: y proximity;
+}
+
+/* header fixe : 64px sur mobile, 104px à partir de lg */
+article[id]:not(#cta) {
+  scroll-margin-top: 4rem;
+}
+
+@media (min-width: 1024px) {
+  article[id]:not(#cta) {
+    scroll-margin-top: 104px;
+  }
 }
 
 article {
@@ -78,6 +85,7 @@ article {
 body {
   @apply bg-gray-900;
   @apply text-white;
+  overflow-x: clip;
 }
 
 .smooth {

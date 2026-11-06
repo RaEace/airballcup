@@ -9,7 +9,7 @@ import {Tournament} from "@/payload-types.ts";
 
 const CallToAction: FunctionComponent<{tournamentInfo: Tournament}> = ({tournamentInfo}) => {
     return (
-        <article id={"cta"} className={"relative w-full h-full flex flex-col items-center justify-center"}>
+        <article id={"cta"} className={"relative w-full min-h-svh flex flex-col items-center justify-center"}>
             <Image src={heroBackground} alt={""} fill priority sizes={"100vw"} className={"object-cover object-center"}/>
             <div className={"relative px-8 mr-2 space-y-4"}>
                 <div className={"smooth w-full md:w-3/4 h-full space-y-4"}>
